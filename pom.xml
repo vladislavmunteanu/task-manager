@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+
+	<groupId>org.task-manager</groupId>
+	<artifactId>task-manager-root</artifactId>
+	<version>1.0</version>
+	<packaging>pom</packaging>
+	<name>Task Manager : Root</name>
+	<description>Task Manager Root</description>
+
+
+	<modules>
+		<module>task-manager-core</module>
+		<module>task-manager-engine</module>
+		<module>task-manager-app</module>
+	</modules>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>

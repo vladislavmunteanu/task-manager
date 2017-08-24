@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<TaskManager>
+
+    <TaskGroup name="Group_1" parallel="true" once="true" scheduler="0/5 * * * * ?">
+        <Task>
+            <Name>task_1</Name>
+        </Task>
+        <Task>
+            <Name>task_2</Name>
+            <Parameter type="String">Got the message</Parameter>
+        </Task>
+        <Task>
+            <Name>task_3</Name>
+            <Parameter type="Number">1234</Parameter>
+        </Task>
+    </TaskGroup>
+
+    <TaskGroup name="Group_2" parallel="false" once="false" scheduler="0/7 * * * * ?">
+        <Task>
+            <Name>task_4</Name>
+            <Parameter type="Double">3456.234</Parameter>
+        </Task>
+        <Task>
+            <Name>task_5</Name>
+            <Parameter type="Date">12/12/2014 10:09:09 PM</Parameter>
+        </Task>
+        <Task>
+            <Name>task_6</Name>
+            <Parameter type="Boolean">true</Parameter>
+        </Task>
+    </TaskGroup>
+
+    <!--<TaskGroup name="Group_1" parallel="true" scheduler="0/5 * * * * ?">
+        <Task>
+            <Name>Task_1</Name>
+            <Parameter type="String">Vlad</Parameter>
+            <Parameter type="Number">3</Parameter>
+            <Parameter type="Double">4.6</Parameter>
+            <Parameter type="Date">12/12/2014 10:09:09 PM</Parameter>
+            <Parameter type="Boolean">true</Parameter>
+        </Task>
+    </TaskGroup> -->
+
+</TaskManager>

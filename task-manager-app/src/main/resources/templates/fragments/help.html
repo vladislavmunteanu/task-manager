@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Manager</title>
+    <link type="text/css" th:href="@{/css/style.css}" rel="stylesheet"/>
+    <link type="text/css" th:href="@{/css/help.css}" rel="stylesheet"/>
+
+    <link rel="icon" type="image/png" th:href="@{/img/fav.png}"/>
+
+    <script th:src="@{/webjars/jquery/3.1.0/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+</head>
+
+<body>
+<div th:replace="fragments/header :: header"></div>
+
+<div id="main">
+    <div id="main_nav" role="navigation">
+        <nav id="widgets">
+            <a id="dash_widget" th:href="@{/}"><img th:src="@{/img/dash.png}"><span>DASHBOARD</span></a>
+            <a id="group_widget" th:href="@{/groups/_main}"><img th:src="@{/img/group.png}"><span>GROUPS</span></a>
+            <a id="task_widget" th:href="@{/tasks}"><img th:src="@{/img/task.png}"><span>TASKS</span> </a>
+        </nav>
+    </div>
+    <div id="main_content_outer">
+        <div id="main_content">
+            <div id="main_content_title">
+                <h1 id="title">Help</h1>
+            </div>
+            <div id="main_content_data">
+                <article class="markdown-body entry-content"><p>Task Manager Version 2.0</p>
+
+                    <h2>Description</h2>
+
+                    <p>The tool is used to manage and run tasks which are written in Java and Groovy.</p>
+
+                    <h2>NOTE</h2>
+
+                    <p>There are two ways to run this tool:</p>
+
+                    <pre><code>1.Using non-compiled class which should be located in task-manager/workspace/${Task_Class}.${language}
+2.Using compiled class which should be located in task-manager/lib/${Class_Jar}.jar
+</code></pre>
+
+                    <h2>STEPS(1)</h2>
+
+                    <p>1.Configure properties in properties/task-manager.properties</p>
+
+                    <pre><code>Set:
+    task.manager.type = ${language}
+    task.manager.xml = ${TaskManager}.xml
+    task.manager.compiled = false
+    task.manager.class = ${Task_Class}.${language}
+
+E.g. (Groovy):
+    task.manager.type = groovy
+    task.manager.xml = SampleTaskManager.xml
+    task.manager.compiled = false
+    task.manager.class = SampleScript.groovy
+
+E.g. (Java):
+    task.manager.type = java
+    task.manager.xml = SampleTaskManager.xml
+    task.manager.compiled = false
+    task.manager.class = SampleTasks.java
+</code></pre>
+
+                    <p>2.Configure Task Manager XML file in task-manager/${TaskManager}.xml</p>
+
+                    <pre><code>E.g.:
+    Check SampleTaskManager.xml in task-manager/SampleTaskManager.xml
+    Update log4j.properties set line log4j.logger.${Task_Class}=INFO, TASK
+
+E.g.:
+    log4j.logger.SampleTasks=INFO, TASK
+</code></pre>
+
+                    <p>3.Run task-manager.bat</p>
+
+                    <h2>STEPS(2)</h2>
+
+                    <p>1.Configure properties in properties/task-manager.properties</p>
+
+                    <pre><code>Set:
+    task.manager.xml = ${TaskManager}.xml
+    task.manager.compiled = true
+    task.manager.class = ${class_package}.${Task_Class}
+
+E.g.:
+    task.manager.xml = SampleTaskManager.xml
+    task.manager.compiled = false
+    task.manager.class = com.my.tasks.MyTasks
+</code></pre>
+
+                    <p>2.Configure Task Manager XML file in task-manager/${TaskManager}.xml</p>
+
+                    <pre><code>E.g.:
+   Check SampleTaskManager.xml in task-manager/SampleTaskManager.xml
+   Copy class jar to task-manager/lib/
+</code></pre>
+
+                    <p>3.Update log4j.properties by uncommenting line {#log4j.logger.class_package=INFO, TASK} and
+                        comment line {log4j.logger.SampleTasks=INFO, TASK}</p>
+
+                    <pre><code>E.g.:
+   log4j.logger.com.my.tasks=INFO, TASK
+</code></pre>
+
+                    <p>4.Run task-manager.bat</p>
+
+                    <p>(C) Vlad Munteanu : <a href="mailto:munteanu.vladislav89@gmail.com">munteanu.vladislav89@gmail.com</a></p>
+                </article>
+
+            </div>
+        </div>
+    </div>
+    <div style="clear: both"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body th:fragment="header">
+<div id="header">
+
+    <div id="header_container">
+        <a id="header_logo" th:href="@{/}">
+            <img th:src="@{/img/logo.png}">
+        </a>
+        <a id="header_help" th:href="@{/help}">
+            <img th:src="@{/img/help.png}">
+        </a>
+        <a  id="header_git" href="https://github.com/vladislavmunteanu/task-manager" target="_blank">
+            <img th:src="@{/img/git.png}">
+        </a>
+    </div>
+</div>
+<!--<div th:replace="fragments/time :: time"></div>-->
+</body>
+</html>
