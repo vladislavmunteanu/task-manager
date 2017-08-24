@@ -22,6 +22,7 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -44,23 +45,25 @@ public class EngineConfImpl implements EngineConf {
     private Object classInstance;
     private List<TaskGroup> taskGroupList; //TODO find a way to not keep objects in memory "org.mapdb"
     private static HashMap<String,Integer> tgIndexMap;
+    private Properties properties;
 
 
     private static final Logger Log = Logger.getLogger(EngineConfImpl.class);
 
     public EngineConfImpl() throws EngineException {
 
-        this.compiled = Boolean.valueOf(getProperty("task.manager.compiled"));
+        this.properties = this.loadProperties();
+        this.compiled = Boolean.valueOf(this.getProperties().getProperty("task.manager.compiled"));
         if (!this.isCompiled()) {
-            this.type = getProperty("task.manager.type");
+            this.type = this.getProperties().getProperty("task.manager.type");
         }
-        this.taskXml = getProperty("task.manager.xml");
+        this.taskXml = this.getProperties().getProperty("task.manager.xml");
 
         validateAgainstXSD(Thread.currentThread().getContextClassLoader().getResourceAsStream(this.getTaskXml()),
                 Thread.currentThread().getContextClassLoader().getResourceAsStream("TaskManager.xsd"));
 
         Log.info(String.format("Found valid Task Manager XML '%s'",this.getTaskXml()));
-        this.taskClass = getProperty("task.manager.class");
+        this.taskClass = this.getProperties().getProperty("task.manager.class");
         this.classInstance = buildClassInstance(this.isCompiled(),this.getTaskClass(),this.getType());
         this.taskGroupList = buildTaskGroupList(this.getTaskXml(),this.getClassInstance());
     }
@@ -94,16 +97,25 @@ public class EngineConfImpl implements EngineConf {
         return tgIndexMap.get(tgName);
     }
 
-    private static String getProperty(String propertyName) throws EngineException {
+    @Override
+    public Properties getProperties(){
+        return properties;
+    }
+
+    private Properties loadProperties() throws EngineException {
 
         Properties properties = new Properties();
         try {
             InputStream inputStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("task-manager.properties");
-            properties.load(inputStream);
+            if (inputStream == null){
+                throw new FileNotFoundException("Failed to load 'task-manager.properties'");
+            }else {
+                properties.load(inputStream);
+            }
         } catch (IOException e) {
-            throw new EngineException(String.format("Failed to get '%s' property", propertyName), e);
+            throw new EngineException("Failed to load properties" ,e);
         }
-        return properties.getProperty(propertyName);
+        return properties;
     }
 
     private Boolean isCompiled() {
