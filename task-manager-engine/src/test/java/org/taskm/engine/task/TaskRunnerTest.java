@@ -43,7 +43,9 @@ public class TaskRunnerTest extends TaskTemplate{
 
         long endTime1 = System.currentTimeMillis();
         double duration1 = (endTime1 - startTime1) / 1000;
+
         LOG.info("Done in " + duration1 + " seconds");
+
 
         assert duration < duration1;
 

@@ -7,7 +7,7 @@ class Script {
 
     void task_1(){
         Log.info 'Groovy: task_1 successfully finished'
-        sleep(60000)
+        sleep(20000)
       //  throw new RuntimeException("fake exception")
     }
 

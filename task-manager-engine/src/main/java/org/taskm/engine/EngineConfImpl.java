@@ -159,8 +159,7 @@ public class EngineConfImpl implements EngineConf {
                     tgIndexMap.put(taskGroupName,i);
                     boolean parallel = Boolean.parseBoolean(groupElement.getAttribute("parallel"));
                     String scheduler = groupElement.getAttribute("scheduler");
-                    boolean once = Boolean.valueOf(groupElement.getAttribute("once"));
-                    TaskGroup taskGroup = new TaskGroup(taskGroupName, parallel, once, scheduler);
+                    TaskGroup taskGroup = new TaskGroup(taskGroupName, parallel,scheduler);
                     NodeList taskList = groupElement.getElementsByTagName("Task");
 
                     for (int j = 0; j < taskList.getLength(); j++) {

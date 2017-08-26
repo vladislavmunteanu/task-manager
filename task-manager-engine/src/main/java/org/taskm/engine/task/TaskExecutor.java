@@ -28,7 +28,17 @@ class TaskExecutor implements Callable<Void> {
         if (task.getParameters() == null || task.getParameters().isEmpty()){
             try {
                 method = task.getObject().getClass().getMethod(task.getMethodName());
+
+                long startTime = System.currentTimeMillis();
+
+                task.setStatus(TaskStatus.RUNNING);
+                task.setExecutionTime(null);
+
                 method.invoke(task.getObject());
+
+                long endTime = System.currentTimeMillis();
+
+                task.setExecutionTime(extractExecutionTime(endTime - startTime));
                 task.setStatus(TaskStatus.EXECUTED);
             } catch (NoSuchMethodException e) {
                 task.setStatus(TaskStatus.FAILED);
@@ -41,7 +51,15 @@ class TaskExecutor implements Callable<Void> {
             method = getMethod(task);
             if (method != null) {
                 try {
+
+                    long startTime = System.currentTimeMillis();
+                    task.setStatus(TaskStatus.RUNNING);
+                    task.setExecutionTime(null);
+
                     method.invoke(task.getObject(),task.getParameters().toArray());
+
+                    long endTime = System.currentTimeMillis();
+                    task.setExecutionTime(extractExecutionTime(endTime - startTime));
                     task.setStatus(TaskStatus.EXECUTED);
 
                 } catch (InvocationTargetException | IllegalAccessException e) {
@@ -103,6 +121,18 @@ class TaskExecutor implements Callable<Void> {
             default:
                 return parameter.getType().getTypeName();
         }
+
+    }
+
+    private static String extractExecutionTime(long milliseconds){
+
+        String format = String.format("%%0%dd", 2);
+        long elapsedTime = milliseconds / 1000;
+        String seconds = String.format(format, elapsedTime % 60);
+        String minutes = String.format(format, (elapsedTime % 3600) / 60);
+        String hours = String.format(format, elapsedTime / 3600);
+
+        return hours + ":" + minutes + ":" + seconds;
 
     }
 

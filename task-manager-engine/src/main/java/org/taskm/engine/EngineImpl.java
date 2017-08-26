@@ -5,7 +5,6 @@ import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.taskm.core.task.Task;
 import org.taskm.core.task.TaskGroup;
 import org.taskm.engine.job.TaskJob;
 import org.taskm.engine.task.TaskRunner;

@@ -100,7 +100,7 @@
 				<artifactId>maven-assembly-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>create-distibution</id>
+						<id>create-distribution</id>
 						<phase>package</phase>
 						<goals>
 							<goal>single</goal>

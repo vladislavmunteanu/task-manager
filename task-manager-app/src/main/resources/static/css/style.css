@@ -35,9 +35,8 @@ li{
 /*----HEADER----*/
 
 #header {
-    background-color: #fff !important;
     box-shadow: 0 2px 3px 0 rgba(0,0,0,0.2);
-    background-image: none !important;
+    background: #fff none !important;
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)" !important;
     -webkit-filter: none !important;
     filter: none !important;
@@ -142,14 +141,13 @@ li{
 }
 
 #main_content_outer{
-    background-color: #fff;
     border: 0 none;
     border-radius: 5px;
     padding: 0;
     box-sizing: content-box;
     position: relative;
     background-clip: padding-box;
-    background: rgba(255,255,255,0.3);
+    background: rgba(255, 255, 255, 0.3);
     width: 900px;
     float: right;
     box-shadow: 0 0 6px 2px rgba(51,51,51,0.25);
@@ -157,8 +155,7 @@ li{
 }
 
 #main_content{
-    background-color: transparent;
-    background-position: 50% 49px;
+    background: transparent 50% 49px;
     border: 0 none;
     padding: 0;
 }

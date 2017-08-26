@@ -1,8 +1,6 @@
 package org.taskm.core.task;
 
 import org.quartz.CronExpression;
-import org.quartz.CronTrigger;
-import org.quartz.impl.triggers.CronTriggerImpl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,7 +19,6 @@ public class TaskGroup {
     private final boolean parallel;
     private final String scheduler;
     private final List<Task> taskList;
-    private final Boolean runningOnce;
     private int executions;
     private int failures;
     private TaskGroupStatus taskGroupStatus;
@@ -30,13 +27,11 @@ public class TaskGroup {
      * @param name        - task name
      * @param parallel    - if true then all tasks from this group should run in parallel
      * @param scheduler   - time when task group should run
-     * @param runningOnce - specify if task is running once
      */
-    public TaskGroup(String name, boolean parallel, Boolean runningOnce, String scheduler) {
+    public TaskGroup(String name, boolean parallel, String scheduler) {
         this.name = name;
         this.parallel = parallel;
         this.scheduler = scheduler;
-        this.runningOnce = runningOnce;
         this.taskList = new ArrayList<>();
         this.executions = 0;
         this.failures = 0;
@@ -74,10 +69,6 @@ public class TaskGroup {
 
     public String toString() {
         return String.format("Task Group - [Name : %s] [Parallel : %s] [Scheduler : %s]", this.getName(), this.isParallel(), this.getScheduler());
-    }
-
-    public Boolean isRunningOnce() {
-        return runningOnce;
     }
 
     public String getFireTime() throws TaskCoreException {
@@ -127,7 +118,7 @@ public class TaskGroup {
         this.failures = failures;
     }
 
-    public TaskGroupStatus getTaskGroupStatus() {
+    private TaskGroupStatus getTaskGroupStatus() {
         return taskGroupStatus;
     }
 

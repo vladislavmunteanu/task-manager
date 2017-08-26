@@ -6,5 +6,6 @@ package org.taskm.core.task;
 public enum TaskStatus {
     PENDING,
     EXECUTED,
-    FAILED
+    FAILED,
+    RUNNING
 }

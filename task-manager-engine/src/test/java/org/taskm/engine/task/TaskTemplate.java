@@ -11,7 +11,7 @@ import java.util.List;
  * Created by Vlad Munteanu on 8/26/2016.
  */
 
-public class TaskTemplate {
+class TaskTemplate {
 
     static TaskRunner runner;
 
@@ -69,17 +69,17 @@ public class TaskTemplate {
         LOG.info("message_1 = " + message_1);
     }
 
-    public void testInt(int message) throws InterruptedException {
+    void testInt(int message) throws InterruptedException {
         Thread.sleep(3000);
         LOG.info(String.valueOf(message));
     }
 
-    public void testByte(byte message) throws InterruptedException {
+    void testByte(byte message) throws InterruptedException {
         Thread.sleep(2000);
         LOG.info(String.valueOf(message));
     }
 
-    public void testShort(Short message) throws InterruptedException {
+    void testShort(Short message) throws InterruptedException {
         Thread.sleep(1000);
         LOG.info(String.valueOf(message));
     }

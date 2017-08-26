@@ -12,6 +12,7 @@ public class Task {
     private final String methodName;
     private List<Object> parameters;
     private TaskStatus status;
+    private String executionTime;
 
     public Task(Object object, String methodName){
         this.object = object;
@@ -70,7 +71,7 @@ public class Task {
 
     }
 
-    private TaskStatus getStatus() {
+    public TaskStatus getStatus() {
         return status;
     }
 
@@ -83,5 +84,11 @@ public class Task {
         return hashCode.hashCode();
     }
 
+    public String getExecutionTime() {
+        return executionTime;
+    }
 
+    public void setExecutionTime(String executionTime) {
+        this.executionTime = executionTime;
+    }
 }

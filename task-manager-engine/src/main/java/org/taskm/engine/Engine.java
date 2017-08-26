@@ -1,7 +1,6 @@
 package org.taskm.engine;
 
 import org.quartz.Scheduler;
-import org.taskm.core.task.Task;
 import org.taskm.core.task.TaskGroup;
 
 import java.util.List;
