@@ -278,3 +278,11 @@
     font-weight: bold;
     position: relative;
 }
+
+.group_tasks_status span.failed{
+    color: red!important;
+}
+
+.group_tasks_status span.executed{
+    color: rgb(178, 217, 157)!important;
+}

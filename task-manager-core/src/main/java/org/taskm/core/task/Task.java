@@ -11,20 +11,20 @@ public class Task {
     private final Object object;
     private final String methodName;
     private List<Object> parameters;
-    private TaskStatus status;
+    private String status;
     private String executionTime;
 
     public Task(Object object, String methodName){
         this.object = object;
         this.methodName = methodName;
         this.parameters = new ArrayList<>();
-        this.status = TaskStatus.PENDING;
+        this.status = String.valueOf(TaskStatus.NEW);
     }
 
     public Task(Object object, String methodName, List<Object> parameters) throws TaskCoreException {
         this.object = object;
         this.methodName = methodName;
-        this.status = TaskStatus.PENDING;
+        this.status = String.valueOf(TaskStatus.NEW);
         if(!(parameters == null)){
             this.parameters = new ArrayList<>();
             for (Object parameter : parameters){
@@ -71,12 +71,13 @@ public class Task {
 
     }
 
-    public TaskStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
     public void setStatus(TaskStatus status) {
-        this.status = status;
+
+        this.status = String.valueOf(status);
     }
 
     public int hashCode(){

@@ -8,11 +8,12 @@ class Script {
     void task_1(){
         Log.info 'Groovy: task_1 successfully finished'
         sleep(20000)
-      //  throw new RuntimeException("fake exception")
+
     }
 
     void task_2(String message){
         Log.info "Groovy: The string is : ${message}"
+        throw new RuntimeException("fake exception")
     }
 
     void task_3(int number){

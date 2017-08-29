@@ -101,7 +101,7 @@
                                     <span th:text="${task.executionTime == null}? '--:--:--'">--:--:--</span>
                                 </div>
                                 <div class="group_tasks_status">
-                                    <span th:text="${task.status}"></span>
+                                    <span th:classappend="${(task.status == 'EXECUTED' ? 'executed' : '') + (task.status == 'FAILED' ? 'failed' : '')}" th:text="${task.status}"></span>
                                 </div>
                             </div>
                         </div>
