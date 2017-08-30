@@ -1,6 +1,8 @@
 package org.taskm.core.task;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,8 +15,9 @@ public class Task {
     private List<Object> parameters;
     private String status;
     private String executionTime;
+    private Date lastFireTime;
 
-    public Task(Object object, String methodName){
+    public Task(Object object, String methodName) {
         this.object = object;
         this.methodName = methodName;
         this.parameters = new ArrayList<>();
@@ -25,17 +28,17 @@ public class Task {
         this.object = object;
         this.methodName = methodName;
         this.status = String.valueOf(TaskStatus.NEW);
-        if(!(parameters == null)){
+        if (!(parameters == null)) {
             this.parameters = new ArrayList<>();
-            for (Object parameter : parameters){
-                if (!(parameter == null)){
+            for (Object parameter : parameters) {
+                if (!(parameter == null)) {
                     this.parameters.add(parameter);
-                }else {
-                    throw new TaskCoreException("Failed to build task.", new Throwable(String.format("Method %s has null parameter provided",methodName)));
+                } else {
+                    throw new TaskCoreException("Failed to build task.", new Throwable(String.format("Method %s has null parameter provided", methodName)));
                 }
             }
-        }else {
-            throw new TaskCoreException("Failed to build task.", new Throwable(String.format("Method %s has null parameter provided",methodName)));
+        } else {
+            throw new TaskCoreException("Failed to build task.", new Throwable(String.format("Method %s has null parameter provided", methodName)));
         }
     }
 
@@ -51,23 +54,23 @@ public class Task {
         return parameters;
     }
 
-    public void setParameters(List<Object> parameters){
+    public void setParameters(List<Object> parameters) {
         this.parameters = parameters;
     }
 
     public void addParameter(Object parameter) throws TaskCoreException {
 
-        if (!(parameter == null)){
+        if (!(parameter == null)) {
             this.getParameters().add(parameter);
-        }else {
-            throw new TaskCoreException("Failed to add parameter.", new Throwable(String.format("Method %s has null parameter provided",methodName)));
+        } else {
+            throw new TaskCoreException("Failed to add parameter.", new Throwable(String.format("Method %s has null parameter provided", methodName)));
         }
 
     }
 
-    public String toString(){
+    public String toString() {
 
-        return String.format("%s : %s",this.getMethodName(),this.getStatus());
+        return String.format("%s : %s", this.getMethodName(), this.getParameters());
 
     }
 
@@ -80,8 +83,8 @@ public class Task {
         this.status = String.valueOf(status);
     }
 
-    public int hashCode(){
-        String hashCode = this.getMethodName()+this.getParameters();
+    public int hashCode() {
+        String hashCode = this.getMethodName() + this.getParameters();
         return hashCode.hashCode();
     }
 
@@ -91,5 +94,34 @@ public class Task {
 
     public void setExecutionTime(String executionTime) {
         this.executionTime = executionTime;
+    }
+
+    public String getFireTime() {
+        if (this.getLastFireTime() == null){
+            return "--:--:--";
+        }
+        else {
+            System.out.println(this.getLastFireTime());
+            return new SimpleDateFormat("hh:mm:ss a").format(this.getLastFireTime());
+        }
+    }
+
+    public int getDays() {
+
+        Date d1 = this.getLastFireTime();
+        Date d2 = new Date();
+        if (d1 == null) {
+            return 0;
+        } else {
+            return (int) ((d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+        }
+    }
+
+    public Date getLastFireTime() {
+        return lastFireTime;
+    }
+
+    public void setLastFireTime(Date lastFireTime) {
+        this.lastFireTime = lastFireTime;
     }
 }

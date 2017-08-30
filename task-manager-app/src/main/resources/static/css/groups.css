@@ -235,7 +235,7 @@
 
 .task_row:hover{
     cursor: pointer;
-    transition: opacity .5s linear;
+    background-color: #f7f7f7;
 }
 
 .task_details{
@@ -273,7 +273,7 @@
 
     color: #9a9a9a;
     box-sizing: border-box;
-    display: block;
+    display: inline-block;
     font-size: 10px;
     font-weight: bold;
     position: relative;
@@ -285,4 +285,10 @@
 
 .group_tasks_status span.executed{
     color: rgb(178, 217, 157)!important;
+}
+
+.group_tasks_fire_time sup.days{
+    color: red!important;
+    font-size: 9px;
+    margin-left: -3px;
 }

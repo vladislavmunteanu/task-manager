@@ -6,6 +6,7 @@ import org.taskm.core.task.TaskStatus;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 
@@ -32,6 +33,7 @@ class TaskExecutor implements Callable<Void> {
                 long startTime = System.currentTimeMillis();
 
                 task.setStatus(TaskStatus.RUNNING);
+                task.setLastFireTime(new Date(startTime));
                 task.setExecutionTime(null);
 
                 method.invoke(task.getObject());
@@ -54,6 +56,7 @@ class TaskExecutor implements Callable<Void> {
 
                     long startTime = System.currentTimeMillis();
                     task.setStatus(TaskStatus.RUNNING);
+                    task.setLastFireTime(new Date(startTime));
                     task.setExecutionTime(null);
 
                     method.invoke(task.getObject(),task.getParameters().toArray());
@@ -132,7 +135,11 @@ class TaskExecutor implements Callable<Void> {
         String minutes = String.format(format, (elapsedTime % 3600) / 60);
         String hours = String.format(format, elapsedTime / 3600);
 
-        return hours + ":" + minutes + ":" + seconds;
+        String stringRep = String.format("%.3f",(double) milliseconds / 1000);
+
+        String milli = stringRep.substring(stringRep.lastIndexOf("."),stringRep.lastIndexOf(".")+4);
+
+        return hours + ":" + minutes + ":" + seconds + milli;
 
     }
 

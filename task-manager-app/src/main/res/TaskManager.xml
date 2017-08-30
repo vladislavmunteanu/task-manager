@@ -2,7 +2,7 @@
 
 <TaskManager>
 
-    <TaskGroup name="Group_1" parallel="true" scheduler="0/50 * * * * ?">
+    <TaskGroup name="Group_1" parallel="true" scheduler="45 * * * * ?">
         <Task>
             <Name>task_1</Name>
         </Task>

@@ -95,7 +95,11 @@
                                 <div class="group_tasks_task_name">
                                     <span class="name" th:text="${task.methodName}"></span>
                                 </div>
-                                <div class="group_tasks_fire_time"><span>--:--:--</span></div>
+                                <div class="group_tasks_fire_time">
+                                    <span th:text="${task.fireTime}">--:--:--</span>
+                                    <sup class="days" th:text="${task.days > 0}?'-'+${task.days}"></sup>
+
+                                </div>
                                 <div class="group_tasks_exec_time">
                                     <span th:text="${task.executionTime != null}? ${task.executionTime}">--:--:--</span>
                                     <span th:text="${task.executionTime == null}? '--:--:--'">--:--:--</span>

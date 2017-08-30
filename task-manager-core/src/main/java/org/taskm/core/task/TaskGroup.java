@@ -118,11 +118,12 @@ public class TaskGroup {
         this.failures = failures;
     }
 
-    private TaskGroupStatus getTaskGroupStatus() {
+    public TaskGroupStatus getTaskGroupStatus() {
         return taskGroupStatus;
     }
 
     public void setTaskGroupStatus(TaskGroupStatus taskGroupStatus){
         this.taskGroupStatus = taskGroupStatus;
     }
+
 }
