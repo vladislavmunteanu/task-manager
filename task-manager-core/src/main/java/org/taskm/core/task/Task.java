@@ -16,6 +16,7 @@ public class Task {
     private String status;
     private String executionTime;
     private Date lastFireTime;
+    private String errorMessage;
 
     public Task(Object object, String methodName) {
         this.object = object;
@@ -101,7 +102,6 @@ public class Task {
             return "--:--:--";
         }
         else {
-            System.out.println(this.getLastFireTime());
             return new SimpleDateFormat("hh:mm:ss a").format(this.getLastFireTime());
         }
     }
@@ -123,5 +123,13 @@ public class Task {
 
     public void setLastFireTime(Date lastFireTime) {
         this.lastFireTime = lastFireTime;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 }

@@ -31,6 +31,9 @@ public class EngineImpl implements Engine {
 
     @Override
     public void startEngine() throws EngineException {
+
+        System.setProperty("org.quartz.jobStore.misfireThreshold","10000");
+
         List<TaskGroup> taskGroupList =  this.getEngineConf().getTaskGroupList();
         Scheduler scheduler;
         try {
@@ -42,7 +45,6 @@ public class EngineImpl implements Engine {
             throw new RuntimeException("Failed to run Scheduler.",e);
         }
 
-        List<TriggerKey> triggerKeyList = new ArrayList<>();
 
         for (TaskGroup taskGroup : taskGroupList) {
 
@@ -52,9 +54,9 @@ public class EngineImpl implements Engine {
 
                 Trigger trigger = TriggerBuilder.newTrigger()
                         .withIdentity("cronTrigger_" + taskGroup.getName(), taskGroup.getName())
-                        .withSchedule(CronScheduleBuilder.cronSchedule(taskGroup.getScheduler()))
+                        .withSchedule(CronScheduleBuilder.cronSchedule(taskGroup.getScheduler()).withMisfireHandlingInstructionDoNothing())
                         .build();
-                triggerKeyList.add(trigger.getKey());
+
                 try {
                     scheduler.getContext().put(jobKey.getName(), taskGroup);
                     scheduler.scheduleJob(job, trigger);

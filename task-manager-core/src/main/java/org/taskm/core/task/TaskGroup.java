@@ -21,7 +21,7 @@ public class TaskGroup {
     private final List<Task> taskList;
     private int executions;
     private int failures;
-    private TaskGroupStatus taskGroupStatus;
+    private TaskGroupStatus status;
 
     /**
      * @param name        - task name
@@ -35,7 +35,7 @@ public class TaskGroup {
         this.taskList = new ArrayList<>();
         this.executions = 0;
         this.failures = 0;
-        this.taskGroupStatus = TaskGroupStatus.PENDING;
+        this.status = TaskGroupStatus.PENDING;
 
     }
 
@@ -75,7 +75,7 @@ public class TaskGroup {
 
         if (Objects.equals(this.getScheduler(), "manual")) {
             return "manual";
-        } else if (this.getTaskGroupStatus() == TaskGroupStatus.RUNNING){
+        } else if (this.getStatus() == TaskGroupStatus.RUNNING){
             return String.valueOf(TaskGroupStatus.RUNNING);
         }
         else{
@@ -118,12 +118,12 @@ public class TaskGroup {
         this.failures = failures;
     }
 
-    public TaskGroupStatus getTaskGroupStatus() {
-        return taskGroupStatus;
+    public TaskGroupStatus getStatus() {
+        return status;
     }
 
-    public void setTaskGroupStatus(TaskGroupStatus taskGroupStatus){
-        this.taskGroupStatus = taskGroupStatus;
+    public void setStatus(TaskGroupStatus status){
+        this.status = status;
     }
 
 }

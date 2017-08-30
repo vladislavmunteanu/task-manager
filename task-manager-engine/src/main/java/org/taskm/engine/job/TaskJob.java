@@ -3,7 +3,6 @@ package org.taskm.engine.job;
 import org.apache.log4j.Logger;
 import org.quartz.*;
 import org.taskm.core.task.Task;
-import org.taskm.core.task.TaskCoreException;
 import org.taskm.core.task.TaskGroup;
 import org.taskm.core.task.TaskGroupStatus;
 import org.taskm.engine.EngineException;
@@ -62,19 +61,12 @@ public class TaskJob implements Job {
     public static void taskGroupUpdates(TaskGroup taskGroup, TaskRunner taskRunner) {
         taskGroup.incrementExecutions();
         taskGroup.setFailures(taskGroup.getFailures() + taskRunner.getFailedTasks());
-        taskGroup.setTaskGroupStatus(TaskGroupStatus.PENDING);
+        taskGroup.setStatus(TaskGroupStatus.PENDING);
     }
 
     public static void executeTaskGroup(TaskGroup taskGroup, TaskRunner taskRunner) {
 
-        System.out.println(taskGroup.getName()+": start time - " + new Date(System.currentTimeMillis())+" status - " + taskGroup.getTaskGroupStatus());
-
-        for (Task task : taskGroup.getTaskList()){
-            System.out.println(task.getMethodName()+" last fire - " + task.getFireTime());
-        }
-
-
-        taskGroup.setTaskGroupStatus(TaskGroupStatus.RUNNING);
+        taskGroup.setStatus(TaskGroupStatus.RUNNING);
 
         if (taskGroup.isParallel() && taskGroup.getTaskList().size() > 1) {
             try {

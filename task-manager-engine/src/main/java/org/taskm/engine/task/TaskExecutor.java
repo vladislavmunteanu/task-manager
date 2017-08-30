@@ -35,6 +35,7 @@ class TaskExecutor implements Callable<Void> {
                 task.setStatus(TaskStatus.RUNNING);
                 task.setLastFireTime(new Date(startTime));
                 task.setExecutionTime(null);
+                task.setErrorMessage(null);
 
                 method.invoke(task.getObject());
 
@@ -43,9 +44,11 @@ class TaskExecutor implements Callable<Void> {
                 task.setExecutionTime(extractExecutionTime(endTime - startTime));
                 task.setStatus(TaskStatus.EXECUTED);
             } catch (NoSuchMethodException e) {
+                task.setErrorMessage(e.getCause().getMessage());
                 task.setStatus(TaskStatus.FAILED);
                 throw new EngineException(String.format("Could not find '%s'.", task),e);
             } catch (InvocationTargetException | IllegalAccessException e) {
+                task.setErrorMessage(e.getCause().getMessage());
                 task.setStatus(TaskStatus.FAILED);
                 throw new EngineException(String.format("Could not execute '%s'.", task),e);
             }
@@ -58,6 +61,7 @@ class TaskExecutor implements Callable<Void> {
                     task.setStatus(TaskStatus.RUNNING);
                     task.setLastFireTime(new Date(startTime));
                     task.setExecutionTime(null);
+                    task.setErrorMessage(null);
 
                     method.invoke(task.getObject(),task.getParameters().toArray());
 
@@ -66,10 +70,12 @@ class TaskExecutor implements Callable<Void> {
                     task.setStatus(TaskStatus.EXECUTED);
 
                 } catch (InvocationTargetException | IllegalAccessException e) {
+                    task.setErrorMessage(e.getCause().getMessage());
                     task.setStatus(TaskStatus.FAILED);
                     throw new EngineException(String.format("Could not execute '%s'.", task),e);
                 }
             }else {
+                task.setErrorMessage(String.format("Could not find '%s'.", task));
                 task.setStatus(TaskStatus.FAILED);
                 throw new EngineException(String.format("Could not find '%s'.", task));
             }
