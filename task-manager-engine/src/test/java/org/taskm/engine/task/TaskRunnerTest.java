@@ -2,6 +2,7 @@ package org.taskm.engine.task;
 
 import junit.framework.Assert;
 import org.apache.log4j.Logger;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.taskm.core.task.Task;
 import org.taskm.core.task.TaskCoreException;
@@ -12,11 +13,57 @@ import java.util.List;
 /**
  * Created on 1/27/2017.
  */
-public class TaskRunnerTest extends TaskTemplate{
+public class TaskRunnerTest{
 
     private static final Logger LOG = Logger.getLogger(TaskRunnerTest.class);
-    private List<Task> taskList;
-    private Task testTwoParameters;
+
+    private static List<Task> taskList;
+
+    private static Task testTwoParameters;
+
+    private static TaskRunner runner;
+
+    private static Task testInt;
+
+    private static Task doError;
+
+    private static Task testByte;
+
+    private static Task testShort;
+
+    private static TaskTemplate taskTemplate;
+
+
+
+    @BeforeClass
+    public static void setUp() throws TaskRunnerException {
+
+        taskTemplate = new TaskTemplate();
+        runner = new TaskRunner();
+
+        List<Object> testIntParameters = new ArrayList<>();
+        int testIntParameter = 3;
+        testIntParameters.add(testIntParameter);
+        testInt = new Task(taskTemplate,"testInt");
+        testInt.setParameters(testIntParameters);
+
+        List<Object> testByteParameters = new ArrayList<>();
+        byte testByteParameter = 3;
+        testByteParameters.add(testByteParameter);
+        testByte = new Task(taskTemplate,"testByte");
+        testByte.setParameters(testByteParameters);
+
+
+        List<Object> testShortParameters = new ArrayList<>();
+        short testShortParameter = 3;
+        testShortParameters.add(testShortParameter);
+        testShort = new Task(taskTemplate,"testShort");
+        testShort.setParameters(testShortParameters);
+        doError = new Task(taskTemplate,"doError");
+
+    }
+
+
 
     @Test
     public void test_All_Data_Types() throws TaskRunnerException, InterruptedException {

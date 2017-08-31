@@ -13,46 +13,6 @@ import java.util.List;
 
 class TaskTemplate {
 
-    static TaskRunner runner;
-
-    static Task testInt;
-
-    static Task doError;
-
-    static Task testByte;
-
-    static Task testShort;
-
-    static TaskTemplate taskTemplate;
-
-
-    @BeforeClass
-    public static void setUp() throws TaskRunnerException {
-
-        taskTemplate = new TaskTemplate();
-        runner = new TaskRunner();
-        List<Object> testIntParameters = new ArrayList<>();
-        int testIntParameter = 3;
-        testIntParameters.add(testIntParameter);
-        testInt = new Task(taskTemplate,"testInt");
-        testInt.setParameters(testIntParameters);
-
-        List<Object> testByteParameters = new ArrayList<>();
-        byte testByteParameter = 3;
-        testByteParameters.add(testByteParameter);
-        testByte = new Task(taskTemplate,"testByte");
-        testByte.setParameters(testByteParameters);
-
-
-        List<Object> testShortParameters = new ArrayList<>();
-        short testShortParameter = 3;
-        testShortParameters.add(testShortParameter);
-        testShort = new Task(taskTemplate,"testShort");
-        testShort.setParameters(testShortParameters);
-        doError = new Task(taskTemplate,"doError");
-
-    }
-
     private static final Logger LOG = Logger.getLogger(TaskTemplate.class);
 
     public void testNoParameter() throws InterruptedException {
@@ -69,17 +29,17 @@ class TaskTemplate {
         LOG.info("message_1 = " + message_1);
     }
 
-    void testInt(int message) throws InterruptedException {
+    public void testInt(int message) throws InterruptedException {
         Thread.sleep(3000);
         LOG.info(String.valueOf(message));
     }
 
-    void testByte(byte message) throws InterruptedException {
+    public void testByte(byte message) throws InterruptedException {
         Thread.sleep(2000);
         LOG.info(String.valueOf(message));
     }
 
-    void testShort(Short message) throws InterruptedException {
+    public void testShort(Short message) throws InterruptedException {
         Thread.sleep(1000);
         LOG.info(String.valueOf(message));
     }
