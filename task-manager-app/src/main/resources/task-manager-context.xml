@@ -9,6 +9,4 @@
     <context:component-scan base-package="org.taskm"/>
     <context:property-placeholder location="classpath*:application.properties"/>
 
-
-
 </beans>
