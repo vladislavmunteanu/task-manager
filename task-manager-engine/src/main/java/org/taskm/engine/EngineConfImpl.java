@@ -52,7 +52,7 @@ public class EngineConfImpl implements EngineConf {
 
     public EngineConfImpl() throws EngineException {
 
-        this.properties = this.loadProperties();
+        this.properties = loadProperties();
         this.compiled = Boolean.valueOf(this.getProperties().getProperty("task.manager.compiled"));
         if (!this.isCompiled()) {
             this.type = this.getProperties().getProperty("task.manager.type");
@@ -102,7 +102,7 @@ public class EngineConfImpl implements EngineConf {
         return properties;
     }
 
-    private Properties loadProperties() throws EngineException {
+    private static Properties loadProperties() throws EngineException {
 
         Properties properties = new Properties();
         try {
@@ -117,6 +117,8 @@ public class EngineConfImpl implements EngineConf {
         }
         return properties;
     }
+
+
 
     private Boolean isCompiled() {
         return compiled;
@@ -292,5 +294,9 @@ public class EngineConfImpl implements EngineConf {
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | MalformedURLException e) {
             throw new EngineException(String.format("Failed to create instance of '%s' class",className));
         }
+    }
+
+    public static String getProperty(String propertyName) throws EngineException {
+        return loadProperties().getProperty(propertyName);
     }
 }
