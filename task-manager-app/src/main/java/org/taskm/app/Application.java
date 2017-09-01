@@ -18,7 +18,7 @@ public class Application {
         try {
             System.setProperty("port", EngineConfImpl.getProperty("task.manager.port"));
         } catch (EngineException e) {
-            throw new RuntimeException("Failed to load server port",e);
+            throw new RuntimeException("Failed to load property 'task.manager.port'",e);
         }
 
         SpringApplication.run(Application.class, args);
