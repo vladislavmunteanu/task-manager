@@ -60,6 +60,13 @@ public class EngineController {
         return "fragments/groups";
     }
 
+    @RequestMapping(value = "/groups/{group_name}/{task_name}", method = RequestMethod.GET)
+    public String getGroup(Model model, @PathVariable("group_name") String group_name,@PathVariable("task_name") String task_name) {
+
+        model.addAttribute("task",groups.get(engine.getEngineConf().getTaskGroupIndex(group_name)).getTask(task_name));
+
+        return "fragments/opentask";
+    }
 
 
 

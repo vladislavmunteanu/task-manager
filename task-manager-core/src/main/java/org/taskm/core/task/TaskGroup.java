@@ -126,4 +126,14 @@ public class TaskGroup {
         this.status = status;
     }
 
+    public Task getTask(String taskName){
+
+        for (Task task : this.getTaskList()){
+            if (Objects.equals(task.getMethodName(), taskName)){
+                return task;
+            }
+        }
+        return null;
+    }
+
 }

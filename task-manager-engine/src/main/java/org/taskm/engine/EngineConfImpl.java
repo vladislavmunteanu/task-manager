@@ -118,8 +118,6 @@ public class EngineConfImpl implements EngineConf {
         return properties;
     }
 
-
-
     private Boolean isCompiled() {
         return compiled;
     }
