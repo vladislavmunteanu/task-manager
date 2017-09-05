@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Manager</title>
+</head>
+<body>
+
+<div class="modal-content">
+    <span class="close">&times;</span>
+    <!--/*@thymesVar id="task" type="org.taskm.core.task.Task"*/-->
+    <!--/*@thymesVar id="methodName" type="java.lang.String"*/-->
+    <p th:text="${task.methodName}">Some text in the Modal..</p>
+</div>
+</body>
+</html>

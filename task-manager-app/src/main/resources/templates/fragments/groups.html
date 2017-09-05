@@ -88,7 +88,7 @@
                             <div class="group_tasks_status">status</div>
                         </div>
 
-                        <div class="task_row" th:each="task,iter  : ${selected_group.taskList}" th:onclick="'javascript:opentask(\''+${group_name}+'/'+${task.methodName}+'\');'">
+                        <div class="task_row" th:each="task,iter  : ${selected_group.taskList}" th:onclick="'javascript:openTask(\''+${group_name}+'/'+${task.methodName}+'\');'">
                             <div class="task_details">
                                 <div class="group_tasks_od">
                                     <span class="day" th:text="${iter.index}+1">1</span>
