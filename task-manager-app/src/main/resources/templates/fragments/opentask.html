@@ -7,7 +7,7 @@
 <body>
 
 <div class="modal-content">
-    <span class="close">&times;</span>
+    <span class="close" th:onclick="'javascript:closeTask();'">&times;</span>
     <!--/*@thymesVar id="task" type="org.taskm.core.task.Task"*/-->
     <!--/*@thymesVar id="methodName" type="java.lang.String"*/-->
     <p th:text="${task.methodName}">Some text in the Modal..</p>
