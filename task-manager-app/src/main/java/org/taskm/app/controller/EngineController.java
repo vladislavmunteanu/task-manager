@@ -65,7 +65,7 @@ public class EngineController {
 
         model.addAttribute("task",groups.get(engine.getEngineConf().getTaskGroupIndex(group_name)).getTask(task_name));
 
-        return "fragments/opentask";
+        return "fragments/task-details";
     }
 
 
