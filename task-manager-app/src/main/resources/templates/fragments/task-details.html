@@ -16,9 +16,10 @@
         </div>
 
         <div id="task-details-header-left">
-        <h4 class="task-details-title" th:text="${task.methodName}">Some text in the Modal..</h4>
+            <h4 class="task-details-title" th:text="${task.methodName}">Some text in the Modal..</h4>
         </div>
     </div>
+
     <div id="task-details-content">
         <div class="task-details-content-row">
             <div class="task-details-content-row-data">
@@ -26,7 +27,8 @@
                     <span>status</span>
                 </div>
                 <div class="task-details-content-row-data-value status">
-                    <span th:classappend="${(task.status == 'EXECUTED' ? 'executed' : '') + (task.status == 'FAILED' ? 'failed' : '')}" th:text="${task.status}">status</span>
+                    <span th:classappend="${(task.status == 'EXECUTED' ? 'executed' : '') + (task.status == 'FAILED' ? 'failed' : '')}"
+                          th:text="${task.status}">status</span>
                 </div>
             </div>
         </div>
@@ -55,10 +57,33 @@
 
         <div class="task-details-content-row">
             <div class="task-details-content-row-data">
-                <div class="task-details-content-row-data-caption">
+                <div class="task-details-parameters-caption">
                     <span>parameters</span>
                 </div>
-                <div class="task-details-content-row-data-value">
+                <div class="task-details-parameters-value">
+
+                    <div class="task-details-content-row parameters-value-row">
+                        <div class="task-details-content-row-data parameters-value-row">
+                            <div class="task-details-content-row-data-caption">
+                                <span>String</span>
+                            </div>
+                            <div class="task-details-content-row-data-value">
+                                <span>Fa marie cu bariz</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="task-details-content-row parameters-value-row">
+                        <div class="task-details-content-row-data parameters-value-row">
+                            <div class="task-details-content-row-data-caption">
+                                <span>Integer</span>
+                            </div>
+                            <div class="task-details-content-row-data-value">
+                                <span>3</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
