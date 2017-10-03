@@ -6,11 +6,63 @@
 </head>
 <body>
 
-<div class="modal-content">
-    <span class="close" th:onclick="'javascript:closeTask();'">&times;</span>
-    <!--/*@thymesVar id="task" type="org.taskm.core.task.Task"*/-->
-    <!--/*@thymesVar id="methodName" type="java.lang.String"*/-->
-    <p th:text="${task.methodName}">Some text in the Modal..</p>
+<!--/*@thymesVar id="task" type="org.taskm.core.task.Task"*/-->
+<!--/*@thymesVar id="methodName" type="java.lang.String"*/-->
+<div class="task-details">
+
+    <div id="task-details-header">
+        <div id="task-details-header-right">
+            <span class="close" th:onclick="'javascript:closeTask();'">&times;</span>
+        </div>
+
+        <div id="task-details-header-left">
+        <h4 class="task-details-title" th:text="${task.methodName}">Some text in the Modal..</h4>
+        </div>
+    </div>
+    <div id="task-details-content">
+        <div class="task-details-content-row">
+            <div class="task-details-content-row-data">
+                <div class="task-details-content-row-data-caption">
+                    <span>status</span>
+                </div>
+                <div class="task-details-content-row-data-value status">
+                    <span th:classappend="${(task.status == 'EXECUTED' ? 'executed' : '') + (task.status == 'FAILED' ? 'failed' : '')}" th:text="${task.status}">status</span>
+                </div>
+            </div>
+        </div>
+        <div class="task-details-content-row">
+            <div class="task-details-content-row-data">
+                <div class="task-details-content-row-data-caption">
+                    <span>last fire time</span>
+                </div>
+                <div class="task-details-content-row-data-value day-indicator">
+                    <span th:text="${task.fireTime}">--:--:--</span>
+                    <sup class="days" th:text="${task.days > 0}?'-'+${task.days}"></sup>
+                </div>
+            </div>
+        </div>
+        <div class="task-details-content-row">
+            <div class="task-details-content-row-data">
+                <div class="task-details-content-row-data-caption">
+                    <span>execution time</span>
+                </div>
+                <div class="task-details-content-row-data-value">
+                    <span th:text="${task.executionTime != null}? ${task.executionTime}">--:--:--</span>
+                    <span th:text="${task.executionTime == null}? '--:--:--'">--:--:--</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="task-details-content-row">
+            <div class="task-details-content-row-data">
+                <div class="task-details-content-row-data-caption">
+                    <span>parameters</span>
+                </div>
+                <div class="task-details-content-row-data-value">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>

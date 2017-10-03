@@ -19,7 +19,7 @@
 
 function closeTask() {
 
-    var modal = document.getElementById('myModal');
+    var modal = document.getElementById('modal');
      modal.style.display = "none";
 
 }
@@ -27,7 +27,7 @@ function closeTask() {
 
 function openTask(taskPath) {
 
-    var modal = document.getElementById('myModal');
+    var modal = document.getElementById('modal');
     var ctx = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
 
     $.ajax({
@@ -36,7 +36,7 @@ function openTask(taskPath) {
         method: 'get',
         cache: false,
         success: function (data) {
-            $('#myModal').html(data);
+            $('#modal').html(data);
             modal.style.display = "block";
         }
     });

@@ -96,7 +96,7 @@
                                 <div class="group_tasks_task_name">
                                     <span class="name" th:text="${task.methodName}"></span>
                                 </div>
-                                <div class="group_tasks_fire_time">
+                                <div class="group_tasks_fire_time day-indicator">
                                     <span th:text="${task.fireTime}">--:--:--</span>
                                     <sup class="days" th:text="${task.days > 0}?'-'+${task.days}"></sup>
 
@@ -105,15 +105,13 @@
                                     <span th:text="${task.executionTime != null}? ${task.executionTime}">--:--:--</span>
                                     <span th:text="${task.executionTime == null}? '--:--:--'">--:--:--</span>
                                 </div>
-                                <div class="group_tasks_status">
+                                <div class="group_tasks_status status">
                                     <span th:classappend="${(task.status == 'EXECUTED' ? 'executed' : '') + (task.status == 'FAILED' ? 'failed' : '')}" th:text="${task.status}"></span>
                                 </div>
                             </div>
                         </div>
 
-                        <div id="myModal" class="modal">
-
-                            <!-- Modal content -->
+                        <div id="modal" class="modal-task-details">
 
 
                         </div>
