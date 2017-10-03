@@ -308,6 +308,9 @@
     border: 1px solid #d2d2d2;
     width: 85%;
     overflow: auto;
+    -webkit-box-shadow: 3px -2px 10px 0 rgba(46,74,117,0.42);
+    -moz-box-shadow: 3px -2px 10px 0 rgba(46,74,117,0.42);
+    box-shadow: 3px -2px 10px 0 rgba(46,74,117,0.42);
 }
 
 .close {
@@ -404,7 +407,7 @@
     vertical-align: middle;
 }
 
-.task-details-parameters-caption{
+.task-details-simple-caption{
     color: #727272;
     float: left;
     text-transform: uppercase;
@@ -415,7 +418,7 @@
     line-height: 12px;
 }
 
-.task-details-parameters-value{
+.task-details-simple-value{
     color: #333;
     float: right;
     text-transform: uppercase;
@@ -427,7 +430,14 @@
 }
 
 .parameters-value-row{
-    padding-top: 0 !important;
+    padding: 0 0 10px 0 !important;
     border-bottom: none !important;
-    padding-right: 0 !important;
+}
+
+.task-details-error{
+    text-transform: none !important;
+    text-align: left;
+    color: red;
+    font-size: 11px !important;
+    font-weight: normal !important;
 }

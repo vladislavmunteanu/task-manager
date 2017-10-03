@@ -57,10 +57,10 @@
 
         <div class="task-details-content-row">
             <div class="task-details-content-row-data">
-                <div class="task-details-parameters-caption">
+                <div class="task-details-simple-caption">
                     <span>parameters</span>
                 </div>
-                <div class="task-details-parameters-value">
+                <div class="task-details-simple-value">
 
                     <div class="task-details-content-row parameters-value-row">
                         <div class="task-details-content-row-data parameters-value-row">
@@ -84,6 +84,18 @@
                         </div>
                     </div>
 
+                </div>
+            </div>
+        </div>
+
+        <div class="task-details-content-row">
+            <div class="task-details-content-row-data">
+                <div class="task-details-simple-caption">
+                    <span>error message</span>
+                </div>
+                <div class="task-details-simple-value task-details-error">
+                    <span th:text="${task.errorMessage != null}? ${task.errorMessage}">------</span>
+                    <span th:text="${task.errorMessage == null}? '------'">------</span>
                 </div>
             </div>
         </div>
