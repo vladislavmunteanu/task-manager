@@ -6,6 +6,7 @@
     <link type="text/css" th:href="@{/css/groups.css}" rel="stylesheet"/>
     <link type="text/css" th:href="@{/css/style.css}" rel="stylesheet"/>
     <link type="text/css" th:href="@{/css/help.css}" rel="stylesheet"/>
+    <link type="text/css" th:href="@{/css/task-details.css}" rel="stylesheet"/>
 
     <link rel="icon" type="image/png" th:href="@{/img/fav.png}"/>
 
@@ -88,8 +89,8 @@
                             <div class="group-tasks-status">status</div>
                         </div>
 
-                        <div class="task-row" th:each="task,iter  : ${selected_group.taskList}" th:onclick="'javascript:openTask(\''+${group_name}+'/'+${task.methodName}+'\');'">
-                            <div class="task_details">
+                        <div class="row cursor-pointer" th:each="task,iter  : ${selected_group.taskList}" th:onclick="'javascript:openTask(\''+${group_name}+'/'+${task.methodName}+'\');'">
+                            <div class="row-data display-table">
                                 <div class="group-tasks-od">
                                     <span class="day" th:text="${iter.index}+1">1</span>
                                 </div>

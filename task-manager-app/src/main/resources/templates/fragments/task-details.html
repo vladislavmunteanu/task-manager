@@ -24,53 +24,53 @@
     </div>
 
     <div id="task-details-content">
-        <div class="task-details-content-row">
-            <div class="task-details-content-row-data">
-                <div class="task-details-content-row-data-caption">
+        <div class="row">
+            <div class="row-data">
+                <div class="task-details-caption task-details-caption-addon">
                     <span>status</span>
                 </div>
-                <div class="task-details-content-row-data-value status">
+                <div class="task-details-value task-details-value-addon status">
                     <span th:classappend="${(task.status == 'EXECUTED' ? 'executed' : '') + (task.status == 'FAILED' ? 'failed' : '')}"
                           th:text="${task.status}">status</span>
                 </div>
             </div>
         </div>
-        <div class="task-details-content-row">
-            <div class="task-details-content-row-data">
-                <div class="task-details-content-row-data-caption">
+        <div class="row">
+            <div class="row-data">
+                <div class="task-details-caption task-details-caption-addon">
                     <span>last fire time</span>
                 </div>
-                <div class="task-details-content-row-data-value day-indicator">
+                <div class="task-details-value task-details-value-addon day-indicator">
                     <span th:text="${task.fireTime}">--:--:--</span>
                     <sup class="days" th:text="${task.days > 0}?'-'+${task.days}"></sup>
                 </div>
             </div>
         </div>
-        <div class="task-details-content-row">
-            <div class="task-details-content-row-data">
-                <div class="task-details-content-row-data-caption">
+        <div class="row">
+            <div class="row-data">
+                <div class="task-details-caption task-details-caption-addon">
                     <span>execution time</span>
                 </div>
-                <div class="task-details-content-row-data-value">
+                <div class="task-details-value task-details-value-addon">
                     <span th:text="${task.executionTime != null}? ${task.executionTime}">--:--:--</span>
                     <span th:text="${task.executionTime == null}? '--:--:--'">--:--:--</span>
                 </div>
             </div>
         </div>
 
-        <div class="task-details-content-row">
-            <div class="task-details-content-row-data">
-                <div class="task-details-simple-caption">
+        <div class="row">
+            <div class="row-data">
+                <div class="task-details-caption">
                     <span>parameters</span>
                 </div>
-                <div class="task-details-simple-value" th:classappend="${taskParameters.size() == 0}? 'task-details-na' : ''">
+                <div class="task-details-value" th:classappend="${taskParameters.size() == 0}? 'task-details-na' : ''">
 
-                    <div class="task-details-content-row parameters-value-row" th:each="parameter : ${taskParameters}">
-                        <div class="task-details-content-row-data parameters-value-row">
-                            <div class="task-details-content-row-data-caption">
+                    <div class="row task-details-parameters-row" th:each="parameter : ${taskParameters}">
+                        <div class="row-data task-details-parameters-row">
+                            <div class="task-details-caption task-details-caption-addon">
                                 <span th:text="${parameter.key}"></span>
                             </div>
-                            <div class="task-details-content-row-data-value">
+                            <div class="task-details-value task-details-value-addon">
                                 <span th:text="${parameter.value}"></span>
                             </div>
                         </div>
@@ -81,12 +81,12 @@
             </div>
         </div>
 
-        <div class="task-details-content-row">
-            <div class="task-details-content-row-data">
-                <div class="task-details-simple-caption">
+        <div class="row">
+            <div class="row-data">
+                <div class="task-details-caption">
                     <span>error message</span>
                 </div>
-                <div class="task-details-simple-value task-details-error" th:classappend="${task.errorMessage == null}? 'task-details-na' : ''">
+                <div class="task-details-value task-details-error" th:classappend="${task.errorMessage == null}? 'task-details-na' : ''">
                     <span th:text="${task.errorMessage != null}? ${task.errorMessage}">------</span>
                     <span th:text="${task.errorMessage == null}? 'N/A'">------</span>
                 </div>

@@ -40,6 +40,5 @@ function openTask(taskPath) {
             modal.style.display = "block";
         }
     });
-
-
+    
 }

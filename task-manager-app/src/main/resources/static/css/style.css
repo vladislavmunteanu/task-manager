@@ -192,7 +192,39 @@ li{
     background: #fff !important;
 }
 
+.row {
+    border-bottom: 1px solid #eee;
+    padding: 10px 0 10px;
+}
 
+.cursor-pointer:hover {
+    cursor: pointer;
+    background-color: #f7f7f7;
+}
 
+.row-data {
+    box-sizing: border-box;
+    display: table;
+    padding: 10px;
+    table-layout: fixed;
+    width: 100%;
+}
 
+.display-table div{
+    display: table-cell;
+    vertical-align: middle;
+}
 
+.status span.failed {
+    color: red !important;
+}
+
+.status span.executed {
+    color: rgb(178, 217, 157) !important;
+}
+
+.day-indicator sup.days {
+    color: red !important;
+    font-size: 9px;
+    margin-left: -3px;
+}
