@@ -1,17 +1,17 @@
-#group_widget{
+#group-widget {
     background-color: #1C76B6 !important;
 }
 
-#group_widget span{
+#group-widget span {
     color: #fff !important;
 }
 
-#main_content_data{
+#main-content-data {
     padding: 0 !important;
     display: flex !important;
 }
 
-#main_modules{
+#main-modules {
     box-sizing: border-box;
     float: left;
     padding: 0;
@@ -21,11 +21,11 @@
 
 }
 
-#main_modules ul{
+#main-modules ul {
     padding-bottom: 0.5px;
 }
 
-#main_modules ul li{
+#main-modules ul li {
     background-color: #fff;
     border-radius: 0 !important;
     border-bottom: 1px solid #d2d2d2;
@@ -33,30 +33,30 @@
     padding: 5px;
 }
 
-#main_modules ul li.selected{
+#main-modules ul li.selected {
     background-color: #f5f5f5;
     text-shadow: none;
 }
 
-#main_modules ul li a{
+#main-modules ul li a {
     border-radius: 3px;
     display: block;
     padding: 6px;
     color: #666;
 }
 
-#main_modules ul li.selected a{
+#main-modules ul li.selected a {
     padding: 6px;
     background: rgb(232, 243, 223);
     border: 1px solid rgb(178, 217, 157);
     border-image: initial;
 }
 
-#main_modules ul li.selected a span{
+#main-modules ul li.selected a span {
     color: #2D3E4E;
 }
 
-#group_header{
+#group-header {
     background-color: #fff;
     border-bottom: 1px solid #d2d2d2;
     margin: 0 !important;
@@ -67,23 +67,23 @@
     font-size: 16px;
 }
 
-.group_name{
+.group-name {
     margin-top: 5px;
     display: inline-block;
     width: 55%;
     text-decoration: none;
 }
 
-.group_name span{
+.group-name span {
     color: #8f8f8f;
     font-size: 11px;
 }
 
-.group_details{
+.group-details {
     float: right;
 }
 
-.group_details span{
+.group-details span {
     color: #666;
     display: inline-block;
     float: right;
@@ -95,8 +95,8 @@
     text-align: right;
 }
 
-.group_details span.days{
-    color: red!important;
+.group-details span.days {
+    color: red !important;
     font-size: 9px;
     margin-left: -3px;
     float: right;
@@ -105,21 +105,21 @@
     margin-top: 0;
 }
 
-.group_details img{
+.group-details img {
     display: inline-block;
     height: 30px;
     margin-top: 5.5px;
     margin-right: 15px
 }
 
-#side_modules{
+#side-modules {
     float: right;
     position: relative;
     width: 630px;
     box-sizing: border-box;
 }
 
-#side_modules_header{
+#side-modules-header {
     background-color: #fff;
     border-bottom: 1px solid #d2d2d2;
     box-sizing: border-box;
@@ -129,7 +129,7 @@
     width: 100%;
 }
 
-#side_modules_header_info{
+#side-modules-header-info {
     display: inline-block;
     height: 35px;
     margin-bottom: 20px;
@@ -137,7 +137,7 @@
 
 }
 
-#side_modules_header_info h4{
+#side-modules-header-info h4 {
     color: #4c4c4c;
     font-size: 18px;
     font-weight: bold;
@@ -145,17 +145,17 @@
     margin-top: 0;
 }
 
-#side_modules_header ul.header_group_details {
+#side-modules-header ul.header-group-details {
     float: right;
     margin-right: 10px;
 }
 
-#side_modules_header ul.header_group_details li {
+#side-modules-header ul.header-group-details li {
     display: inline-block;
     margin-left: 30px;
 }
 
-#side_modules_header ul.header_group_details li span.key{
+#side-modules-header ul.header-group-details li span.key {
     font-size: 12px;
     color: #9a9a9a !important;
     display: block;
@@ -164,7 +164,7 @@
 
 }
 
-#side_modules_header ul.header_group_details li span.value{
+#side-modules-header ul.header-group-details li span.value {
 
     color: #1C76B6;
     display: inline-block;
@@ -173,7 +173,7 @@
     text-align: right;
 }
 
-#group_tasks_header{
+#group-tasks-header {
     border-bottom: 1px solid #e5e5e5;
     box-sizing: border-box;
     color: #727272;
@@ -187,56 +187,56 @@
     width: 100%;
 }
 
-#group_tasks{
+#group-tasks {
     float: left;
     position: relative;
 }
 
-#group_tasks_header div{
+#group-tasks-header div {
     display: table-cell;
     vertical-align: middle;
 }
 
-.group_tasks_od{
+.group-tasks-od {
     min-width: 30px;
     padding-right: 13px;
     width: 7%;
 }
 
-.group_tasks_task_name{
+.group-tasks-task-name {
     width: 43%;
     padding-right: 13px;
 }
 
-.group_tasks_exec_time{
+.group-tasks-exec-time {
     width: 20%;
     padding-right: 13px;
     text-align: center;
 }
 
-.group_tasks_fire_time{
+.group-tasks-fire-time {
     text-align: center;
     width: 20%;
     padding-right: 13px;
 }
 
-.group_tasks_status{
+.group-tasks-status {
     text-align: center;
     width: 10%;
-     padding-right: 13px;
- }
+    padding-right: 13px;
+}
 
-.task_row{
+.task-row {
     border-bottom: 1px solid #eee;
     padding: 10px 0 10px;
 }
 
-.task_row:hover{
+.task-row:hover {
     cursor: pointer;
     background-color: #f7f7f7;
 }
 
-.task_details{
+.task_details {
     box-sizing: border-box;
     display: table;
     padding: 10px;
@@ -244,12 +244,12 @@
     width: 100%;
 }
 
-.task_details div{
+.task_details div {
     display: table-cell;
     vertical-align: middle;
 }
 
-.group_tasks_od span.day {
+.group-tasks-od span.day {
     color: #333;
     display: block;
     font-weight: bold;
@@ -258,7 +258,7 @@
     text-transform: uppercase;
 }
 
-.group_tasks_task_name span.name {
+.group-tasks-task-name span.name {
     box-sizing: border-box;
     color: #333;
     display: block;
@@ -267,7 +267,7 @@
     position: relative;
 }
 
-.group_tasks_status span, .group_tasks_fire_time span, .group_tasks_exec_time span {
+.group-tasks-status span, .group-tasks-fire-time span, .group-tasks-exec-time span {
 
     color: #9a9a9a;
     box-sizing: border-box;
@@ -277,16 +277,16 @@
     position: relative;
 }
 
-.status span.failed{
-    color: red!important;
+.status span.failed {
+    color: red !important;
 }
 
-.status span.executed{
-    color: rgb(178, 217, 157)!important;
+.status span.executed {
+    color: rgb(178, 217, 157) !important;
 }
 
-.day-indicator sup.days{
-    color: red!important;
+.day-indicator sup.days {
+    color: red !important;
     font-size: 9px;
     margin-left: -3px;
 }
@@ -301,16 +301,15 @@
     overflow: auto;
 }
 
-
 .task-details {
     background-color: #fefefe;
     margin: auto;
     border: 1px solid #d2d2d2;
     width: 85%;
     overflow: auto;
-    -webkit-box-shadow: 3px 3px 10px 0 rgba(46,74,117,0.42);
-    -moz-box-shadow: 3px 3px 10px 0 rgba(46,74,117,0.42);
-    box-shadow: 3px 3px 10px 0 rgba(46,74,117,0.42);
+    -webkit-box-shadow: 3px 3px 10px 0 rgba(46, 74, 117, 0.42);
+    -moz-box-shadow: 3px 3px 10px 0 rgba(46, 74, 117, 0.42);
+    box-shadow: 3px 3px 10px 0 rgba(46, 74, 117, 0.42);
 }
 
 .close {
@@ -327,7 +326,7 @@
     cursor: pointer;
 }
 
-.task-details-title{
+.task-details-title {
     color: #333;
     display: block;
     font-weight: bold;
@@ -336,21 +335,21 @@
     font-size: 16px;
 }
 
-#task-details-header{
+#task-details-header {
     width: 100%;
     height: 40px;
     border-bottom: 1px solid #d2d2d2;
     background-color: #f6f5f7
 }
 
-#task-details-header-left{
+#task-details-header-left {
     float: left;
     width: 50px;
     height: 100%;
     margin-left: 10px;
 }
 
-#task-details-header-right{
+#task-details-header-right {
     float: right;
     width: 15px;
     margin-right: 10px;
@@ -375,7 +374,7 @@
     width: 100%;
 }
 
-.task-details-content-row-data-caption{
+.task-details-content-row-data-caption {
     min-width: 30px;
     color: #727272;
     font-size: 10px;
@@ -388,7 +387,7 @@
     vertical-align: middle;
 }
 
-.task-details-content-row-data-value{
+.task-details-content-row-data-value {
     min-width: 30px;
     color: #333;
     font-size: 10px;
@@ -402,7 +401,7 @@
     vertical-align: middle;
 }
 
-.task-details-simple-caption{
+.task-details-simple-caption {
     color: #727272;
     float: left;
     text-transform: uppercase;
@@ -413,7 +412,7 @@
     line-height: 12px;
 }
 
-.task-details-simple-value{
+.task-details-simple-value {
     color: #333;
     float: right;
     text-transform: uppercase;
@@ -424,19 +423,19 @@
     line-height: 12px;
 }
 
-.parameters-value-row{
+.parameters-value-row {
     padding: 0 !important;
     border-bottom: none !important;
 }
 
-.task-details-error{
+.task-details-error {
     text-transform: none !important;
     text-align: left;
     font-size: 11px !important;
     font-weight: normal !important;
 }
 
-.task-details-na{
+.task-details-na {
     text-align: right !important;
     font-size: 11px !important;
     font-weight: normal !important;

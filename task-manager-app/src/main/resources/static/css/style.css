@@ -49,20 +49,20 @@ li{
     margin: 0;
 }
 
-#header_container {
+#header-container {
     height: 70px;
     padding: 0;
     width: 1005px;
     margin: 0 auto;
 }
 
-#header_logo{
+#header-logo{
     height: 45px;
     margin-top: 12px;
     width: auto;
 }
 
-#header_git,#header_help{
+#header-git,#header-help{
     height: 40px;
     margin-top: 15px;
     width: auto;
@@ -70,11 +70,11 @@ li{
     margin-left: 10px;
 }
 
-#header_logo img{
+#header-logo img{
     height: 45px;
 }
 
-#header_git img,#header_help img{
+#header-git img,#header-help img{
     height: 40px;
 }
 
@@ -90,7 +90,7 @@ li{
     margin-left: auto;
 }
 
-#main_nav{
+#main-nav{
     background: transparent;
     position: absolute;
     padding: 0;
@@ -140,7 +140,7 @@ li{
     letter-spacing: 0.8px;
 }
 
-#main_content_outer{
+#main-content-outer{
     border: 0 none;
     border-radius: 5px;
     padding: 0;
@@ -154,13 +154,13 @@ li{
     margin-bottom: 50px;
 }
 
-#main_content{
+#main-content{
     background: transparent 50% 49px;
     border: 0 none;
     padding: 0;
 }
 
-#main_content_title{
+#main-content-title{
     background-color: #f6f5f7 !important;
     border-bottom: 1px solid #ccc;
     border-radius: 5px 5px 0 0;
@@ -169,7 +169,7 @@ li{
     height: 62px;
 }
 
-#main_content_title h1{
+#main-content-title h1{
     float: left;
     font-size: 22px;
     line-height: 26px;
@@ -177,14 +177,13 @@ li{
     margin-top: 7px;
     margin-bottom: 17px;
     color: #1C76B6 !important;
-    /*color: #D9733B !important;*/
 
     margin-left: 0;
     padding-bottom: 11px;
     letter-spacing: 0.5px;
 }
 
-#main_content_data{
+#main-content-data{
     padding: 20px 15px 15px;
     min-height: 630px;
     position: relative;
