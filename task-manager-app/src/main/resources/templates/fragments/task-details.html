@@ -8,6 +8,9 @@
 
 <!--/*@thymesVar id="task" type="org.taskm.core.task.Task"*/-->
 <!--/*@thymesVar id="methodName" type="java.lang.String"*/-->
+<!--/*@thymesVar id="taskParameters" type="java.util.Map"*/-->
+<!--/*@thymesVar id="key" type="java.lang.String"*/-->
+<!--/*@thymesVar id="value" type="java.lang.String"*/-->
 <div class="task-details">
 
     <div id="task-details-header">
@@ -60,30 +63,20 @@
                 <div class="task-details-simple-caption">
                     <span>parameters</span>
                 </div>
-                <div class="task-details-simple-value">
+                <div class="task-details-simple-value" th:classappend="${taskParameters.size() == 0}? 'task-details-na' : ''">
 
-                    <div class="task-details-content-row parameters-value-row">
+                    <div class="task-details-content-row parameters-value-row" th:each="parameter : ${taskParameters}">
                         <div class="task-details-content-row-data parameters-value-row">
                             <div class="task-details-content-row-data-caption">
-                                <span>String</span>
+                                <span th:text="${parameter.key}"></span>
                             </div>
                             <div class="task-details-content-row-data-value">
-                                <span>Fa marie cu bariz</span>
+                                <span th:text="${parameter.value}"></span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="task-details-content-row parameters-value-row">
-                        <div class="task-details-content-row-data parameters-value-row">
-                            <div class="task-details-content-row-data-caption">
-                                <span>Integer</span>
-                            </div>
-                            <div class="task-details-content-row-data-value">
-                                <span>3</span>
-                            </div>
-                        </div>
-                    </div>
-
+                    <span th:text="${taskParameters.size() == 0}? 'N/A'">------</span>
                 </div>
             </div>
         </div>
@@ -93,9 +86,9 @@
                 <div class="task-details-simple-caption">
                     <span>error message</span>
                 </div>
-                <div class="task-details-simple-value task-details-error">
+                <div class="task-details-simple-value task-details-error" th:classappend="${task.errorMessage == null}? 'task-details-na' : ''">
                     <span th:text="${task.errorMessage != null}? ${task.errorMessage}">------</span>
-                    <span th:text="${task.errorMessage == null}? '------'">------</span>
+                    <span th:text="${task.errorMessage == null}? 'N/A'">------</span>
                 </div>
             </div>
         </div>

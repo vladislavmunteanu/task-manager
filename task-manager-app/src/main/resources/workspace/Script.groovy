@@ -13,7 +13,7 @@ class Script {
 
     void task_2(String message){
         Log.info "Groovy: The string is : ${message}"
-        throw new RuntimeException("Failed to start task group 'Group_1': org.taskm.engine.EngineException: Could not execute 'task_2 : [Got the message]'.")
+        throw new RuntimeException("Fake exception: ",new Throwable("Testing exception: 'task_2"))
     }
 
     void task_3(int number){
