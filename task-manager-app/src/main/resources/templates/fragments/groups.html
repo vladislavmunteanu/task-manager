@@ -38,9 +38,8 @@
             </div>
             <div id="main-content-data">
 
-
                 <div id="main-modules">
-                    <h3 id="group-header">All Groups</h3>
+                    <h3 id="main-modules-header">All Groups</h3>
                     <ul>
 
                         <li th:each="group : ${groups}" th:classappend="${group.name eq group_name}?selected">
