@@ -5,12 +5,14 @@ import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.taskm.core.task.Task;
 import org.taskm.core.task.TaskGroup;
 import org.taskm.engine.job.TaskJob;
 import org.taskm.engine.task.TaskRunner;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -21,6 +23,7 @@ public class EngineImpl implements Engine {
 
     private Scheduler scheduler;
     private EngineConf engineConf;
+    private Map<TaskGroup, List<Task>> tasksMap;
     private static final Logger Log = Logger.getLogger(EngineImpl.class);
 
 
@@ -84,11 +87,6 @@ public class EngineImpl implements Engine {
         return scheduler;
     }
 
-    @Override
-    public List<TaskGroup> getTaskGroups() {
-        return this.getEngineConf().getTaskGroupList();
-    }
-
     public EngineConf getEngineConf() {
         return engineConf;
     }
@@ -100,7 +98,7 @@ public class EngineImpl implements Engine {
     @Override
     public void executeTaskGroup(String groupName){
         TaskRunner taskRunner = new TaskRunner();
-        TaskGroup taskGroup = this.getTaskGroups().get(this.getEngineConf().getTaskGroupIndex(groupName));
+        TaskGroup taskGroup = this.getEngineConf().getTaskGroupList().get(this.getEngineConf().getTaskGroupIndex(groupName));
         TaskJob.executeTaskGroup(taskGroup,taskRunner);
         TaskJob.taskGroupUpdates(taskGroup,taskRunner);
     }

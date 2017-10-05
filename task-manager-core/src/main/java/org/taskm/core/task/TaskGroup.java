@@ -22,6 +22,7 @@ public class TaskGroup {
     private int executions;
     private int failures;
     private TaskGroupStatus status;
+    private String fireTime;
 
     /**
      * @param name        - task name

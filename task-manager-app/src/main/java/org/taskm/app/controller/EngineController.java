@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.taskm.app.AppUtils;
 import org.taskm.core.task.Task;
 import org.taskm.core.task.TaskGroup;
+import org.taskm.core.task.TaskMap;
 import org.taskm.engine.Engine;
 import org.taskm.engine.EngineException;
 
@@ -27,6 +28,7 @@ public class EngineController {
     private final Engine engine;
     private static final Logger Log = Logger.getLogger(EngineController.class);
     private List<TaskGroup> groups;
+    private Map<String,TaskMap> tasksMap;
 
     @Autowired
     public EngineController(Engine engine) {
@@ -36,13 +38,21 @@ public class EngineController {
         } catch (EngineException e) {
             Log.error(e);
         }
-        this.groups = this.engine.getTaskGroups();
-
+        this.groups = this.engine.getEngineConf().getTaskGroupList();
+        this.tasksMap = this.engine.getEngineConf().getTasksMap();
     }
 
-    @RequestMapping("/tasks")
-    public String tasks(Model model) {
-        model.addAttribute("groups", groups);
+    @RequestMapping(value = "/tasks/{name}", method = RequestMethod.GET)
+    public String tasks(Model model, @PathVariable("name") String name) {
+
+        model.addAttribute("tasksMap", tasksMap);
+
+        if (Objects.equals(name, "_main")) {
+            model.addAttribute("taskMap_name", tasksMap.get(tasksMap.keySet().toArray()[0]).getTask().getMethodName()+"-"
+                    +tasksMap.get(tasksMap.keySet().toArray()[0]).getTaskGroup().getName());
+        } else {
+            model.addAttribute("taskMap_name", tasksMap.get(name).getTask().getMethodName()+"-"+tasksMap.get(name).getTaskGroup().getName());
+        }
         return "fragments/tasks";
 
     }

@@ -21,7 +21,7 @@
         <nav id="widgets">
             <a id="dash-widget" th:href="@{/}"><img th:src="@{/img/dash.png}" src=""><span>DASHBOARD</span></a>
             <a id="group-widget" th:href="@{/groups/_main}"><img th:src="@{/img/group.png}" src=""><span>GROUPS</span></a>
-            <a id="task-widget" th:href="@{/tasks}"><img th:src="@{/img/task_1.png}" src=""><span>TASKS</span> </a>
+            <a id="task-widget" th:href="@{/tasks/_main}"><img th:src="@{/img/task_1.png}" src=""><span>TASKS</span> </a>
         </nav>
     </div>
     <div id="main-content-outer">
@@ -32,6 +32,30 @@
             <div id="main-content-data">
                 <div id="main-modules">
                     <h3 id="main-modules-header">All Tasks</h3>
+                    <ul>
+
+                        <!--/*@thymesVar id="tasksMap" type="org.taskm.core.task.TaskMap"*/-->
+                        <!--/*@thymesVar id="taskMap_name" type="java.lang.String"*/-->
+                        <!--/*@thymesVar id="value" type="java.lang.Object"*/-->
+                        <li th:each="taskMap : ${tasksMap}" th:classappend="${taskMap.key eq taskMap_name}?selected">
+                            <a th:href="@{'/tasks/'+ ${taskMap.key}}">
+                                <div class="entity-name">
+                                    <!--/*@thymesVar id="methodName" type="java.lang.String"*/-->
+                                    <!--/*@thymesVar id="name" type="java.lang.String"*/-->
+                                    <h4 th:text="${taskMap.value.task.methodName}">Task Name "Test1"</h4>
+                                    <span th:text="${taskMap.value.taskGroup.name}">Group Name</span>
+                                </div>
+                                <div class="entity-details">
+                                    <!--/*@thymesVar id="days" type="java.lang.Integer"*/-->
+
+                                    <span th:classappend="${taskMap.value.taskGroup.days > 0}?days"
+                                          th:text="${taskMap.value.taskGroup.days > 0}?'+'+${taskMap.value.taskGroup.days}"></span>
+                                    <span th:text="${taskMap.value.taskGroup.fireTime != 'RUNNING'}?${taskMap.value.taskGroup.fireTime}">10:40:00 AM</span>
+                                    <img th:if="${taskMap.value.taskGroup.fireTime == 'RUNNING'}" th:src="@{/img/running.gif}">
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <div id="side-modules"></div>
             </div>

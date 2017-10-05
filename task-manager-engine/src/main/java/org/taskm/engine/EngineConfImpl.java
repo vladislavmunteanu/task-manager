@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.taskm.core.task.Task;
 import org.taskm.core.task.TaskCoreException;
 import org.taskm.core.task.TaskGroup;
+import org.taskm.core.task.TaskMap;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -46,6 +47,7 @@ public class EngineConfImpl implements EngineConf {
     private List<TaskGroup> taskGroupList; //TODO find a way to not keep objects in memory "org.mapdb"
     private static HashMap<String,Integer> tgIndexMap;
     private Properties properties;
+    private Map<String,TaskMap> tasksMap;
 
 
     private static final Logger Log = Logger.getLogger(EngineConfImpl.class);
@@ -66,12 +68,19 @@ public class EngineConfImpl implements EngineConf {
         this.taskClass = this.getProperties().getProperty("task.manager.class");
         this.classInstance = buildClassInstance(this.isCompiled(),this.getTaskClass(),this.getType());
         this.taskGroupList = buildTaskGroupList(this.getTaskXml(),this.getClassInstance());
+        this.tasksMap = buildTasksMap(this.getTaskGroupList());
     }
 
     @Override
     public List<TaskGroup> getTaskGroupList() {
         return taskGroupList;
     }
+
+    @Override
+    public Map<String,TaskMap> getTasksMap() {
+        return this.tasksMap;
+    }
+
 
     @Override
     public Object getClassInstance() {
@@ -294,7 +303,24 @@ public class EngineConfImpl implements EngineConf {
         }
     }
 
+    private static Map<String,TaskMap> buildTasksMap(List<TaskGroup> taskGroups){
+
+        Map<String,TaskMap> taskMap  = new LinkedHashMap<>(taskGroups.size());
+
+        Log.info("Starting to build Tasks Map ");
+
+        for (TaskGroup group : taskGroups){
+            for (Task task : group.getTaskList()){
+                taskMap.put(task.getMethodName()+"-"+group.getName(),new TaskMap(task,group));
+            }
+        }
+        Log.info("Built Tasks Map");
+        return taskMap;
+    }
+
     public static String getProperty(String propertyName) throws EngineException {
         return loadProperties().getProperty(propertyName);
     }
+
+
 }

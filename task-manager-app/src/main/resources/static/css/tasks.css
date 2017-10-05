@@ -5,3 +5,16 @@
 #task-widget span{
     color: #fff !important;
 }
+
+
+.group-name {
+    margin-top: 5px;
+    display: inline-block;
+    width: 55%;
+    text-decoration: none;
+}
+
+.group-name span {
+    color: #8f8f8f;
+    font-size: 11px;
+}

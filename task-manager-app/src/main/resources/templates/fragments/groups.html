@@ -28,7 +28,7 @@
         <nav id="widgets">
             <a id="dash-widget" th:href="@{/}"><img th:src="@{/img/dash.png}" src=""><span>DASHBOARD</span></a>
             <a id="group-widget" th:href="@{/groups/_main}"><img th:src="@{/img/group_1.png}" src=""><span>GROUPS</span></a>
-            <a id="task-widget" th:href="@{/tasks}"><img th:src="@{/img/task.png}" src=""><span>TASKS</span> </a>
+            <a id="task-widget" th:href="@{/tasks/_main}"><img th:src="@{/img/task.png}" src=""><span>TASKS</span> </a>
         </nav>
     </div>
     <div id="main-content-outer">
@@ -44,11 +44,11 @@
 
                         <li th:each="group : ${groups}" th:classappend="${group.name eq group_name}?selected">
                             <a th:href="@{'/groups/'+ ${group.name}}">
-                                <div class="group-name">
+                                <div class="entity-name">
                                     <h4 th:text="${group.name}">Group Name "Test1"</h4>
                                     <span th:text="${#lists.size(group.taskList)}+' tasks'">2 tasks</span>
                                 </div>
-                                <div class="group-details">
+                                <div class="entity-details">
                                     <!--/*@thymesVar id="days" type="java.lang.Integer"*/-->
                                     <span th:classappend="${group.days > 0}?days"
                                           th:text="${group.days > 0}?'+'+${group.days}"></span>

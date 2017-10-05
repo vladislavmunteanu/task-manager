@@ -292,3 +292,48 @@ li{
     font-size: 9px;
     margin-left: -3px;
 }
+
+.entity-name {
+    margin-top: 5px;
+    display: inline-block;
+    width: 55%;
+    text-decoration: none;
+}
+
+.entity-name span {
+    color: #8f8f8f;
+    font-size: 11px;
+}
+
+.entity-details {
+    float: right;
+}
+
+.entity-details span {
+    color: #666;
+    display: inline-block;
+    float: right;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 14px;
+    margin-top: 12px;
+    position: relative;
+    text-align: right;
+}
+
+.entity-details span.days {
+    color: red !important;
+    font-size: 9px;
+    margin-left: -3px;
+    float: right;
+    display: inline-block;
+    position: relative;
+    margin-top: 0;
+}
+
+.entity-details img {
+    display: inline-block;
+    height: 30px;
+    margin-top: 5.5px;
+    margin-right: 15px
+}
