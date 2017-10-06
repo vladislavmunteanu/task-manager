@@ -17,6 +17,7 @@ body{
     font-family: 'myCustom',sans-serif;
 }
 
+
 img{
     vertical-align: middle;
 }
@@ -184,18 +185,13 @@ li{
 }
 
 #main-content-data{
-    padding: 20px 15px 15px;
     min-height: 630px;
     position: relative;
     overflow: hidden;
     clear: both;
     background: #fff !important;
-}
-
-
-#main-content-data {
-    padding: 0 !important;
-    display: flex !important;
+    padding: 0;
+    display: flex;
 }
 
 #main-modules {

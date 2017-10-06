@@ -6,6 +6,7 @@
     <link type="text/css" th:href="@{/css/tasks.css}" rel="stylesheet"/>
     <link type="text/css" th:href="@{/css/style.css}" rel="stylesheet"/>
     <link type="text/css" th:href="@{/css/help.css}" rel="stylesheet"/>
+    <link type="text/css" th:href="@{/css/task-details.css}" rel="stylesheet"/>
 
     <link rel="icon" type="image/png" th:href="@{/img/fav.png}"/>
 
@@ -37,17 +38,18 @@
                         <!--/*@thymesVar id="tasksMap" type="org.taskm.core.task.TaskMap"*/-->
                         <!--/*@thymesVar id="taskMap_name" type="java.lang.String"*/-->
                         <!--/*@thymesVar id="value" type="java.lang.Object"*/-->
+                        <!--/*@thymesVar id="key" type="java.lang.Object"*/-->
+                        <!--/*@thymesVar id="methodName" type="java.lang.String"*/-->
+                        <!--/*@thymesVar id="name" type="java.lang.String"*/-->
+                        <!--/*@thymesVar id="days" type="java.lang.Integer"*/-->
+
                         <li th:each="taskMap : ${tasksMap}" th:classappend="${taskMap.key eq taskMap_name}?selected">
-                            <a th:href="@{'/tasks/'+ ${taskMap.key}}">
+                            <a th:id="${taskMap.key}" th:href="@{'/tasks/'+ ${taskMap.key}}">
                                 <div class="entity-name">
-                                    <!--/*@thymesVar id="methodName" type="java.lang.String"*/-->
-                                    <!--/*@thymesVar id="name" type="java.lang.String"*/-->
                                     <h4 th:text="${taskMap.value.task.methodName}">Task Name "Test1"</h4>
                                     <span th:text="${taskMap.value.taskGroup.name}">Group Name</span>
                                 </div>
                                 <div class="entity-details">
-                                    <!--/*@thymesVar id="days" type="java.lang.Integer"*/-->
-
                                     <span th:classappend="${taskMap.value.taskGroup.days > 0}?days"
                                           th:text="${taskMap.value.taskGroup.days > 0}?'+'+${taskMap.value.taskGroup.days}"></span>
                                     <span th:text="${taskMap.value.taskGroup.fireTime != 'RUNNING'}?${taskMap.value.taskGroup.fireTime}">10:40:00 AM</span>
@@ -57,7 +59,8 @@
                         </li>
                     </ul>
                 </div>
-                <div id="side-modules"></div>
+                <div id="side-modules">
+                </div>
             </div>
         </div>
     </div>

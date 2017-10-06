@@ -1,3 +1,14 @@
+
+#markdown{
+    padding: 20px 15px 15px;
+    min-height: 630px;
+    position: relative;
+    overflow: hidden;
+    clear: both;
+    background: #fff !important;
+    display: flex;
+}
+
 .markdown-body {
     border: 0;
     border-radius: 0;
