@@ -13,7 +13,7 @@ class Script {
 
     void task_2(String message){
         Log.info "Groovy: The string is : ${message}"
-        throw new RuntimeException("Fake exception: ",new Throwable("Testing exception: 'task_2"))
+        throw new RuntimeException("Fake exception: Fake exception: Fake exception: Fake exception: Fake exception: Fake exception: vFake exception: Fake exception: Fake exception: Fake exception: vFake exception: Fake exception: Fake exception: Fake exception: v")
     }
 
     void task_3(int number){
