@@ -30,7 +30,7 @@
                     <span>status</span>
                 </div>
                 <div class="task-details-value task-details-value-addon status">
-                    <span th:classappend="${(task.status == 'EXECUTED' ? 'executed' : '') + (task.status == 'FAILED' ? 'failed' : '')}"
+                    <span th:classappend="${(task.status == 'Executed' ? 'executed' : '') + (task.status == 'Failed' ? 'failed' : '')}"
                           th:text="${task.status}">status</span>
                 </div>
             </div>

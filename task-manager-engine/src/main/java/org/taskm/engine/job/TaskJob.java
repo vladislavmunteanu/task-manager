@@ -9,8 +9,6 @@ import org.taskm.engine.EngineException;
 import org.taskm.engine.task.TaskRunner;
 import org.taskm.engine.task.TaskRunnerException;
 
-import java.util.Date;
-
 /**
  * Created on 1/26/2017.
  */
@@ -61,12 +59,12 @@ public class TaskJob implements Job {
     public static void taskGroupUpdates(TaskGroup taskGroup, TaskRunner taskRunner) {
         taskGroup.incrementExecutions();
         taskGroup.setFailures(taskGroup.getFailures() + taskRunner.getFailedTasks());
-        taskGroup.setStatus(TaskGroupStatus.PENDING);
+        taskGroup.setStatus(TaskGroupStatus.Pending);
     }
 
     public static void executeTaskGroup(TaskGroup taskGroup, TaskRunner taskRunner) {
 
-        taskGroup.setStatus(TaskGroupStatus.RUNNING);
+        taskGroup.setStatus(TaskGroupStatus.Running);
 
         if (taskGroup.isParallel() && taskGroup.getTaskList().size() > 1) {
             try {

@@ -22,13 +22,13 @@ public class Task {
         this.object = object;
         this.methodName = methodName;
         this.parameters = new ArrayList<>();
-        this.status = String.valueOf(TaskStatus.NEW);
+        this.status = String.valueOf(TaskStatus.New);
     }
 
     public Task(Object object, String methodName, List<Object> parameters) throws TaskCoreException {
         this.object = object;
         this.methodName = methodName;
-        this.status = String.valueOf(TaskStatus.NEW);
+        this.status = String.valueOf(TaskStatus.New);
         if (!(parameters == null)) {
             this.parameters = new ArrayList<>();
             for (Object parameter : parameters) {

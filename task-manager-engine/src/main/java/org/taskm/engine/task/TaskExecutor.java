@@ -32,7 +32,7 @@ class TaskExecutor implements Callable<Void> {
 
                 long startTime = System.currentTimeMillis();
 
-                task.setStatus(TaskStatus.RUNNING);
+                task.setStatus(TaskStatus.Running);
                 task.setLastFireTime(new Date(startTime));
                 task.setExecutionTime(null);
                 task.setErrorMessage(null);
@@ -42,14 +42,14 @@ class TaskExecutor implements Callable<Void> {
                 long endTime = System.currentTimeMillis();
 
                 task.setExecutionTime(extractExecutionTime(endTime - startTime));
-                task.setStatus(TaskStatus.EXECUTED);
+                task.setStatus(TaskStatus.Executed);
             } catch (NoSuchMethodException e) {
                 task.setErrorMessage(e.getCause().getMessage());
-                task.setStatus(TaskStatus.FAILED);
+                task.setStatus(TaskStatus.Failed);
                 throw new EngineException(String.format("Could not find '%s'.", task),e);
             } catch (InvocationTargetException | IllegalAccessException e) {
                 task.setErrorMessage(e.getCause().getMessage());
-                task.setStatus(TaskStatus.FAILED);
+                task.setStatus(TaskStatus.Failed);
                 throw new EngineException(String.format("Could not execute '%s'.", task),e);
             }
         }else {
@@ -58,7 +58,7 @@ class TaskExecutor implements Callable<Void> {
                 try {
 
                     long startTime = System.currentTimeMillis();
-                    task.setStatus(TaskStatus.RUNNING);
+                    task.setStatus(TaskStatus.Running);
                     task.setLastFireTime(new Date(startTime));
                     task.setExecutionTime(null);
                     task.setErrorMessage(null);
@@ -67,16 +67,16 @@ class TaskExecutor implements Callable<Void> {
 
                     long endTime = System.currentTimeMillis();
                     task.setExecutionTime(extractExecutionTime(endTime - startTime));
-                    task.setStatus(TaskStatus.EXECUTED);
+                    task.setStatus(TaskStatus.Executed);
 
                 } catch (InvocationTargetException | IllegalAccessException e) {
                     task.setErrorMessage(e.getCause().getMessage());
-                    task.setStatus(TaskStatus.FAILED);
+                    task.setStatus(TaskStatus.Failed);
                     throw new EngineException(String.format("Could not execute '%s'.", task),e);
                 }
             }else {
                 task.setErrorMessage(String.format("Could not find '%s'.", task));
-                task.setStatus(TaskStatus.FAILED);
+                task.setStatus(TaskStatus.Failed);
                 throw new EngineException(String.format("Could not find '%s'.", task));
             }
         }

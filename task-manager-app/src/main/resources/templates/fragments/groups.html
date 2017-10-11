@@ -52,8 +52,8 @@
                                     <!--/*@thymesVar id="days" type="java.lang.Integer"*/-->
                                     <span th:classappend="${group.days > 0}?days"
                                           th:text="${group.days > 0}?'+'+${group.days}"></span>
-                                    <span th:text="${group.fireTime != 'RUNNING'}?${group.fireTime}">10:40:00 AM</span>
-                                    <img th:if="${group.fireTime == 'RUNNING'}" th:src="@{/img/running.gif}">
+                                    <span th:text="${group.fireTime != 'Running'}?${group.fireTime}">10:40:00 AM</span>
+                                    <img th:if="${group.fireTime == 'Running'}" th:src="@{/img/running.gif}">
                                 </div>
                             </a>
                         </li>
@@ -64,7 +64,7 @@
                         <div id="side-modules-header-info">
                             <h4 th:text="${group_name}">Group_Name</h4>
                         </div>
-                        <ul class="header-group-details">
+                        <ul class="header-entity-details">
                             <li>
                                 <span class="key">Tasks</span>
 
@@ -106,7 +106,7 @@
                                     <span th:text="${task.executionTime == null}? '--:--:--'">--:--:--</span>
                                 </div>
                                 <div class="group-tasks-status status">
-                                    <span th:classappend="${(task.status == 'EXECUTED' ? 'executed' : '') + (task.status == 'FAILED' ? 'failed' : '')}" th:text="${task.status}"></span>
+                                    <span th:classappend="${(task.status == 'Executed' ? 'executed' : '') + (task.status == 'Failed' ? 'failed' : '')}" th:text="${task.status}"></span>
                                 </div>
                             </div>
                         </div>

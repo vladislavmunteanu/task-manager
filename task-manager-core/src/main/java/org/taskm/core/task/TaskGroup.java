@@ -36,7 +36,7 @@ public class TaskGroup {
         this.taskList = new ArrayList<>();
         this.executions = 0;
         this.failures = 0;
-        this.status = TaskGroupStatus.PENDING;
+        this.status = TaskGroupStatus.Pending;
 
     }
 
@@ -63,7 +63,7 @@ public class TaskGroup {
     public void resetTasksStatus() {
 
         for (Task task : this.getTaskList()) {
-            task.setStatus(TaskStatus.PENDING);
+            task.setStatus(TaskStatus.Pending);
         }
 
     }
@@ -76,8 +76,8 @@ public class TaskGroup {
 
         if (Objects.equals(this.getScheduler(), "manual")) {
             return "manual";
-        } else if (this.getStatus() == TaskGroupStatus.RUNNING){
-            return String.valueOf(TaskGroupStatus.RUNNING);
+        } else if (this.getStatus() == TaskGroupStatus.Running){
+            return String.valueOf(TaskGroupStatus.Running);
         }
         else{
             return new SimpleDateFormat("hh:mm:ss a").format(this.getNextFireTime());

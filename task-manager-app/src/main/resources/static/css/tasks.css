@@ -6,15 +6,27 @@
     color: #fff !important;
 }
 
-
-.group-name {
-    margin-top: 5px;
-    display: inline-block;
-    width: 55%;
-    text-decoration: none;
+.header-task-details{
+    padding-top: 5px;
 }
 
-.group-name span {
-    color: #8f8f8f;
-    font-size: 11px;
+
+.header-task-details span.key {
+    display: inline-block !important;
+    margin-right: 7px;
+}
+
+.header-task-details span.value {
+    font-size: 14px !important;
+}
+
+.header-task-details a.value {
+    color: #1C76B6;
+    display: inline-block;
+    float: right;
+    font-size: 14px !important;
+}
+
+.header-task-details a.value:hover{
+    color: #2D3E4E !important;
 }

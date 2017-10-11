@@ -50,8 +50,10 @@ public class EngineController {
         if (Objects.equals(name, "_main")) {
             model.addAttribute("taskMap_name", tasksMap.get(tasksMap.keySet().toArray()[0]).getTask().getMethodName()+"-"
                     +tasksMap.get(tasksMap.keySet().toArray()[0]).getTaskGroup().getName());
+            model.addAttribute("selected_map",tasksMap.get(tasksMap.keySet().toArray()[0]));
         } else {
             model.addAttribute("taskMap_name", tasksMap.get(name).getTask().getMethodName()+"-"+tasksMap.get(name).getTaskGroup().getName());
+            model.addAttribute("selected_map",tasksMap.get(name));
         }
         return "fragments/tasks";
 
