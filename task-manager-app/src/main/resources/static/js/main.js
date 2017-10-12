@@ -43,14 +43,20 @@ function openTask(taskPath) {
     
 }
 
+function openTask_tepm(taskMap) {
 
-$(document).ready(function(){
-    $('#main').fadeOut();
-    $('#main').fadeIn();
-});
+    var ctx = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
 
-//
-// $(document).ready(function(){
-//     $('#main-modules').animate({
-//         scrollTop: ($('#selected_1').offset().top)},1000);
-// });
+    $.ajax({
+
+        url: ctx + "/tasks/" + taskMap,
+        method: 'get',
+        cache: false,
+        success: function (data) {
+            $('#side-modules').html(data);
+            $('.selected').removeClass('selected');
+            $('#'+taskMap).addClass('selected');
+        }
+    });
+
+}

@@ -14,7 +14,6 @@ import org.taskm.core.task.TaskMap;
 import org.taskm.engine.Engine;
 import org.taskm.engine.EngineException;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -40,27 +39,6 @@ public class EngineController {
         }
         this.groups = this.engine.getEngineConf().getTaskGroupList();
         this.tasksMap = this.engine.getEngineConf().getTasksMap();
-    }
-
-    @RequestMapping(value = "/tasks/{name}", method = RequestMethod.GET)
-    public String tasks(Model model, @PathVariable("name") String name) {
-
-        model.addAttribute("tasksMap", tasksMap);
-
-        if (Objects.equals(name, "_main")) {
-            model.addAttribute("taskMap_name", tasksMap.get(tasksMap.keySet().toArray()[0]).getTask().getMethodName()+"-"
-                    +tasksMap.get(tasksMap.keySet().toArray()[0]).getTaskGroup().getName());
-            model.addAttribute("selected_map",tasksMap.get(tasksMap.keySet().toArray()[0]));
-            Map<String, String> taskParameters = AppUtils.extractTaskParameters(tasksMap.get(tasksMap.keySet().toArray()[0]).getTask());
-            model.addAttribute("taskParameters", taskParameters);
-        } else {
-            model.addAttribute("taskMap_name", tasksMap.get(name).getTask().getMethodName()+"-"+tasksMap.get(name).getTaskGroup().getName());
-            model.addAttribute("selected_map",tasksMap.get(name));
-            Map<String, String> taskParameters = AppUtils.extractTaskParameters(tasksMap.get(name).getTask());
-            model.addAttribute("taskParameters", taskParameters);
-        }
-        return "fragments/tasks";
-
     }
 
     @RequestMapping(value = "/groups/{name}", method = RequestMethod.GET)
@@ -92,8 +70,32 @@ public class EngineController {
 
         model.addAttribute("taskParameters", taskParameters);
 
+        return "fragments/group-task-details";
+    }
+
+    @RequestMapping("/tasks")
+    public String talt(Model model) {
+
+        model.addAttribute("tasksMap", tasksMap);
+        model.addAttribute("first_map",tasksMap.get(tasksMap.keySet().toArray()[0]));
+        model.addAttribute("first_map_name", tasksMap.get(tasksMap.keySet().toArray()[0]).getTask().getMethodName()+"-"
+                +tasksMap.get(tasksMap.keySet().toArray()[0]).getTaskGroup().getName());
+
+        return "fragments/tasks";
+    }
+
+    @RequestMapping("/tasks/{task_map}")
+    public String taltDetails(Model model, @PathVariable("task_map") String task_map) {
+
+        model.addAttribute("taskMap", tasksMap.get(task_map));
+
+        Map<String, String> taskParameters = AppUtils.extractTaskParameters(tasksMap.get(task_map).getTask());
+
+        model.addAttribute("taskParameters", taskParameters);
+
         return "fragments/task-details";
     }
+
 
 }
 

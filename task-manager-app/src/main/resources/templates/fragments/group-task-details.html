@@ -6,67 +6,63 @@
 </head>
 <body>
 
-<!--/*@thymesVar id="taskMap" type="org.taskm.core.task.TaskMap"*/-->
+<!--/*@thymesVar id="task" type="org.taskm.core.task.Task"*/-->
+<!--/*@thymesVar id="methodName" type="java.lang.String"*/-->
 <!--/*@thymesVar id="taskParameters" type="java.util.Map"*/-->
+<!--/*@thymesVar id="key" type="java.lang.String"*/-->
+<!--/*@thymesVar id="value" type="java.lang.String"*/-->
+<div class="task-details">
 
-
-    <div id="side-modules-header">
-        <div id="side-modules-header-info">
-            <h4 th:text="${taskMap.task.methodName}">Task_Name</h4>
+    <div id="task-details-header">
+        <div id="task-details-header-right">
+            <span class="close" th:onclick="'javascript:closeTask();'">&times;</span>
         </div>
-        <ul class="header-entity-details">
-            <li class="header-task-details status">
-                <span class="key">Status</span>
-                <span class="value" th:classappend="${(taskMap.task.status == 'Executed' ? 'executed' : '') + (taskMap.task.status == 'Failed' ? 'failed' : '')}" th:text="${taskMap.task.status}"></span>
-            </li>
-            <li class="header-task-details">
-                <span class="key">Group</span>
-                <a class="value"  th:href="@{'/groups/'+ ${taskMap.taskGroup.name}}"><span th:text="${taskMap.taskGroup.name}"></span></a>
-            </li>
-        </ul>
+
+        <div id="task-details-header-left">
+            <h4 class="task-details-title" th:text="${task.methodName}">Some text in the Modal..</h4>
+        </div>
     </div>
 
     <div id="task-details-content">
         <div class="row">
-            <div class="row-data task-details-row-data">
+            <div class="row-data">
                 <div class="task-details-caption task-details-caption-addon">
                     <span>status</span>
                 </div>
                 <div class="task-details-value task-details-value-addon status">
-                    <span th:classappend="${(taskMap.task.status == 'Executed' ? 'executed' : '') + (taskMap.task.status == 'Failed' ? 'failed' : '')}"
-                          th:text="${taskMap.task.status}">status</span>
+                    <span th:classappend="${(task.status == 'Executed' ? 'executed' : '') + (task.status == 'Failed' ? 'failed' : '')}"
+                          th:text="${task.status}">status</span>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="row-data task-details-row-data">
+            <div class="row-data">
                 <div class="task-details-caption task-details-caption-addon">
                     <span>last fire time</span>
                 </div>
                 <div class="task-details-value task-details-value-addon day-indicator">
-                    <span th:text="${taskMap.task.fireTime}">--:--:--</span>
-                    <sup class="days" th:text="${taskMap.task.days > 0}?'-'+${taskMap.task.days}"></sup>
+                    <span th:text="${task.fireTime}">--:--:--</span>
+                    <sup class="days" th:text="${task.days > 0}?'-'+${task.days}"></sup>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="row-data task-details-row-data">
+            <div class="row-data">
                 <div class="task-details-caption task-details-caption-addon">
                     <span>execution time</span>
                 </div>
                 <div class="task-details-value task-details-value-addon">
-                    <span th:text="${taskMap.task.executionTime != null}? ${taskMap.task.executionTime}">--:--:--</span>
-                    <span th:text="${taskMap.task.executionTime == null}? '--:--:--'">--:--:--</span>
+                    <span th:text="${task.executionTime != null}? ${task.executionTime}">--:--:--</span>
+                    <span th:text="${task.executionTime == null}? '--:--:--'">--:--:--</span>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="row-data task-details-row-data">
+            <div class="row-data">
                 <div class="task-details-caption">
                     <span>parameters</span>
                 </div>
-                <!--/*@thymesVar id="taskParameters" type=""*/-->
                 <div class="task-details-value" th:classappend="${taskParameters.size() == 0}? 'task-details-na' : ''">
 
                     <div class="row task-details-parameters-row" th:each="parameter : ${taskParameters}">
@@ -86,17 +82,17 @@
         </div>
 
         <div class="row">
-            <div class="row-data task-details-row-data">
+            <div class="row-data">
                 <div class="task-details-caption">
                     <span>error message</span>
                 </div>
-                <div class="task-details-value task-details-error" th:classappend="${taskMap.task.errorMessage == null}? 'task-details-na' : ''">
-                    <span th:text="${taskMap.task.errorMessage != null}? ${taskMap.task.errorMessage}">------</span>
-                    <span th:text="${taskMap.task.errorMessage == null}? 'N/A'">------</span>
+                <div class="task-details-value task-details-error" th:classappend="${task.errorMessage == null}? 'task-details-na' : ''">
+                    <span th:text="${task.errorMessage != null}? ${task.errorMessage}">------</span>
+                    <span th:text="${task.errorMessage == null}? 'N/A'">------</span>
                 </div>
             </div>
         </div>
     </div>
-
+</div>
 </body>
 </html>
