@@ -22,6 +22,7 @@
 <!--/*@thymesVar id="methodName" type="java.lang.String"*/-->
 <!--/*@thymesVar id="name" type="java.lang.String"*/-->
 <!--/*@thymesVar id="days" type="java.lang.Integer"*/-->
+<!--/*@thymesVar id="taskParameters" type="java.util.Map"*/-->
 <body>
 <div th:replace="fragments/header :: header"></div>
 
@@ -42,8 +43,8 @@
                 <div id="main-modules">
                     <h3 id="main-modules-header">All Tasks</h3>
                     <ul>
-                        <li th:each="taskMap : ${tasksMap}" th:classappend="${taskMap.key eq taskMap_name}?selected">
-                            <a th:id="${taskMap.key}" th:href="@{'/tasks/'+ ${taskMap.key}}">
+                        <li th:each="taskMap : ${tasksMap}" th:classappend="${taskMap.key eq taskMap_name}?selected" th:id="${taskMap.key eq taskMap_name}?selected_1">
+                            <!--<a th:href="@{'/tasks/'+ ${taskMap.key}}">-->
                                 <div class="entity-name">
                                     <h4 th:text="${taskMap.value.task.methodName}">Task Name "Test1"</h4>
                                     <span th:text="${taskMap.value.taskGroup.name}">Group Name</span>
@@ -54,26 +55,104 @@
                                     <span th:text="${taskMap.value.taskGroup.fireTime != 'Running'}?${taskMap.value.taskGroup.fireTime}">10:40:00 AM</span>
                                     <img th:if="${taskMap.value.taskGroup.fireTime == 'Running'}" th:src="@{/img/running.gif}">
                                 </div>
-                            </a>
+                            <!--</a>-->
                         </li>
                     </ul>
                 </div>
                 <div id="side-modules">
-                    <div id="side-modules-header">
-                        <div id="side-modules-header-info">
-                            <h4 th:text="${selected_map.task.methodName}">Task_Name</h4>
-                        </div>
-                        <ul class="header-entity-details">
-                            <li class="header-task-details status">
-                                <span class="key">Status</span>
-                                <span class="value" th:classappend="${(selected_map.task.status == 'Executed' ? 'executed' : '') + (selected_map.task.status == 'Failed' ? 'failed' : '')}" th:text="${selected_map.task.status}"></span>
-                            </li>
-                            <li class="header-task-details">
-                                <span class="key">Group</span>
-                               <a class="value"  th:href="@{'/groups/'+ ${selected_map.taskGroup.name}}"><span th:text="${selected_map.taskGroup.name}"></span></a>
-                            </li>
-                        </ul>
-                    </div>
+
+
+
+
+                    <!--<div id="side-modules-header">-->
+                        <!--<div id="side-modules-header-info">-->
+                            <!--<h4 th:text="${selected_map.task.methodName}">Task_Name</h4>-->
+                        <!--</div>-->
+                        <!--<ul class="header-entity-details">-->
+                            <!--<li class="header-task-details status">-->
+                                <!--<span class="key">Status</span>-->
+                                <!--<span class="value" th:classappend="${(selected_map.task.status == 'Executed' ? 'executed' : '') + (selected_map.task.status == 'Failed' ? 'failed' : '')}" th:text="${selected_map.task.status}"></span>-->
+                            <!--</li>-->
+                            <!--<li class="header-task-details">-->
+                                <!--<span class="key">Group</span>-->
+                               <!--<a class="value"  th:href="@{'/groups/'+ ${selected_map.taskGroup.name}}"><span th:text="${selected_map.taskGroup.name}"></span></a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+
+                    <!--<div id="task-details-content">-->
+                        <!--<div class="row">-->
+                            <!--<div class="row-data task-details-row-data">-->
+                                <!--<div class="task-details-caption task-details-caption-addon">-->
+                                    <!--<span>status</span>-->
+                                <!--</div>-->
+                                <!--<div class="task-details-value task-details-value-addon status">-->
+                    <!--<span th:classappend="${(selected_map.task.status == 'Executed' ? 'executed' : '') + (selected_map.task.status == 'Failed' ? 'failed' : '')}"-->
+                          <!--th:text="${selected_map.task.status}">status</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                            <!--<div class="row-data task-details-row-data">-->
+                                <!--<div class="task-details-caption task-details-caption-addon">-->
+                                    <!--<span>last fire time</span>-->
+                                <!--</div>-->
+                                <!--<div class="task-details-value task-details-value-addon day-indicator">-->
+                                    <!--<span th:text="${selected_map.task.fireTime}">&#45;&#45;:&#45;&#45;:&#45;&#45;</span>-->
+                                    <!--<sup class="days" th:text="${selected_map.task.days > 0}?'-'+${selected_map.task.days}"></sup>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--<div class="row">-->
+                            <!--<div class="row-data task-details-row-data">-->
+                                <!--<div class="task-details-caption task-details-caption-addon">-->
+                                    <!--<span>execution time</span>-->
+                                <!--</div>-->
+                                <!--<div class="task-details-value task-details-value-addon">-->
+                                    <!--<span th:text="${selected_map.task.executionTime != null}? ${selected_map.task.executionTime}">&#45;&#45;:&#45;&#45;:&#45;&#45;</span>-->
+                                    <!--<span th:text="${selected_map.task.executionTime == null}? '&#45;&#45;:&#45;&#45;:&#45;&#45;'">&#45;&#45;:&#45;&#45;:&#45;&#45;</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!--<div class="row">-->
+                            <!--<div class="row-data task-details-row-data">-->
+                                <!--<div class="task-details-caption">-->
+                                    <!--<span>parameters</span>-->
+                                <!--</div>-->
+                                <!--&lt;!&ndash;/*@thymesVar id="taskParameters" type=""*/&ndash;&gt;-->
+                                <!--<div class="task-details-value" th:classappend="${taskParameters.size() == 0}? 'task-details-na' : ''">-->
+
+                                    <!--<div class="row task-details-parameters-row" th:each="parameter : ${taskParameters}">-->
+                                        <!--<div class="row-data task-details-parameters-row">-->
+                                            <!--<div class="task-details-caption task-details-caption-addon">-->
+                                                <!--<span th:text="${parameter.key}"></span>-->
+                                            <!--</div>-->
+                                            <!--<div class="task-details-value task-details-value-addon">-->
+                                                <!--<span th:text="${parameter.value}"></span>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+
+                                    <!--<span th:text="${taskParameters.size() == 0}? 'N/A'">&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!--<div class="row">-->
+                            <!--<div class="row-data task-details-row-data">-->
+                                <!--<div class="task-details-caption">-->
+                                    <!--<span>error message</span>-->
+                                <!--</div>-->
+                                <!--<div class="task-details-value task-details-error" th:classappend="${selected_map.task.errorMessage == null}? 'task-details-na' : ''">-->
+                                    <!--<span th:text="${selected_map.task.errorMessage != null}? ${selected_map.task.errorMessage}">&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+                                    <!--<span th:text="${selected_map.task.errorMessage == null}? 'N/A'">&#45;&#45;&#45;&#45;&#45;&#45;</span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+
                 </div>
             </div>
         </div>

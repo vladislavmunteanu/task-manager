@@ -44,3 +44,13 @@ function openTask(taskPath) {
 }
 
 
+$(document).ready(function(){
+    $('#main').fadeOut();
+    $('#main').fadeIn();
+});
+
+//
+// $(document).ready(function(){
+//     $('#main-modules').animate({
+//         scrollTop: ($('#selected_1').offset().top)},1000);
+// });

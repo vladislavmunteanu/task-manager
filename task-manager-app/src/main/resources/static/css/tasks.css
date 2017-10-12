@@ -30,3 +30,8 @@
 .header-task-details a.value:hover{
     color: #2D3E4E !important;
 }
+
+.task-details-row-data{
+    padding-left: 15px !important;
+    padding-right: 25px !important;
+}

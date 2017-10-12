@@ -85,6 +85,7 @@
     font-size: 10px;
     font-weight: bold;
     position: relative;
+    text-transform: uppercase;
 }
 
 .modal-task-details {

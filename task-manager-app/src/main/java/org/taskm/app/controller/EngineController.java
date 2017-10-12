@@ -51,9 +51,13 @@ public class EngineController {
             model.addAttribute("taskMap_name", tasksMap.get(tasksMap.keySet().toArray()[0]).getTask().getMethodName()+"-"
                     +tasksMap.get(tasksMap.keySet().toArray()[0]).getTaskGroup().getName());
             model.addAttribute("selected_map",tasksMap.get(tasksMap.keySet().toArray()[0]));
+            Map<String, String> taskParameters = AppUtils.extractTaskParameters(tasksMap.get(tasksMap.keySet().toArray()[0]).getTask());
+            model.addAttribute("taskParameters", taskParameters);
         } else {
             model.addAttribute("taskMap_name", tasksMap.get(name).getTask().getMethodName()+"-"+tasksMap.get(name).getTaskGroup().getName());
             model.addAttribute("selected_map",tasksMap.get(name));
+            Map<String, String> taskParameters = AppUtils.extractTaskParameters(tasksMap.get(name).getTask());
+            model.addAttribute("taskParameters", taskParameters);
         }
         return "fragments/tasks";
 
