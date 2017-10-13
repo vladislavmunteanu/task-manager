@@ -41,21 +41,21 @@ public class EngineController {
         this.tasksMap = this.engine.getEngineConf().getTasksMap();
     }
 
-    @RequestMapping(value = "/groups/{name}", method = RequestMethod.GET)
-    public String getGroup(Model model, @PathVariable("name") String name) {
-
-        model.addAttribute("groups", groups);
-
-        if (Objects.equals(name, "_main")) {
-            model.addAttribute("group_name", groups.get(0).getName());
-            model.addAttribute("selected_group", groups.get(0));
-        } else {
-            model.addAttribute("group_name", groups.get(engine.getEngineConf().getTaskGroupIndex(name)).getName());
-            model.addAttribute("selected_group", groups.get(engine.getEngineConf().getTaskGroupIndex(name)));
-        }
-
-        return "fragments/groups";
-    }
+//    @RequestMapping(value = "/groups/{name}", method = RequestMethod.GET)
+//    public String getGroup(Model model, @PathVariable("name") String name) {
+//
+//        model.addAttribute("groups", groups);
+//
+//        if (Objects.equals(name, "_main")) {
+//            model.addAttribute("group_name", groups.get(0).getName());
+//            model.addAttribute("selected_group", groups.get(0));
+//        } else {
+//            model.addAttribute("group_name", groups.get(engine.getEngineConf().getTaskGroupIndex(name)).getName());
+//            model.addAttribute("selected_group", groups.get(engine.getEngineConf().getTaskGroupIndex(name)));
+//        }
+//
+//        return "fragments/groups";
+//    }
 
     @RequestMapping(value = "/groups/{group_name}/{task_name}", method = RequestMethod.GET)
     public String getGroup(Model model, @PathVariable("group_name") String group_name, @PathVariable("task_name") String task_name) {
@@ -81,6 +81,10 @@ public class EngineController {
         model.addAttribute("first_map_name", tasksMap.get(tasksMap.keySet().toArray()[0]).getTask().getMethodName()+"-"
                 +tasksMap.get(tasksMap.keySet().toArray()[0]).getTaskGroup().getName());
 
+        Map<String, String> taskParameters = AppUtils.extractTaskParameters(tasksMap.get(tasksMap.keySet().toArray()[0]).getTask());
+
+        model.addAttribute("taskParameters", taskParameters);
+
         return "fragments/tasks";
     }
 
@@ -96,6 +100,25 @@ public class EngineController {
         return "fragments/task-details";
     }
 
+    @RequestMapping("/groups/{group_name}")
+    public String groupDetails(Model model, @PathVariable("group_name") String group_name) {
+
+        model.addAttribute("group_name", groups.get(engine.getEngineConf().getTaskGroupIndex(group_name)).getName());
+        model.addAttribute("selected_group", groups.get(engine.getEngineConf().getTaskGroupIndex(group_name)));
+
+        return "fragments/group-details";
+    }
+
+
+    @RequestMapping("/groups")
+    public String getGroup(Model model) {
+
+        model.addAttribute("groups", groups);
+        model.addAttribute("first_group",groups.get(0));
+        model.addAttribute("first_group_name",groups.get(0).getName());
+
+        return "fragments/groups";
+    }
 
 }
 

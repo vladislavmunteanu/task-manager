@@ -242,6 +242,10 @@ li{
     border-image: initial;
 }
 
+#main-modules ul li .li-data:hover {
+    background-color: aliceblue;
+}
+
 #main-modules ul li.selected .li-data span {
     color: #2D3E4E;
 }

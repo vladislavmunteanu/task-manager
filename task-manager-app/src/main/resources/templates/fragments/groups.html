@@ -19,15 +19,15 @@
 
 <div id="main">
 
-    <!--/*@thymesVar id="group_name" type="java.lang.String"*/-->
+    <!--/*@thymesVar id="first_group_name" type="java.lang.String"*/-->
     <!--/*@thymesVar id="groups" type="java.util.List<org.taskm.core.task.TaskGroup>"*/-->
     <!--/*@thymesVar id="group" type="org.taskm.core.task.TaskGroup"*/-->
-    <!--/*@thymesVar id="selected_group" type="org.taskm.core.task.TaskGroup"*/-->
+    <!--/*@thymesVar id="first_group" type="org.taskm.core.task.TaskGroup"*/-->
 
     <div id="main-nav" role="navigation">
         <nav id="widgets">
             <a id="dash-widget" th:href="@{/}"><img th:src="@{/img/dash.png}" src=""><span>DASHBOARD</span></a>
-            <a id="group-widget" th:href="@{/groups/_main}"><img th:src="@{/img/group_1.png}" src=""><span>GROUPS</span></a>
+            <a id="group-widget" th:href="@{/groups}"><img th:src="@{/img/group_1.png}" src=""><span>GROUPS</span></a>
             <a id="task-widget" th:href="@{/tasks}"><img th:src="@{/img/task.png}" src=""><span>TASKS</span> </a>
         </nav>
     </div>
@@ -42,8 +42,8 @@
                     <h3 id="main-modules-header">All Groups</h3>
                     <ul>
 
-                        <li th:each="group : ${groups}" th:classappend="${group.name eq group_name}?selected">
-                            <a th:href="@{'/groups/'+ ${group.name}}">
+                        <li th:each="group : ${groups}" th:classappend="${group.name eq first_group_name}?selected" th:id="${group.name}">
+                            <div class="li-data" th:onclick="'javascript:openGroupDetails(\''+${group.name}+'\');'">
                                 <div class="entity-name">
                                     <h4 th:text="${group.name}">Group Name "Test1"</h4>
                                     <span th:text="${#lists.size(group.taskList)}+' tasks'">2 tasks</span>
@@ -55,27 +55,31 @@
                                     <span th:text="${group.fireTime != 'Running'}?${group.fireTime}">10:40:00 AM</span>
                                     <img th:if="${group.fireTime == 'Running'}" th:src="@{/img/running.gif}">
                                 </div>
-                            </a>
+                        </div>
                         </li>
                     </ul>
                 </div>
                 <div id="side-modules">
+
                     <div id="side-modules-header">
                         <div id="side-modules-header-info">
-                            <h4 th:text="${group_name}">Group_Name</h4>
+
+                            <h4 th:text="${first_group_name}">Group_Name</h4>
                         </div>
                         <ul class="header-entity-details">
                             <li>
                                 <span class="key">Tasks</span>
 
-                                <span class="value" th:text="${#lists.size(selected_group.taskList)}"></span>
+
+
+                                <span class="value" th:text="${#lists.size(first_group.taskList)}"></span>
                             </li>
                             <li>
                                 <span class="key">Executions</span>
-                                <span class="value" th:text="${selected_group.executions}"></span>
+                                <span class="value" th:text="${first_group.executions}"></span>
                             </li>
                             <li>
-                                <span class="key">Failures</span><span class="value" th:text="${selected_group.failures}"></span>
+                                <span class="key">Failures</span><span class="value" th:text="${first_group.failures}"></span>
                             </li>
                         </ul>
                     </div>
@@ -88,7 +92,8 @@
                             <div class="group-tasks-status">status</div>
                         </div>
 
-                        <div class="row cursor-pointer" th:each="task,iter  : ${selected_group.taskList}" th:onclick="'javascript:openTask(\''+${group_name}+'/'+${task.methodName}+'\');'">
+                        <div class="row cursor-pointer" th:each="task,iter  : ${first_group.taskList}"
+                             th:onclick="'javascript:openGroupTaskDetails(\''+${first_group_name}+'/'+${task.methodName}+'\');'">
                             <div class="row-data display-table">
                                 <div class="group-tasks-od">
                                     <span class="day" th:text="${iter.index}+1">1</span>
@@ -106,17 +111,18 @@
                                     <span th:text="${task.executionTime == null}? '--:--:--'">--:--:--</span>
                                 </div>
                                 <div class="group-tasks-status status">
-                                    <span th:classappend="${(task.status == 'Executed' ? 'executed' : '') + (task.status == 'Failed' ? 'failed' : '')}" th:text="${task.status}"></span>
+                <span th:classappend="${(task.status == 'Executed' ? 'executed' : '') + (task.status == 'Failed' ? 'failed' : '')}"
+                      th:text="${task.status}"></span>
                                 </div>
                             </div>
                         </div>
 
                         <div id="modal" class="modal-task-details">
 
-
                         </div>
 
                     </div>
+
                 </div>
             </div>
         </div>
