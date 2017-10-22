@@ -14,6 +14,8 @@
 </head>
 
 <body>
+<!--/*@thymesVar id="groups_size" type="java.lang.Integer"*/-->
+<!--/*@thymesVar id="tasks_size" type="java.lang.Integer"*/-->
 <div th:replace="fragments/header :: header"></div>
 
 <div id="main">
@@ -30,9 +32,27 @@
                 <h1 id="title">Dashboard</h1>
             </div>
             <div id="main-content-data">
-                <div id="main-modules">
+                <div class="dash-main-modules" id="main-modules">
+                    <ul class="dash-1">
+                        <li>
+                            <span class="value" th:text="${groups_size}"></span>
+                            <span class="key">Gorups</span>
+                        </li>
+                        <li>
+                            <span class="value" th:text="${tasks_size}"></span>
+                            <span class="key">Tasks</span>
+                        </li>
+                        <li>
+                            <span class="value">3</span>
+                            <span class="key">Executions</span>
+                        </li>
+                        <li>
+                            <span class="value">4</span>
+                            <span class="key">Failures</span>
+                        </li>
+                    </ul>
                 </div>
-                <div id="side-modules"></div>
+                <div id="side-modules" class="dash-side-modules"></div>
             </div>
         </div>
     </div>

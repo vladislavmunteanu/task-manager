@@ -5,3 +5,49 @@
 #dash-widget span{
     color: #fff !important;
 }
+
+.dash-main-modules{
+    width: 600px !important;
+}
+
+
+.dash-side-modules{
+    width: 300px !important;
+}
+
+.dash-1{
+    float: left;
+}
+
+.dash-1 li {
+    display: inline-block;
+    border: none !important;
+    height: 85px;
+    width: 85px;
+    background-color: #fff;
+    transition:all .2s ease;
+    -webkit-box-shadow: 1px 1px 3px 0 rgba(46,74,117,0.52) !important;
+    -moz-box-shadow: 1px 1px 3px 0 rgba(46,74,117,0.52) !important;
+    box-shadow: 1px 1px 3px 0 rgba(46,74,117,0.52) !important;
+    box-sizing:border-box;
+    border-radius:2px !important;
+    margin: 15px;
+}
+
+
+.dash-1 li span.key {
+    font-size: 12px;
+    color: #1C76B6;
+    display: block;
+    text-align: center;
+    font-weight: bold
+
+}
+
+.dash-1 li span.value {
+    color: #9a9a9a !important;
+    display: block;
+    font-size: 40px;
+    text-align: center;
+    font-weight: bold;
+}

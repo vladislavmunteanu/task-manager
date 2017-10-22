@@ -25,11 +25,6 @@ public class AppController {
     }
 
 
-    @RequestMapping("/")
-    public String index(Model model) {
-        return "index";
-    }
-
     @RequestMapping("/help")
     public String help() {
         return "fragments/help";
