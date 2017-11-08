@@ -35,20 +35,50 @@
                 <div class="dash-main-modules" id="main-modules">
                     <ul class="dash-1">
                         <li>
-                            <span class="value" th:text="${groups_size}"></span>
-                            <span class="key">Gorups</span>
+                            <div class="dash-1-item">
+                                <div class="dash-1-item-header dash-1-item-header-orange">
+                                    <img th:src="@{/img/group_1.png}" src="">
+                                </div>
+                                <div class="dash-1-item-content">
+                                    <p class="key">Gorups</p>
+                                    <h3 class="value" th:text="${groups_size}"></h3>
+                                </div>
+                            </div>
                         </li>
                         <li>
-                            <span class="value" th:text="${tasks_size}"></span>
-                            <span class="key">Tasks</span>
+                            <div class="dash-1-item">
+                                <div class="dash-1-item-header dash-1-item-header-orange">
+                                    <img th:src="@{/img/task_1.png}" src="">
+                                </div>
+                                <div class="dash-1-item-content">
+                                    <p class="key">Tasks</p>
+                                    <h3 class="value" th:text="${tasks_size}"></h3>
+
+                                </div>
+                            </div>
                         </li>
                         <li>
-                            <span class="value">3</span>
-                            <span class="key">Executions</span>
+                            <div class="dash-1-item">
+                                <div class="dash-1-item-header dash-1-item-header-green">
+                                    <img th:src="@{/img/group_1.png}" src="">
+                                </div>
+                                <div class="dash-1-item-content">
+                                    <p class="key">Executions</p>
+                                    <h3 class="value" th:text="${groups_size}"></h3>
+                                </div>
+                            </div>
                         </li>
                         <li>
-                            <span class="value">4</span>
-                            <span class="key">Failures</span>
+                            <div class="dash-1-item">
+                                <div class="dash-1-item-header dash-1-item-header-red">
+                                    <img th:src="@{/img/fail.png}" src="">
+                                </div>
+                                <div class="dash-1-item-content">
+                                    <p class="key">Failures</p>
+                                    <h3 class="value" th:text="${tasks_size}"></h3>
+
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
