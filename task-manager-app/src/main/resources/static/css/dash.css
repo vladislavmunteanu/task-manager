@@ -8,6 +8,7 @@
 
 .dash-main-modules{
     width: 600px !important;
+    background: #f6f5f7;
 }
 
 
@@ -21,17 +22,16 @@
 }
 
 .dash-1 li {
-    /*display: inline-block;*/
-    /*border: none !important;*/
-
-    /*margin: 15px;*/
     float: left;
     width: 50%;
     position: relative;
     min-height: 1px;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 15px !important;
+    padding-left: 15px !important;
     box-sizing: border-box;
+    border-bottom: none !important;
+    background: none !important;
+    box-shadow: none !important;
 }
 
 .dash-1 li .dash-1-item{
@@ -68,7 +68,7 @@
 
 .dash-1-item-header-green{
     background: linear-gradient(60deg, #66bb6a, #43a047);
-    box-shadow: 0 12px 20px -10px rgba(76, 175, 80, 0.28), 0 4px 20px 0px rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(76, 175, 80, 0.2);
+    box-shadow: 0 12px 20px -10px rgba(76, 175, 80, 0.28), 0 4px 20px 0 rgba(0, 0, 0, 0.12), 0 7px 8px -5px rgba(76, 175, 80, 0.2);
 }
 
 .dash-1-item-header img{
@@ -81,7 +81,7 @@
     text-align: center;
     box-sizing: border-box;
     padding: 15px 20px;
-    width: 30%;
+    width: 100px;
     float: right;
 }
 

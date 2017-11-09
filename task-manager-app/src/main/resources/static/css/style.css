@@ -345,15 +345,15 @@ li{
 }
 
 .status span.failed {
-    color: red !important;
+    color: #ef5350 !important;
 }
 
 .status span.executed {
-    color: rgb(178, 217, 157) !important;
+    color: #66bb6a !important;
 }
 
 .day-indicator sup.days {
-    color: red !important;
+    color: #ef5350 !important;
     font-size: 9px;
     margin-left: -3px;
 }
