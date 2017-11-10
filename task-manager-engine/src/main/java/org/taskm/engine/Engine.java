@@ -1,6 +1,7 @@
 package org.taskm.engine;
 
 import org.quartz.Scheduler;
+import org.taskm.core.task.SystemHistory;
 import org.taskm.core.task.Task;
 import org.taskm.core.task.TaskGroup;
 
@@ -21,6 +22,8 @@ public interface Engine {
     Scheduler getScheduler();
 
     EngineConf getEngineConf();
+
+    SystemHistory getSystemHistory();
 
     void executeTaskGroup(String groupName);
 

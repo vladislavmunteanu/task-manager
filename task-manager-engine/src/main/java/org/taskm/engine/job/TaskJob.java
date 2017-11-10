@@ -2,12 +2,15 @@ package org.taskm.engine.job;
 
 import org.apache.log4j.Logger;
 import org.quartz.*;
+import org.taskm.core.task.SystemHistory;
 import org.taskm.core.task.Task;
 import org.taskm.core.task.TaskGroup;
 import org.taskm.core.task.TaskGroupStatus;
 import org.taskm.engine.EngineException;
 import org.taskm.engine.task.TaskRunner;
 import org.taskm.engine.task.TaskRunnerException;
+
+import java.util.HashMap;
 
 /**
  * Created on 1/26/2017.
@@ -16,6 +19,7 @@ import org.taskm.engine.task.TaskRunnerException;
 public class TaskJob implements Job {
 
     private TaskGroup taskGroup;
+    private SystemHistory systemHistory;
     private final TaskRunner taskRunner;
     private static final Logger Log = Logger.getLogger(TaskJob.class);
 
@@ -89,6 +93,7 @@ public class TaskJob implements Job {
     }
 
     private static void runTaskGroup(TaskGroup taskGroup, TaskRunner taskRunner) throws EngineException {
+
 
         taskGroup.resetTasksStatus();
         Log.info(String.format("Running Task Group %s, Tasks : %s", taskGroup.getName(), taskGroup.getTaskList()));

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Manager</title>
+</head>
+
+<body>
+<!--/*@thymesVar id="group_name" type="java.lang.String"*/-->
+<!--/*@thymesVar id="selected_group" type="org.taskm.core.task.TaskGroup"*/-->
+<div id="side-modules-header">
+    <div id="side-modules-header-info">
+
+        <h4 th:text="${group_name}">Group_Name</h4>
+    </div>
+    <ul class="header-entity-details">
+        <li>
+            <span class="key">Tasks</span>
+
+
+            <span class="value" th:text="${#lists.size(selected_group.taskList)}"></span>
+        </li>
+        <li>
+            <span class="key">Executions</span>
+            <span class="value" th:text="${selected_group.executions}"></span>
+        </li>
+        <li>
+            <span class="key">Failures</span><span class="value" th:text="${selected_group.failures}"></span>
+        </li>
+    </ul>
+</div>
+<div id="group-tasks">
+    <div id="group-tasks-header">
+        <div class="group-tasks-od">on</div>
+        <div class="group-tasks-task-name">task name</div>
+        <div class="group-tasks-fire-time">last fire time</div>
+        <div class="group-tasks-exec-time">execution time</div>
+        <div class="group-tasks-status">status</div>
+    </div>
+
+    <div class="row cursor-pointer" th:each="task,iter  : ${selected_group.taskList}"
+         th:onclick="'javascript:openGroupTaskDetails(\''+${group_name}+'/'+${task.methodName}+'\');'">
+        <div class="row-data display-table">
+            <div class="group-tasks-od">
+                <span class="day" th:text="${iter.index}+1">1</span>
+            </div>
+            <div class="group-tasks-task-name">
+                <span class="name" th:text="${task.methodName}"></span>
+            </div>
+            <div class="group-tasks-fire-time day-indicator">
+                <span th:text="${task.fireTime}">--:--:--</span>
+                <sup class="days" th:text="${task.days > 0}?'-'+${task.days}"></sup>
+
+            </div>
+            <div class="group-tasks-exec-time">
+                <span th:text="${task.executionTime != null}? ${task.executionTime}">--:--:--</span>
+                <span th:text="${task.executionTime == null}? '--:--:--'">--:--:--</span>
+            </div>
+            <div class="group-tasks-status status">
+                <span th:classappend="${(task.status == 'Executed' ? 'executed' : '') + (task.status == 'Failed' ? 'failed' : '')}"
+                      th:text="${task.status}"></span>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal" class="modal-task-details">
+
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -5,6 +5,7 @@ import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.taskm.core.task.SystemHistory;
 import org.taskm.core.task.Task;
 import org.taskm.core.task.TaskGroup;
 import org.taskm.engine.job.TaskJob;
@@ -23,6 +24,7 @@ public class EngineImpl implements Engine {
 
     private Scheduler scheduler;
     private EngineConf engineConf;
+    private SystemHistory systemHistory;
     private Map<TaskGroup, List<Task>> tasksMap;
     private static final Logger Log = Logger.getLogger(EngineImpl.class);
 
@@ -30,6 +32,7 @@ public class EngineImpl implements Engine {
     @Autowired
     public EngineImpl(EngineConf engineConf) throws EngineException {
         this.engineConf = engineConf;
+        this.systemHistory = new SystemHistory();
     }
 
     @Override
@@ -62,6 +65,7 @@ public class EngineImpl implements Engine {
 
                 try {
                     scheduler.getContext().put(jobKey.getName(), taskGroup);
+                    scheduler.getContext().put("systemHistory",this.systemHistory);
                     scheduler.scheduleJob(job, trigger);
                 } catch (SchedulerException e) {
                     Log.error("Failed to run Scheduler, check task-scheduler.log for details", e);
@@ -89,6 +93,11 @@ public class EngineImpl implements Engine {
 
     public EngineConf getEngineConf() {
         return engineConf;
+    }
+
+    @Override
+    public SystemHistory getSystemHistory() {
+        return systemHistory;
     }
 
     public void setEngineConf(EngineConf engineConf){
