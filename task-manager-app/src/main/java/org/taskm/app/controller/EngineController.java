@@ -35,7 +35,8 @@ public class EngineController {
         try {
             this.engine.startEngine();
         } catch (EngineException e) {
-            Log.error(e);
+            Log.error("Failed to start Engine.", e);
+            throw new RuntimeException("Failed to start Engine.", e);
         }
         this.groups = this.engine.getEngineConf().getTaskGroupList();
         this.tasksMap = this.engine.getEngineConf().getTasksMap();

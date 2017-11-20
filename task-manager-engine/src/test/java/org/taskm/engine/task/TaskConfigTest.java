@@ -114,14 +114,14 @@ public class TaskConfigTest {
     @Test
     public void test_RunGroup1(){
 
-            TaskJob.executeTaskGroup(parser.getTaskGroupList().get(0),new TaskRunner());
+           // TaskJob.executeTaskGroup(parser.getTaskGroupList().get(0),new TaskRunner());
 
     }
 
     @Test
     public void test_RunGroup2(){
 
-            TaskJob.executeTaskGroup(parser.getTaskGroupList().get(1),new TaskRunner());
+            //TaskJob.executeTaskGroup(parser.getTaskGroupList().get(1),new TaskRunner());
 
     }
 

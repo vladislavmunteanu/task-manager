@@ -5,15 +5,13 @@ import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.taskm.core.task.SystemHistory;
-import org.taskm.core.task.Task;
+import org.taskm.engine.utils.History;
 import org.taskm.core.task.TaskGroup;
 import org.taskm.engine.job.TaskJob;
 import org.taskm.engine.task.TaskRunner;
+import org.taskm.engine.utils.NotificationClient;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -24,15 +22,14 @@ public class EngineImpl implements Engine {
 
     private Scheduler scheduler;
     private EngineConf engineConf;
-    private SystemHistory systemHistory;
-    private Map<TaskGroup, List<Task>> tasksMap;
+    private History systemHistory;
     private static final Logger Log = Logger.getLogger(EngineImpl.class);
 
 
     @Autowired
-    public EngineImpl(EngineConf engineConf) throws EngineException {
+    public EngineImpl(EngineConf engineConf, History systemHistory) throws EngineException {
         this.engineConf = engineConf;
-        this.systemHistory = new SystemHistory();
+        this.systemHistory = systemHistory;
     }
 
     @Override
@@ -41,16 +38,15 @@ public class EngineImpl implements Engine {
         System.setProperty("org.quartz.jobStore.misfireThreshold","10000");
 
         List<TaskGroup> taskGroupList =  this.getEngineConf().getTaskGroupList();
-        Scheduler scheduler;
+
         try {
             scheduler = new StdSchedulerFactory().getScheduler();
             scheduler.start();
 
         } catch (SchedulerException e) {
             Log.error("Failed to run Scheduler, check task-scheduler.log for details",e);
-            throw new RuntimeException("Failed to run Scheduler.",e);
+            throw new EngineException("Failed to run Scheduler.",e);
         }
-
 
         for (TaskGroup taskGroup : taskGroupList) {
 
@@ -65,11 +61,11 @@ public class EngineImpl implements Engine {
 
                 try {
                     scheduler.getContext().put(jobKey.getName(), taskGroup);
-                    scheduler.getContext().put("systemHistory",this.systemHistory);
+                    scheduler.getContext().put("systemHistory",this.getSystemHistory());
                     scheduler.scheduleJob(job, trigger);
                 } catch (SchedulerException e) {
                     Log.error("Failed to run Scheduler, check task-scheduler.log for details", e);
-                    throw new RuntimeException("Failed to run Scheduler.", e);
+                    throw new EngineException("Failed to run Scheduler.", e);
                 }
             }
         }
@@ -96,20 +92,16 @@ public class EngineImpl implements Engine {
     }
 
     @Override
-    public SystemHistory getSystemHistory() {
+    public History getSystemHistory() {
         return systemHistory;
-    }
-
-    public void setEngineConf(EngineConf engineConf){
-        this.engineConf = engineConf;
     }
 
     @Override
     public void executeTaskGroup(String groupName){
         TaskRunner taskRunner = new TaskRunner();
         TaskGroup taskGroup = this.getEngineConf().getTaskGroupList().get(this.getEngineConf().getTaskGroupIndex(groupName));
-        TaskJob.executeTaskGroup(taskGroup,taskRunner);
-        TaskJob.taskGroupUpdates(taskGroup,taskRunner);
+       // TaskJob.executeTaskGroup(taskGroup,taskRunner);
+      //  TaskJob.taskGroupUpdates(taskGroup,taskRunner);
     }
 
 }

@@ -3,6 +3,8 @@ package org.taskm.engine.task;
 import org.taskm.engine.EngineException;
 import org.taskm.core.task.Task;
 import org.taskm.core.task.TaskStatus;
+import org.taskm.engine.utils.NotificationClient;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;

@@ -1,3 +1,4 @@
+
 #dash-widget{
     background-color: #1C76B6 !important;
 }
@@ -8,12 +9,13 @@
 
 .dash-main-modules{
     width: 600px !important;
-    background: #f6f5f7;
+    background: rgba(238, 238, 238, 0.7);
 }
 
 
 .dash-side-modules{
     width: 300px !important;
+    background: rgba(238, 238, 238, 0.7);
 }
 
 .dash-1{
@@ -78,12 +80,11 @@
 }
 
 .dash-1-item-content{
-    text-align: center;
+    text-align: right;
     box-sizing: border-box;
     padding: 15px 20px;
-    width: 100px;
-    float: right;
 }
+
 
 .dash-1 li .dash-1-item-content p.key {
     font-size: 12px;
@@ -95,9 +96,61 @@
 
 .dash-1 li .dash-1-item-content h3.value {
     color: #9a9a9a !important;
-    font-size: 40px;
+    font-size: 25px;
     font-weight: bold;
     margin: 0;
+}
+
+.dash-1-item-footer {
+    margin: 0 20px 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eeeeee;
+    box-sizing: border-box;
+}
+
+.dash-1-item-footer .stats {
+    line-height: 22px;
+    color: #999999;
+    font-size: 12px;
+    display: inline-block;
+}
+
+#notification-list{
+
+}
+
+#notification-list li{
+    color: #fff;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    /*background: rgba(251, 140, 0, 0.6);*/
+    background-color:rgba(251, 140, 0, 0.6);
+    box-shadow: 0 25px 10px -15px rgba(0,0,0,0.05);
+    /*animation-name: animScale;*/
+    /*animation-duration: 0.25s;*/
+
+}
+
+.show-notification{
+    animation-name: anim-scale;
+    animation-duration: 0.25s;
+}
+
+.hide-notification{
+    animation-name: anim-scale-revers;
+    animation-duration: 0.25s;
+}
+
+
+@keyframes anim-scale {
+    0% { opacity: 0; transform: translate3d(0,40px,0) scale3d(0.1,0.6,1); }
+    100% { opacity: 1; transform: translate3d(0,0,0) scale3d(1,1,1); }
+}
+
+@keyframes anim-scale-revers {
+    0% { opacity: 1; transform: translate3d(0,0,0) scale3d(1,1,1); }
+    100% { opacity: 0; transform: translate3d(0,40px,0) scale3d(0.1,0.6,1); }
 }
 
 /*http://demos.creative-tim.com/material-dashboard/examples/dashboard.html*/

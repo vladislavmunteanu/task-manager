@@ -1,12 +1,8 @@
 package org.taskm.engine;
 
 import org.quartz.Scheduler;
-import org.taskm.core.task.SystemHistory;
-import org.taskm.core.task.Task;
-import org.taskm.core.task.TaskGroup;
-
-import java.util.List;
-import java.util.Map;
+import org.taskm.engine.utils.History;
+import org.taskm.engine.utils.NotificationClient;
 
 /**
  * Created on 1/26/2017.
@@ -23,7 +19,7 @@ public interface Engine {
 
     EngineConf getEngineConf();
 
-    SystemHistory getSystemHistory();
+    History getSystemHistory();
 
     void executeTaskGroup(String groupName);
 
