@@ -4,8 +4,6 @@
     border: 1px solid #d2d2d2;
     width: 85%;
     overflow: auto;
-    -webkit-box-shadow: 3px 3px 10px 0 rgba(46, 74, 117, 0.42);
-    -moz-box-shadow: 3px 3px 10px 0 rgba(46, 74, 117, 0.42);
     box-shadow: 3px 3px 10px 0 rgba(46, 74, 117, 0.42);
 }
 

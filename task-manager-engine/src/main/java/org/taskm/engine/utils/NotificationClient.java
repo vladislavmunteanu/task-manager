@@ -58,9 +58,10 @@ public class NotificationClient {
         }
     }
 
-    public void sendMessage(String message) {
+    public void sendQuickNotification(String type, String message) {
 
-        String jsonHello = "{ \"name\" : \" "+message+"\" }";
-        this.stompSession.send("/console/notification", jsonHello.getBytes());
+        String jsonNotification = "{\"type\" : \""+type+"\",\"message\" : \""+message+"\" }";
+        this.stompSession.send("/console/notification/quick-notification", jsonNotification.getBytes());
     }
 }
+

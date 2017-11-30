@@ -16,7 +16,7 @@
         </Task>
     </TaskGroup>
 
-    <TaskGroup name="Group_2" parallel="false" scheduler="0 45 * * * ?">
+    <TaskGroup name="Group_2" parallel="false" scheduler="32 * * * * ?">
         <Task>
             <Name>task_4</Name>
             <Parameter type="Double">3456.234</Parameter>
@@ -31,7 +31,7 @@
         </Task>
     </TaskGroup>
 
-    <TaskGroup name="Group_3" parallel="true" scheduler="0 23 * * * ?">
+    <TaskGroup name="Group_3" parallel="true" scheduler="21 * * * * ?">
         <Task>
             <Name>task_1</Name>
         </Task>
@@ -45,7 +45,7 @@
         </Task>
     </TaskGroup>
 
-    <TaskGroup name="Group_4" parallel="false" scheduler="0 54 * * * ?">
+    <TaskGroup name="Group_4" parallel="false" scheduler="53 * * * * ?">
         <Task>
             <Name>task_4</Name>
             <Parameter type="Double">3456.234</Parameter>

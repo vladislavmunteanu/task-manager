@@ -7,11 +7,11 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class NotificationController {
 
-    @MessageMapping("/notification")
-    @SendTo("/notify")
-    public Notification notify(Message message) throws Exception {
+    @MessageMapping("/notification/quick-notification")
+    @SendTo("/notify/quick-notification")
+    public Notification notify(Notification notification) throws Exception {
 
-        return new Notification(message.getName());
+        return notification;
     }
 
 }

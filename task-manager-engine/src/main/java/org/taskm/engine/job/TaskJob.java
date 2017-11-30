@@ -1,9 +1,7 @@
 package org.taskm.engine.job;
 
-import com.sun.tools.corba.se.idl.constExpr.Not;
 import org.apache.log4j.Logger;
 import org.quartz.*;
-import org.taskm.engine.utils.History;
 import org.taskm.core.task.Task;
 import org.taskm.core.task.TaskGroup;
 import org.taskm.core.task.TaskGroupStatus;
@@ -19,7 +17,6 @@ import org.taskm.engine.utils.NotificationClient;
 public class TaskJob implements Job {
 
     private TaskGroup taskGroup;
-    private History systemHistory;
     private NotificationClient notificationClient;
     private final TaskRunner taskRunner;
     private static final Logger Log = Logger.getLogger(TaskJob.class);
@@ -48,7 +45,6 @@ public class TaskJob implements Job {
         try {
             schedulerContext = jobExecutionContext.getScheduler().getContext();
             this.taskGroup = (TaskGroup) schedulerContext.get(jobExecutionContext.getJobDetail().getKey().getName());
-            this.systemHistory = (History) schedulerContext.get("systemHistory");
             this.notificationClient = (NotificationClient) schedulerContext.get("notificationClient");
 
         } catch (SchedulerException e) {
@@ -67,7 +63,7 @@ public class TaskJob implements Job {
     public static void taskGroupUpdates(TaskGroup taskGroup, TaskRunner taskRunner,NotificationClient notificationClient) {
         taskGroup.incrementExecutions();
         taskGroup.setFailures(taskGroup.getFailures() + taskRunner.getFailedTasks());
-        notificationClient.sendMessage(taskGroup.getName()+" executed");
+        notificationClient.sendQuickNotification("success",taskGroup.getName()+" executed");
         taskGroup.setStatus(TaskGroupStatus.Pending);
     }
 
@@ -77,7 +73,7 @@ public class TaskJob implements Job {
 
         if (taskGroup.isParallel() && taskGroup.getTaskList().size() > 1) {
             try {
-                notificationClient.sendMessage(taskGroup.getName()+" started");
+                notificationClient.sendQuickNotification("notice",taskGroup.getName()+" started");
                 runTaskGroupParallel(taskGroup,taskRunner);
 
             } catch (EngineException taskManagerException) {
@@ -85,7 +81,7 @@ public class TaskJob implements Job {
             }
         } else {
             try {
-                notificationClient.sendMessage(taskGroup.getName()+" started");
+                notificationClient.sendQuickNotification("notice",taskGroup.getName()+" started");
                 runTaskGroup(taskGroup,taskRunner);
             } catch (EngineException taskManagerException) {
                 provideException(notificationClient,taskGroup,taskRunner,taskManagerException);
@@ -94,7 +90,7 @@ public class TaskJob implements Job {
     }
 
     private static void provideException(NotificationClient notificationClient,TaskGroup taskGroup, TaskRunner taskRunner,EngineException taskManagerException){
-        notificationClient.sendMessage("Failure in " + taskGroup.getName());
+        notificationClient.sendQuickNotification("error","Failure in " + taskGroup.getName());
         taskGroupUpdates(taskGroup, taskRunner,notificationClient);
         Log.warn(String.format("%s [Executed : %s] [Failed : %s]", taskGroup, taskRunner.getExecutedTasks(), taskRunner.getFailedTasks()));
         Log.error(String.format("Failed to run %s", taskGroup), taskManagerException);
@@ -136,11 +132,6 @@ public class TaskJob implements Job {
             throw new EngineException(String.format("Failed to start task group '%s'.", taskGroup.getName()), e);
         }
         Log.info(String.format("Finished Tasks : %s", taskGroup.getTaskList()));
-    }
-
-
-    public History getSystemHistory() {
-        return systemHistory;
     }
 
     public NotificationClient getNotificationClient() {

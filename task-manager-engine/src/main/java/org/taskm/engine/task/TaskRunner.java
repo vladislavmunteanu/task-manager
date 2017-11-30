@@ -1,6 +1,7 @@
 package org.taskm.engine.task;
 
 import org.taskm.core.task.Task;
+import org.taskm.engine.utils.NotificationClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +33,6 @@ public class TaskRunner {
         runTasksFuture(taskFutures);
         executorService.shutdown();
     }
-
-
 
     /**
      * @param task - methods to be executed

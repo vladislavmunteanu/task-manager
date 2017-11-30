@@ -94,7 +94,6 @@ public class EngineController {
         return "fragments/group-details";
     }
 
-
     @RequestMapping("/groups")
     public String getGroup(Model model) {
 

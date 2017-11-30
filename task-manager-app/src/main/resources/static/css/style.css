@@ -38,8 +38,6 @@ li{
 #header {
     box-shadow: 0 2px 3px 0 rgba(0,0,0,0.2);
     background: #fff none !important;
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(enabled=false)" !important;
-    -webkit-filter: none !important;
     filter: none !important;
     height: 70px;
     position: relative;
@@ -115,8 +113,6 @@ li{
     padding:15px 5px;
     transition:all .2s ease;
     width:85px;
-    -webkit-box-shadow: 1px 1px 3px 0 rgba(46,74,117,0.52);
-    -moz-box-shadow: 1px 1px 3px 0 rgba(46,74,117,0.52);
     box-shadow: 1px 1px 3px 0 rgba(46,74,117,0.52);
     box-sizing:border-box;
     border-radius:2px;
@@ -124,8 +120,6 @@ li{
 }
 
 #widgets a:hover{
-    -webkit-box-shadow: 3px 3px 3px 0 rgba(46,74,117,0.52);
-    -moz-box-shadow: 3px 3px 3px 0 rgba(46,74,117,0.52);
     box-shadow: 3px 3px 3px 0 rgba(46,74,117,0.52);
     background-color: aliceblue;
     border-radius:3px
