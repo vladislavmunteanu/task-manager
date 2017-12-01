@@ -49,10 +49,10 @@ public class NotificationClient {
         String port = System.getProperty("port");
 
         String url = "ws://{host}:{port}/console/notification";
-        return stompClient.connect(url, headers, new MyHandler(), "localhost", port);
+        return stompClient.connect(url, headers, new NotificationHandler(), "localhost", port);
     }
 
-    private class MyHandler extends StompSessionHandlerAdapter {
+    private class NotificationHandler extends StompSessionHandlerAdapter {
         public void afterConnected(StompSession stompSession, StompHeaders stompHeaders) {
             logger.info("Notification Client connected");
         }

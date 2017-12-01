@@ -4,10 +4,12 @@ import org.taskm.engine.EngineException;
 import org.taskm.core.task.Task;
 import org.taskm.core.task.TaskStatus;
 import org.taskm.engine.utils.NotificationClient;
+import org.taskm.engine.utils.SystemHistory;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Objects;
 import java.util.concurrent.Callable;
@@ -18,9 +20,17 @@ import java.util.concurrent.Callable;
 class TaskExecutor implements Callable<Void> {
 
     private final Task task;
+    private SystemHistory systemHistory;
+    private NotificationClient notificationClient;
 
     TaskExecutor(Task task){
         this.task = task;
+    }
+
+    TaskExecutor(Task task,SystemHistory systemHistory,NotificationClient notificationClient){
+        this.task = task;
+        this.systemHistory = systemHistory;
+        this.notificationClient = notificationClient;
     }
 
     @Override
@@ -41,17 +51,17 @@ class TaskExecutor implements Callable<Void> {
 
                 method.invoke(task.getObject());
 
+                systemHistory.setLastExecutedTask(task.getMethodName());
+
                 long endTime = System.currentTimeMillis();
 
                 task.setExecutionTime(extractExecutionTime(endTime - startTime));
                 task.setStatus(TaskStatus.Executed);
             } catch (NoSuchMethodException e) {
-                task.setErrorMessage(e.getCause().getMessage());
-                task.setStatus(TaskStatus.Failed);
+                provideException(e,task,systemHistory,notificationClient);
                 throw new EngineException(String.format("Could not find '%s'.", task),e);
             } catch (InvocationTargetException | IllegalAccessException e) {
-                task.setErrorMessage(e.getCause().getMessage());
-                task.setStatus(TaskStatus.Failed);
+                provideException(e,task,systemHistory,notificationClient);
                 throw new EngineException(String.format("Could not execute '%s'.", task),e);
             }
         }else {
@@ -67,18 +77,22 @@ class TaskExecutor implements Callable<Void> {
 
                     method.invoke(task.getObject(),task.getParameters().toArray());
 
+                    systemHistory.setLastExecutedTask(task.getMethodName());
+
                     long endTime = System.currentTimeMillis();
                     task.setExecutionTime(extractExecutionTime(endTime - startTime));
                     task.setStatus(TaskStatus.Executed);
 
                 } catch (InvocationTargetException | IllegalAccessException e) {
-                    task.setErrorMessage(e.getCause().getMessage());
-                    task.setStatus(TaskStatus.Failed);
+                    provideException(e,task,systemHistory,notificationClient);
                     throw new EngineException(String.format("Could not execute '%s'.", task),e);
                 }
             }else {
+                notificationClient.sendQuickNotification("error","Failure in " + task.getMethodName());
+                systemHistory.increaseFailures();
                 task.setErrorMessage(String.format("Could not find '%s'.", task));
                 task.setStatus(TaskStatus.Failed);
+                systemHistory.setLastFailureTime(convertToTime(System.currentTimeMillis()));
                 throw new EngineException(String.format("Could not find '%s'.", task));
             }
         }
@@ -149,6 +163,21 @@ class TaskExecutor implements Callable<Void> {
 
         return hours + ":" + minutes + ":" + seconds + milli;
 
+    }
+
+    private static String convertToTime(long milliseconds){
+
+        Date date = new Date(milliseconds);
+
+        return new SimpleDateFormat("hh:mm:ss a").format(date);
+    }
+
+    private static void provideException(Exception e,Task task,SystemHistory systemHistory,NotificationClient notificationClient){
+        notificationClient.sendQuickNotification("error","Failure in " + task.getMethodName());
+        systemHistory.increaseFailures();
+        task.setErrorMessage(e.getCause().getMessage());
+        task.setStatus(TaskStatus.Failed);
+        systemHistory.setLastFailureTime(convertToTime(System.currentTimeMillis()));
     }
 
 }

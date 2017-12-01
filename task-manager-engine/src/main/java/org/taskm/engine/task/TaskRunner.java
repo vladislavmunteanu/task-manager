@@ -2,6 +2,7 @@ package org.taskm.engine.task;
 
 import org.taskm.core.task.Task;
 import org.taskm.engine.utils.NotificationClient;
+import org.taskm.engine.utils.SystemHistory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +20,22 @@ public class TaskRunner {
     private int failedTasks;
     private int executedTasks;
 
+
     /**
      * @param tasks - methods to be executed
      */
+    public void runParallelTasks(List<Task> tasks, SystemHistory systemHistory,NotificationClient notificationClient) throws TaskRunnerException {
+
+        final ExecutorService executorService = Executors.newFixedThreadPool(tasks.size());
+        List<Future> taskFutures = new ArrayList<>();
+
+        for (Task task : tasks){
+            taskFutures.add(executorService.submit(new TaskExecutor(task,systemHistory,notificationClient)));
+        }
+        runTasksFuture(taskFutures);
+        executorService.shutdown();
+    }
+
     public void runParallelTasks(List<Task> tasks) throws TaskRunnerException {
 
         final ExecutorService executorService = Executors.newFixedThreadPool(tasks.size());
@@ -30,6 +44,20 @@ public class TaskRunner {
         for (Task task : tasks){
             taskFutures.add(executorService.submit(new TaskExecutor(task)));
         }
+        runTasksFuture(taskFutures);
+        executorService.shutdown();
+    }
+
+    /**
+     * @param task - methods to be executed
+     */
+    public void runTask(Task task,SystemHistory systemHistory,NotificationClient notificationClient) throws TaskRunnerException {
+
+        final ExecutorService executorService = Executors.newFixedThreadPool(1);
+        List<Future> taskFutures = new ArrayList<>();
+
+        taskFutures.add(executorService.submit(new TaskExecutor(task,systemHistory,notificationClient)));
+
         runTasksFuture(taskFutures);
         executorService.shutdown();
     }

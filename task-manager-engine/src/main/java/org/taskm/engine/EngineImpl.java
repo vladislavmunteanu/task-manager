@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.taskm.core.task.TaskGroup;
 import org.taskm.engine.job.TaskJob;
 import org.taskm.engine.task.TaskRunner;
+import org.taskm.engine.utils.SystemHistory;
 
 import java.util.List;
 import java.util.Objects;
@@ -20,12 +21,14 @@ public class EngineImpl implements Engine {
 
     private Scheduler scheduler;
     private EngineConf engineConf;
+    private SystemHistory systemHistory;
     private static final Logger Log = Logger.getLogger(EngineImpl.class);
 
 
     @Autowired
-    public EngineImpl(EngineConf engineConf) throws EngineException {
+    public EngineImpl(EngineConf engineConf,SystemHistory systemHistory) throws EngineException {
         this.engineConf = engineConf;
+        this.systemHistory = systemHistory;
     }
 
     @Override
@@ -57,6 +60,7 @@ public class EngineImpl implements Engine {
 
                 try {
                     scheduler.getContext().put(jobKey.getName(), taskGroup);
+                    scheduler.getContext().put("systemHistory",this.getSystemHistory());
                     scheduler.scheduleJob(job, trigger);
                 } catch (SchedulerException e) {
                     Log.error("Failed to run Scheduler, check task-scheduler.log for details", e);
@@ -76,12 +80,19 @@ public class EngineImpl implements Engine {
         }
     }
 
+    @Override
     public Scheduler getScheduler() {
         return scheduler;
     }
 
+    @Override
     public EngineConf getEngineConf() {
         return engineConf;
+    }
+
+    @Override
+    public SystemHistory getSystemHistory() {
+        return systemHistory;
     }
 
     @Override

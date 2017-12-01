@@ -20,6 +20,7 @@
 <body onload="notificationController()">
 <!--/*@thymesVar id="groups_size" type="java.lang.Integer"*/-->
 <!--/*@thymesVar id="tasks_size" type="java.lang.Integer"*/-->
+<!--/*@thymesVar id="systemHistory" type="org.taskm.engine.utils.SystemHistory"*/-->
 <div th:replace="fragments/header :: header"></div>
 
 <div id="main">
@@ -54,7 +55,8 @@
                                     <div class="stats">
                                         <img th:src="@{/img/tag.png}" src="" style="opacity: .8">
                                         <span>Last executed </span>
-                                        <span class="stats-data">Group_1</span>
+                                        <span class="stats-data" th:text="${systemHistory.lastExecutedGroup != null}?${systemHistory.lastExecutedGroup}">N/A</span>
+                                        <span class="stats-data" th:text="${systemHistory.lastExecutedGroup == null}?'N/A'">N/A</span>
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +77,8 @@
                                     <div class="stats">
                                         <img th:src="@{/img/tag.png}" src="" style="opacity: .8">
                                         <span>Last executed </span>
-                                        <span class="stats-data">Group_1</span>
+                                        <span class="stats-data" th:text="${systemHistory.lastExecutedTask != null}?${systemHistory.lastExecutedTask}">N/A</span>
+                                        <span class="stats-data" th:text="${systemHistory.lastExecutedTask == null}?'N/A'">N/A</span>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +90,7 @@
                                 </div>
                                 <div class="dash-1-item-content">
 
-                                    <h3 class="value" th:text="${groups_size}"></h3>
+                                    <h3 class="value" th:text="${systemHistory.executions}"></h3>
                                     <p class="key">Executions</p>
 
 
@@ -96,7 +99,8 @@
                                     <div class="stats">
                                         <img th:src="@{/img/time.png}" src="">
                                         <span>Last execution </span>
-                                        <span class="stats-data">11:43:00 AM</span>
+                                        <span class="stats-data" th:text="${systemHistory.lastExecutionTime != null}?${systemHistory.lastExecutionTime}">--:--:--</span>
+                                        <span class="stats-data" th:text="${systemHistory.lastExecutionTime == null}?'--:--:--'">N/A</span>
                                     </div>
                                 </div>
                             </div>
@@ -108,7 +112,7 @@
                                 </div>
                                 <div class="dash-1-item-content">
 
-                                    <h3 class="value" th:text="${tasks_size}"></h3>
+                                    <h3 class="value" th:text="${systemHistory.failures}"></h3>
                                     <p class="key">Failures</p>
 
                                 </div>
@@ -117,7 +121,8 @@
                                     <div class="stats">
                                         <img th:src="@{/img/time.png}" src="">
                                         <span>Last failure </span>
-                                        <span class="stats-data">11:43:00 AM</span>
+                                        <span class="stats-data" th:text="${systemHistory.lastFailureTime != null}?${systemHistory.lastFailureTime}">--:--:--</span>
+                                        <span class="stats-data" th:text="${systemHistory.lastFailureTime == null}?'--:--:--'">N/A</span>
                                     </div>
                                 </div>
                             </div>

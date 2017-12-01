@@ -109,6 +109,7 @@ public class EngineController {
 
         model.addAttribute("groups_size",groups.size());
         model.addAttribute("tasks_size",tasksMap.size());
+        model.addAttribute("systemHistory",this.engine.getSystemHistory());
         return "index";
     }
 }
