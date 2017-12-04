@@ -36,7 +36,7 @@ public class TaskConfigTest {
         Task eTask1 = new Task(parser.getClassInstance(),"task_1");
 
 
-        parameters.add("Got the message");
+        parameters.add("Got the NOTIFICATION_ERROR_MESSAGE");
         Task eTask2 = new Task(parser.getClassInstance(),"task_2", parameters);
 
         parameters.clear();

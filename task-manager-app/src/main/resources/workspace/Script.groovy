@@ -14,7 +14,7 @@ class Script {
     void task_2(String message){
         Log.info "Groovy: The string is : ${message}"
         sleep(200)
-        throw new RuntimeException("Fake exception: Fake exception: Fake exception: Fake exception: Fake exception: Fake exception: vFake exception: Fake exception: Fake exception: Fake exception: vFake exception: Fake exception: Fake exception: Fake exception: v")
+        throw new RuntimeException("Fake exception: Fake exception: Fake exception: Fake exception: Fake exception: Fake exception: Fake exception: Fake exception: Fake exception: Fake exception: Fake exception: Fake exception: Fake exception: Fake exception")
     }
 
     void task_3(int number){
@@ -23,14 +23,17 @@ class Script {
     }
 
     void task_4(double number){
+        sleep(300)
         Log.info "Groovy: The number is : ${number}"
     }
 
     void task_5(Date date){
+        sleep(400)
         Log.info "Groovy: The date is : ${date}"
     }
 
     void task_6(boolean value){
+        sleep(500)
         Log.info "Groovy: The boolean is : ${value}"
     }
 

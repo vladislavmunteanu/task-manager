@@ -22,6 +22,7 @@ class TaskExecutor implements Callable<Void> {
     private final Task task;
     private SystemHistory systemHistory;
     private NotificationClient notificationClient;
+    private String NOTIFICATION_ERROR_MESSAGE;
 
     TaskExecutor(Task task){
         this.task = task;
@@ -31,6 +32,7 @@ class TaskExecutor implements Callable<Void> {
         this.task = task;
         this.systemHistory = systemHistory;
         this.notificationClient = notificationClient;
+        this.NOTIFICATION_ERROR_MESSAGE = String.format("Failure in %s : %s",task.getParent().getName(),task.getMethodName());
     }
 
     @Override
@@ -58,10 +60,10 @@ class TaskExecutor implements Callable<Void> {
                 task.setExecutionTime(extractExecutionTime(endTime - startTime));
                 task.setStatus(TaskStatus.Executed);
             } catch (NoSuchMethodException e) {
-                provideException(e,task,systemHistory,notificationClient);
+                provideException(e,task,systemHistory,notificationClient,NOTIFICATION_ERROR_MESSAGE);
                 throw new EngineException(String.format("Could not find '%s'.", task),e);
             } catch (InvocationTargetException | IllegalAccessException e) {
-                provideException(e,task,systemHistory,notificationClient);
+                provideException(e,task,systemHistory,notificationClient,NOTIFICATION_ERROR_MESSAGE);
                 throw new EngineException(String.format("Could not execute '%s'.", task),e);
             }
         }else {
@@ -84,11 +86,12 @@ class TaskExecutor implements Callable<Void> {
                     task.setStatus(TaskStatus.Executed);
 
                 } catch (InvocationTargetException | IllegalAccessException e) {
-                    provideException(e,task,systemHistory,notificationClient);
+                    provideException(e,task,systemHistory,notificationClient,NOTIFICATION_ERROR_MESSAGE);
                     throw new EngineException(String.format("Could not execute '%s'.", task),e);
                 }
             }else {
-                notificationClient.sendQuickNotification("error","Failure in " + task.getMethodName());
+
+                notificationClient.sendQuickNotification("error", NOTIFICATION_ERROR_MESSAGE);
                 systemHistory.increaseFailures();
                 task.setErrorMessage(String.format("Could not find '%s'.", task));
                 task.setStatus(TaskStatus.Failed);
@@ -172,8 +175,8 @@ class TaskExecutor implements Callable<Void> {
         return new SimpleDateFormat("hh:mm:ss a").format(date);
     }
 
-    private static void provideException(Exception e,Task task,SystemHistory systemHistory,NotificationClient notificationClient){
-        notificationClient.sendQuickNotification("error","Failure in " + task.getMethodName());
+    private static void provideException(Exception e,Task task,SystemHistory systemHistory,NotificationClient notificationClient,String nMessage){
+        notificationClient.sendQuickNotification("error",nMessage);
         systemHistory.increaseFailures();
         task.setErrorMessage(e.getCause().getMessage());
         task.setStatus(TaskStatus.Failed);

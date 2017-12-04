@@ -17,12 +17,22 @@ public class Task {
     private String executionTime;
     private Date lastFireTime;
     private String errorMessage;
+    private TaskGroup parent;
 
     public Task(Object object, String methodName) {
         this.object = object;
         this.methodName = methodName;
         this.parameters = new ArrayList<>();
         this.status = String.valueOf(TaskStatus.New);
+    }
+
+
+    public Task(Object object, String methodName,TaskGroup parent) {
+        this.object = object;
+        this.methodName = methodName;
+        this.parameters = new ArrayList<>();
+        this.status = String.valueOf(TaskStatus.New);
+        this.parent = parent;
     }
 
     public Task(Object object, String methodName, List<Object> parameters) throws TaskCoreException {
@@ -134,5 +144,11 @@ public class Task {
     }
 
 
+    public TaskGroup getParent() {
+        return parent;
+    }
 
+    public void setParent(TaskGroup parent) {
+        this.parent = parent;
+    }
 }

@@ -26,13 +26,13 @@ function pushNotification(notification) {
 
     if (type === 'notice') {
         li.setAttribute('class', 'show-notification notice');
-        displayNotification(li,notification,notificationTime,notificationId,'/console/img/info.png')
+        displayNotification(li,notification,notificationTime,notificationId,'alert-box-notice')
     } else if (type === 'error') {
         li.setAttribute('class', 'show-notification error');
-        displayNotification(li,notification,notificationTime,notificationId,'/console/img/fail.png')
+        displayNotification(li,notification,notificationTime,notificationId,'alert-box-error')
     } else {
         li.setAttribute('class', 'show-notification success');
-        displayNotification(li,notification,notificationTime,notificationId,'/console/img/done.png')
+        displayNotification(li,notification,notificationTime,notificationId,'alert-box-success')
     }
 
     hideNotification(notificationId);
@@ -88,17 +88,15 @@ function removeNotification(id) {
     }
 }
 
-function buildNotification(message, notificationTime, notificationId,notificationImg) {
+function buildNotification(message, notificationTime, notificationId,notificationClass) {
 
-    return '   <div class="notification-content">\n' +
-        '                                    <div class="notification-content-message">\n' +
-        '                                        <img src="'+notificationImg+'">\n' +
-        '                                        <span class="message">'+message+'</span>\n' +
-        '                                        <span class="time">'+notificationTime+'</span>\n' +
-        '                                        <button type="button" class="notification-close close"\n' +
-        '                                                onclick="closeNotification('+notificationId+')">&times;</button>\n' +
-        '                                    </div>\n' +
-        '                                </div>';
+    return '    <div class="alert-box '+notificationClass+'">\n' +
+        '                                <span class="message">'+message+'</span>\n' +
+        '                                <span class="time">'+notificationTime+'</span>\n' +
+        '                            </div>\n' +
+        '                            <div class="alert-box-button">\n' +
+        '                                <button type="button" class="notification-close close" onclick="closeNotification('+notificationId+')">&times;</button>\n' +
+        '                            </div>';
 
 }
 

@@ -55,8 +55,10 @@
                                     <div class="stats">
                                         <img th:src="@{/img/tag.png}" src="" style="opacity: .8">
                                         <span>Last executed </span>
-                                        <span class="stats-data" th:text="${systemHistory.lastExecutedGroup != null}?${systemHistory.lastExecutedGroup}">N/A</span>
-                                        <span class="stats-data" th:text="${systemHistory.lastExecutedGroup == null}?'N/A'">N/A</span>
+                                        <span class="stats-data"
+                                              th:text="${systemHistory.lastExecutedGroup != null}?${systemHistory.lastExecutedGroup}">N/A</span>
+                                        <span class="stats-data"
+                                              th:text="${systemHistory.lastExecutedGroup == null}?'N/A'">N/A</span>
                                     </div>
                                 </div>
                             </div>
@@ -77,8 +79,10 @@
                                     <div class="stats">
                                         <img th:src="@{/img/tag.png}" src="" style="opacity: .8">
                                         <span>Last executed </span>
-                                        <span class="stats-data" th:text="${systemHistory.lastExecutedTask != null}?${systemHistory.lastExecutedTask}">N/A</span>
-                                        <span class="stats-data" th:text="${systemHistory.lastExecutedTask == null}?'N/A'">N/A</span>
+                                        <span class="stats-data"
+                                              th:text="${systemHistory.lastExecutedTask != null}?${systemHistory.lastExecutedTask}">N/A</span>
+                                        <span class="stats-data"
+                                              th:text="${systemHistory.lastExecutedTask == null}?'N/A'">N/A</span>
                                     </div>
                                 </div>
                             </div>
@@ -99,8 +103,10 @@
                                     <div class="stats">
                                         <img th:src="@{/img/time.png}" src="">
                                         <span>Last execution </span>
-                                        <span class="stats-data" th:text="${systemHistory.lastExecutionTime != null}?${systemHistory.lastExecutionTime}">--:--:--</span>
-                                        <span class="stats-data" th:text="${systemHistory.lastExecutionTime == null}?'--:--:--'">N/A</span>
+                                        <span class="stats-data"
+                                              th:text="${systemHistory.lastExecutionTime != null}?${systemHistory.lastExecutionTime}">--:--:--</span>
+                                        <span class="stats-data"
+                                              th:text="${systemHistory.lastExecutionTime == null}?'--:--:--'">N/A</span>
                                     </div>
                                 </div>
                             </div>
@@ -121,8 +127,10 @@
                                     <div class="stats">
                                         <img th:src="@{/img/time.png}" src="">
                                         <span>Last failure </span>
-                                        <span class="stats-data" th:text="${systemHistory.lastFailureTime != null}?${systemHistory.lastFailureTime}">--:--:--</span>
-                                        <span class="stats-data" th:text="${systemHistory.lastFailureTime == null}?'--:--:--'">N/A</span>
+                                        <span class="stats-data"
+                                              th:text="${systemHistory.lastFailureTime != null}?${systemHistory.lastFailureTime}">--:--:--</span>
+                                        <span class="stats-data"
+                                              th:text="${systemHistory.lastFailureTime == null}?'--:--:--'">N/A</span>
                                     </div>
                                 </div>
                             </div>
@@ -160,4 +168,24 @@
 <!--</li>-->
 <!--<li class="notification-footer">-->
 <!--<span class="notifications-stats">4 Notification(s)</span>-->
+<!--</li>-->
+
+
+<!--<li class="show-notification notice">-->
+<!--<div class="alert-box error-b">-->
+<!--<span class="message">Failure in Group_1 : task_1</span>-->
+<!--<span class="time">4:50:00 PM</span>-->
+<!--</div>-->
+<!--<div class="alert-box-button">-->
+<!--<button type="button" class="notification-close close" th:onclick="'javascript:closeNotification();'">&times;</button>-->
+<!--</div>-->
+<!--</li>-->
+<!--<li class="show-notification notice">-->
+<!--<div class="alert-box error-b">-->
+<!--<span class="message">Group_1 started</span>-->
+<!--<span class="time">4:50:00 PM</span>-->
+<!--</div>-->
+<!--<div class="alert-box-button">-->
+<!--<button type="button" class="notification-close close" onclick="closeNotification('+notificationId+')">&times;</button>-->
+<!--</div>-->
 <!--</li>-->

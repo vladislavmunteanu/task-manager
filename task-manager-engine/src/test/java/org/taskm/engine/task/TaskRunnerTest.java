@@ -154,8 +154,8 @@ public class TaskRunnerTest{
 
 
         testTwoParameters = new Task(taskTemplate,"testTwoParameters");
-        testTwoParameters.addParameter("message 0");
-        testTwoParameters.addParameter("message 1");
+        testTwoParameters.addParameter("NOTIFICATION_ERROR_MESSAGE 0");
+        testTwoParameters.addParameter("NOTIFICATION_ERROR_MESSAGE 1");
         taskList = new ArrayList<>();
         taskList.add(testTwoParameters);
         runner.runParallelTasks(taskList);
@@ -168,7 +168,7 @@ public class TaskRunnerTest{
 
         try {
             testTwoParameters = new Task(taskTemplate,"testTwoParameters");
-            testTwoParameters.addParameter("message 0");
+            testTwoParameters.addParameter("NOTIFICATION_ERROR_MESSAGE 0");
             testTwoParameters.addParameter(null);
             taskList = new ArrayList<>();
             taskList.add(testTwoParameters);

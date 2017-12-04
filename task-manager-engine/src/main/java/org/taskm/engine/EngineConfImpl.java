@@ -176,7 +176,7 @@ public class EngineConfImpl implements EngineConf {
                         Element taskElement = (Element) taskList.item(j);
                         String taskName = taskElement.getElementsByTagName("Name").item(0).getFirstChild().getNodeValue();
 
-                        Task task = new Task(classInstance, taskName);
+                        Task task = new Task(classInstance,taskName,taskGroup);
                         NodeList parameters = taskElement.getElementsByTagName("Parameter");
 
                         if (parameters.getLength() > 0) {
