@@ -39,9 +39,9 @@
                 <div id="main-modules">
                     <h3 id="main-modules-header">All Tasks</h3>
                     <ul class="category_list">
-                        <li th:each="taskMap : ${tasksMap}" th:classappend="${taskMap.key eq first_map_name}?selected" th:id="${taskMap.key}">
+                        <li th:each="taskMap : ${tasksMap}" th:classappend="${taskMap.key eq first_map_name}?selected" th:id="${taskMap.value.task.taskId}">
 
-                            <div class="li-data" th:onclick="'javascript:openTaskDetails(\''+${taskMap.key}+'\');'">
+                            <div class="li-data" th:onclick="'javascript:openTaskDetails(\'' + ${taskMap.key} + '\',\'' + ${taskMap.value.task.taskId} + '\');'">
                                 <div class="entity-name">
                                     <h4 th:text="${taskMap.value.task.methodName}">Task Name "Test1"</h4>
                                     <span th:text="${taskMap.value.taskGroup.name}">Group Name</span>
