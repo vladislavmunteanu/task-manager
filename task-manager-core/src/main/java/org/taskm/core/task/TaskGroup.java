@@ -23,13 +23,15 @@ public class TaskGroup {
     private int failures;
     private TaskGroupStatus status;
     private String fireTime;
+    private String groupId;
 
     /**
      * @param name        - task name
      * @param parallel    - if true then all tasks from this group should run in parallel
      * @param scheduler   - time when task group should run
      */
-    public TaskGroup(String name, boolean parallel, String scheduler) {
+    public TaskGroup(String name, boolean parallel, String scheduler,String groupId) {
+        this.groupId = groupId;
         this.name = name;
         this.parallel = parallel;
         this.scheduler = scheduler;
@@ -137,4 +139,7 @@ public class TaskGroup {
         return null;
     }
 
+    public String getGroupId() {
+        return groupId;
+    }
 }

@@ -20,6 +20,6 @@ public interface Engine {
 
     SystemHistory getSystemHistory();
 
-    void executeTaskGroup(String groupName);
+   // void executeTaskGroup(String groupName);
 
 }

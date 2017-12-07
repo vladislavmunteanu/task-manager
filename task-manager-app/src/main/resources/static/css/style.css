@@ -275,7 +275,7 @@ li{
     display: inline-block;
     height: 35px;
     margin-bottom: 20px;
-    width: 47%;
+    max-width: 40%;
 
 }
 

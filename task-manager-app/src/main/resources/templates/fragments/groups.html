@@ -43,8 +43,8 @@
                     <ul>
 
                         <li th:each="group : ${groups}" th:classappend="${group.name eq first_group_name}?selected"
-                            th:id="${group.name}">
-                            <div class="li-data" th:onclick="'javascript:openGroupDetails(\''+${group.name}+'\');'">
+                            th:id="${group.groupId}">
+                            <div class="li-data" th:onclick="'javascript:openGroupDetails(\'' + ${group.name} + '\',\'' + ${group.groupId} + '\');'">
                                 <div class="entity-name">
                                     <h4 th:text="${group.name}">Group Name "Test1"</h4>
                                     <span th:text="${#lists.size(group.taskList)}+' tasks'">2 tasks</span>

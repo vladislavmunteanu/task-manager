@@ -18,6 +18,7 @@ public class Task {
     private Date lastFireTime;
     private String errorMessage;
     private TaskGroup parent;
+    private String taskId;
 
     public Task(Object object, String methodName) {
         this.object = object;
@@ -27,7 +28,8 @@ public class Task {
     }
 
 
-    public Task(Object object, String methodName,TaskGroup parent) {
+    public Task(Object object, String methodName,TaskGroup parent,String taskId) {
+        this.taskId = taskId;
         this.object = object;
         this.methodName = methodName;
         this.parameters = new ArrayList<>();
@@ -150,5 +152,9 @@ public class Task {
 
     public void setParent(TaskGroup parent) {
         this.parent = parent;
+    }
+
+    public String getTaskId() {
+        return taskId;
     }
 }

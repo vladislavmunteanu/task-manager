@@ -53,12 +53,13 @@ class TaskExecutor implements Callable<Void> {
 
                 method.invoke(task.getObject());
 
-                systemHistory.setLastExecutedTask(task.getMethodName());
 
                 long endTime = System.currentTimeMillis();
 
+                updateSystemHistory();
                 task.setExecutionTime(extractExecutionTime(endTime - startTime));
                 task.setStatus(TaskStatus.Executed);
+
             } catch (NoSuchMethodException e) {
                 provideException(e,task,systemHistory,notificationClient,NOTIFICATION_ERROR_MESSAGE);
                 throw new EngineException(String.format("Could not find '%s'.", task),e);
@@ -79,9 +80,9 @@ class TaskExecutor implements Callable<Void> {
 
                     method.invoke(task.getObject(),task.getParameters().toArray());
 
-                    systemHistory.setLastExecutedTask(task.getMethodName());
-
                     long endTime = System.currentTimeMillis();
+
+                    updateSystemHistory();
                     task.setExecutionTime(extractExecutionTime(endTime - startTime));
                     task.setStatus(TaskStatus.Executed);
 
@@ -100,6 +101,12 @@ class TaskExecutor implements Callable<Void> {
             }
         }
         return null;
+    }
+
+    private void updateSystemHistory(){
+        if (systemHistory !=null) {
+            systemHistory.setLastExecutedTask(task.getMethodName());
+        }
     }
 
     private static Method getMethod(Task task) {

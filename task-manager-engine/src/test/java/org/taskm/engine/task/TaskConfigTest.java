@@ -43,7 +43,7 @@ public class TaskConfigTest {
         parameters.add(1234);
         Task eTask3 = new Task(parser.getClassInstance(),"task_3", parameters);
 
-        eTaskGroup1 = new TaskGroup("Group_1",true,"0/5 * * * * ?");
+        eTaskGroup1 = new TaskGroup("Group_1",true,"0/5 * * * * ?","0001");
         eTaskGroup1.addTask(eTask1);
         eTaskGroup1.addTask(eTask2);
         eTaskGroup1.addTask(eTask3);
@@ -61,7 +61,7 @@ public class TaskConfigTest {
         parameters.add(true);
         Task eTask6 = new Task(parser.getClassInstance(),"task_6", parameters);
 
-        eTaskGroup2 = new TaskGroup("Group_2",false,"0/7 * * * * ?");
+        eTaskGroup2 = new TaskGroup("Group_2",false,"0/7 * * * * ?","0005");
         eTaskGroup2.addTask(eTask4);
         eTaskGroup2.addTask(eTask5);
         eTaskGroup2.addTask(eTask6);
@@ -88,12 +88,17 @@ public class TaskConfigTest {
         TaskGroup taskGroup = parser.getTaskGroupList().get(0);
         assert Objects.equals(taskGroup.toString(), eTaskGroup1.toString());
         Assert.assertEquals(taskGroup.isParallel(),eTaskGroup1.isParallel());
+        Assert.assertEquals(taskGroup.getGroupId(),eTaskGroup1.getGroupId());
         Assert.assertEquals(taskGroup.getTaskList().get(0).getMethodName(),eTaskGroup1.getTaskList().get(0).getMethodName());
         Assert.assertEquals(taskGroup.getTaskList().get(1).getMethodName(),eTaskGroup1.getTaskList().get(1).getMethodName());
         Assert.assertEquals(taskGroup.getTaskList().get(2).getMethodName(),eTaskGroup1.getTaskList().get(2).getMethodName());
         Assert.assertEquals(taskGroup.getTaskList().get(0).getParameters().size(),eTaskGroup1.getTaskList().get(0).getParameters().size());
         Assert.assertEquals(taskGroup.getTaskList().get(1).getParameters().size(),eTaskGroup1.getTaskList().get(1).getParameters().size());
         Assert.assertEquals(taskGroup.getTaskList().get(2).getParameters().size(),eTaskGroup1.getTaskList().get(2).getParameters().size());
+        Assert.assertEquals(taskGroup.getTaskList().get(0).getTaskId(),"0002");
+        Assert.assertEquals(taskGroup.getTaskList().get(1).getTaskId(),"0003");
+        Assert.assertEquals(taskGroup.getTaskList().get(2).getTaskId(),"0004");
+
     }
 
     @Test
@@ -102,12 +107,16 @@ public class TaskConfigTest {
         TaskGroup taskGroup = parser.getTaskGroupList().get(1);
         Assert.assertEquals(taskGroup.toString(),eTaskGroup2.toString());
         Assert.assertEquals(taskGroup.isParallel(),eTaskGroup2.isParallel());
+        Assert.assertEquals(taskGroup.getGroupId(),eTaskGroup2.getGroupId());
         Assert.assertEquals(taskGroup.getTaskList().get(0).getMethodName(),eTaskGroup2.getTaskList().get(0).getMethodName());
         Assert.assertEquals(taskGroup.getTaskList().get(1).getMethodName(),eTaskGroup2.getTaskList().get(1).getMethodName());
         Assert.assertEquals(taskGroup.getTaskList().get(2).getMethodName(),eTaskGroup2.getTaskList().get(2).getMethodName());
         Assert.assertEquals(taskGroup.getTaskList().get(0).getParameters().size(),eTaskGroup2.getTaskList().get(0).getParameters().size());
         Assert.assertEquals(taskGroup.getTaskList().get(1).getParameters().size(),eTaskGroup2.getTaskList().get(1).getParameters().size());
         Assert.assertEquals(taskGroup.getTaskList().get(2).getParameters().size(),eTaskGroup2.getTaskList().get(2).getParameters().size());
+        Assert.assertEquals(taskGroup.getTaskList().get(0).getTaskId(),"0006");
+        Assert.assertEquals(taskGroup.getTaskList().get(1).getTaskId(),"0007");
+        Assert.assertEquals(taskGroup.getTaskList().get(2).getTaskId(),"0008");
     }
 
 

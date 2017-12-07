@@ -218,13 +218,14 @@
 
 .alert-box {
     width: 95%;
-    padding: 20px 15px 20px 25px;
-    margin: 0 10px;
+    padding: 20px 10px 20px 25px;
+    margin: 0 0 0 10px;
 }
 
 .alert-box-button{
     width: 5%;
-    padding: 5px 10px;
+    padding-top: 5px;
+    padding-right: 5px;
 }
 
 .alert-box-error {

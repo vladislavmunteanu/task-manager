@@ -48,12 +48,14 @@ public class EngineConfImpl implements EngineConf {
     private static HashMap<String,Integer> tgIndexMap;
     private Properties properties;
     private Map<String,TaskMap> tasksMap;
+    private int nextId;
 
 
     private static final Logger Log = Logger.getLogger(EngineConfImpl.class);
 
     public EngineConfImpl() throws EngineException {
 
+        this.nextId = 0;
         this.properties = loadProperties();
         this.compiled = Boolean.valueOf(this.getProperties().getProperty("task.manager.compiled"));
         if (!this.isCompiled()) {
@@ -131,6 +133,10 @@ public class EngineConfImpl implements EngineConf {
         return compiled;
     }
 
+    private String idGenerator(){
+        return String.format("%04d",++nextId);
+    }
+
     private static void validateAgainstXSD(InputStream xml, InputStream xsd) throws EngineException {
 
         Log.info("Verifying Task Manager XML");
@@ -144,7 +150,7 @@ public class EngineConfImpl implements EngineConf {
         }
     }
 
-    private static List<TaskGroup> buildTaskGroupList(String taskXML,Object classInstance) throws EngineException{
+    private List<TaskGroup> buildTaskGroupList(String taskXML,Object classInstance) throws EngineException{
 
         Log.info("Starting to build Task Groups");
         List<TaskGroup> taskGroupList = new ArrayList<>();
@@ -168,7 +174,7 @@ public class EngineConfImpl implements EngineConf {
                     tgIndexMap.put(taskGroupName,i);
                     boolean parallel = Boolean.parseBoolean(groupElement.getAttribute("parallel"));
                     String scheduler = groupElement.getAttribute("scheduler");
-                    TaskGroup taskGroup = new TaskGroup(taskGroupName, parallel,scheduler);
+                    TaskGroup taskGroup = new TaskGroup(taskGroupName, parallel,scheduler,idGenerator());
                     NodeList taskList = groupElement.getElementsByTagName("Task");
 
                     for (int j = 0; j < taskList.getLength(); j++) {
@@ -176,7 +182,8 @@ public class EngineConfImpl implements EngineConf {
                         Element taskElement = (Element) taskList.item(j);
                         String taskName = taskElement.getElementsByTagName("Name").item(0).getFirstChild().getNodeValue();
 
-                        Task task = new Task(classInstance,taskName,taskGroup);
+                        Task task = new Task(classInstance,taskName,taskGroup,idGenerator());
+
                         NodeList parameters = taskElement.getElementsByTagName("Parameter");
 
                         if (parameters.getLength() > 0) {

@@ -94,13 +94,13 @@ public class EngineImpl implements Engine {
     public SystemHistory getSystemHistory() {
         return systemHistory;
     }
-
-    @Override
-    public void executeTaskGroup(String groupName){
-        TaskRunner taskRunner = new TaskRunner();
-        TaskGroup taskGroup = this.getEngineConf().getTaskGroupList().get(this.getEngineConf().getTaskGroupIndex(groupName));
-       // TaskJob.executeTaskGroup(taskGroup,taskRunner);
-      //  TaskJob.taskGroupUpdates(taskGroup,taskRunner);
-    }
+//
+//    @Override
+//    public void executeTaskGroup(String groupName){
+//        TaskRunner taskRunner = new TaskRunner();
+//        TaskGroup taskGroup = this.getEngineConf().getTaskGroupList().get(this.getEngineConf().getTaskGroupIndex(groupName));
+//       // TaskJob.executeTaskGroup(taskGroup,taskRunner);
+//      //  TaskJob.taskGroupUpdates(taskGroup,taskRunner);
+//    }
 
 }

@@ -95,7 +95,8 @@
 }
 
 .task-details-parameters-row {
-    padding: 0 !important;
+
+    padding: 0 0 2px !important;
     border-bottom: none !important;
 }
 

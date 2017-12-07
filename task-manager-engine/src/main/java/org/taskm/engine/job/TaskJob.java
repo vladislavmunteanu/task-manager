@@ -20,20 +20,16 @@ import java.util.Date;
 @DisallowConcurrentExecution
 public class TaskJob implements Job {
 
-    private final TaskRunner taskRunner;
     private static final Logger Log = Logger.getLogger(TaskJob.class);
 
     public TaskJob() {
-        this.taskRunner = new TaskRunner();
-    }
 
-    public TaskRunner getTaskRunner() {
-        return taskRunner;
     }
 
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
 
+        TaskRunner taskRunner = new TaskRunner();
         SchedulerContext schedulerContext;
         SystemHistory systemHistory;
         NotificationClient notificationClient;
@@ -49,46 +45,46 @@ public class TaskJob implements Job {
             throw new RuntimeException("Failed to run Scheduler", e);
         }
 
-        notificationClient.sendQuickNotification("notice",taskGroup.getName()+" started");
-        executeTaskGroup(taskGroup,this.getTaskRunner(),notificationClient, systemHistory);
+        notificationClient.sendQuickNotification("notice", taskGroup.getName() + " started");
+        executeTaskGroup(taskGroup, taskRunner, notificationClient, systemHistory);
         systemHistory.increaseExecutions();
         systemHistory.setLastExecutedGroup(taskGroup.getName());
 
-        taskGroupUpdates(taskGroup, this.getTaskRunner(),notificationClient, systemHistory);
-        Log.info(String.format("%s - [Executed : %s] [Failed : %s]", taskGroup.getName(), this.getTaskRunner().getExecutedTasks(), this.getTaskRunner().getFailedTasks()));
+        taskGroupUpdates(taskGroup, taskRunner, notificationClient, systemHistory);
+        Log.info(String.format("%s - [Executed : %s] [Failed : %s]", taskGroup.getName(), taskRunner.getExecutedTasks(), taskRunner.getFailedTasks()));
         Log.info(String.format("%s [Next Fire Time : %s]", taskGroup, jobExecutionContext.getNextFireTime()));
 
     }
 
-    public static void taskGroupUpdates(TaskGroup taskGroup, TaskRunner taskRunner,NotificationClient notificationClient,SystemHistory systemHistory) {
+    private void taskGroupUpdates(TaskGroup taskGroup, TaskRunner taskRunner, NotificationClient notificationClient, SystemHistory systemHistory) {
         taskGroup.incrementExecutions();
         taskGroup.setFailures(taskGroup.getFailures() + taskRunner.getFailedTasks());
-        notificationClient.sendQuickNotification("success",taskGroup.getName()+" executed");
+        notificationClient.sendQuickNotification("success", taskGroup.getName() + " executed");
         systemHistory.setLastExecutionTime(new SimpleDateFormat("hh:mm:ss a").format(new Date(System.currentTimeMillis())));
         taskGroup.setStatus(TaskGroupStatus.Pending);
     }
 
-    public static void executeTaskGroup(TaskGroup taskGroup, TaskRunner taskRunner,NotificationClient notificationClient,SystemHistory systemHistory) {
+    private void executeTaskGroup(TaskGroup taskGroup, TaskRunner taskRunner, NotificationClient notificationClient, SystemHistory systemHistory) {
 
         taskGroup.setStatus(TaskGroupStatus.Running);
 
         if (taskGroup.isParallel() && taskGroup.getTaskList().size() > 1) {
             try {
-                runTaskGroupParallel(taskGroup,taskRunner,systemHistory,notificationClient);
+                runTaskGroupParallel(taskGroup, taskRunner, systemHistory, notificationClient);
             } catch (EngineException taskManagerException) {
-                provideException(notificationClient,taskGroup,taskRunner,taskManagerException,systemHistory);
+                provideException(notificationClient, taskGroup, taskRunner, taskManagerException, systemHistory);
             }
         } else {
             try {
-                runTaskGroup(taskGroup,taskRunner,systemHistory,notificationClient);
+                runTaskGroup(taskGroup, taskRunner, systemHistory, notificationClient);
             } catch (EngineException taskManagerException) {
-                provideException(notificationClient,taskGroup,taskRunner,taskManagerException,systemHistory);
+                provideException(notificationClient, taskGroup, taskRunner, taskManagerException, systemHistory);
             }
         }
     }
 
-    private static void provideException(NotificationClient notificationClient,TaskGroup taskGroup, TaskRunner taskRunner,EngineException taskManagerException,SystemHistory systemHistory){
-        taskGroupUpdates(taskGroup, taskRunner,notificationClient,systemHistory);
+    private void provideException(NotificationClient notificationClient, TaskGroup taskGroup, TaskRunner taskRunner, EngineException taskManagerException, SystemHistory systemHistory) {
+        taskGroupUpdates(taskGroup, taskRunner, notificationClient, systemHistory);
         Log.warn(String.format("%s [Executed : %s] [Failed : %s]", taskGroup, taskRunner.getExecutedTasks(), taskRunner.getFailedTasks()));
         Log.error(String.format("Failed to run %s", taskGroup), taskManagerException);
         throw new RuntimeException(String.format("Failed to run %s", taskGroup), taskManagerException);
@@ -96,7 +92,7 @@ public class TaskJob implements Job {
 
     }
 
-    private static void runTaskGroup(TaskGroup taskGroup, TaskRunner taskRunner,SystemHistory systemHistory,NotificationClient notificationClient) throws EngineException {
+    private void runTaskGroup(TaskGroup taskGroup, TaskRunner taskRunner, SystemHistory systemHistory, NotificationClient notificationClient) throws EngineException {
 
 
         taskGroup.resetTasksStatus();
@@ -107,7 +103,7 @@ public class TaskJob implements Job {
         for (Task task : taskGroup.getTaskList()) {
 
             try {
-                taskRunner.runTask(task,systemHistory,notificationClient);
+                taskRunner.runTask(task, systemHistory, notificationClient);
             } catch (TaskRunnerException e) {
                 throw new EngineException(String.format("Failed to start task '%s'.", task.getMethodName()), e);
             }
@@ -117,14 +113,14 @@ public class TaskJob implements Job {
         Log.info(String.format("Finished Tasks : %s", taskGroup.getTaskList()));
     }
 
-    private static void runTaskGroupParallel(TaskGroup taskGroup,TaskRunner taskRunner,SystemHistory systemHistory,NotificationClient notificationClient) throws EngineException {
+    private void runTaskGroupParallel(TaskGroup taskGroup, TaskRunner taskRunner, SystemHistory systemHistory, NotificationClient notificationClient) throws EngineException {
 
         taskGroup.resetTasksStatus();
         Log.info(String.format("Running Task Group : %s, Tasks : %s", taskGroup.getName(), taskGroup.getTaskList()));
         taskRunner.setFailedTasks(0);
         taskRunner.setExecutedTasks(0);
         try {
-            taskRunner.runParallelTasks(taskGroup.getTaskList(),systemHistory,notificationClient);
+            taskRunner.runParallelTasks(taskGroup.getTaskList(), systemHistory, notificationClient);
         } catch (TaskRunnerException e) {
             throw new EngineException(String.format("Failed to start task group '%s'.", taskGroup.getName()), e);
         }

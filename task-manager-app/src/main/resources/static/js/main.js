@@ -42,7 +42,7 @@ function openTaskDetails(taskMap) {
 
 }
 
-function openGroupDetails(groupName) {
+function openGroupDetails(groupName,groupId) {
 
     var ctx = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
 
@@ -54,8 +54,9 @@ function openGroupDetails(groupName) {
         success: function (data) {
             $('#side-modules').html(data);
             $('.selected').removeClass('selected');
-            $('#'+groupName).addClass('selected');
+            $('#'+groupId).addClass('selected');
         }
     });
 
 }
+
