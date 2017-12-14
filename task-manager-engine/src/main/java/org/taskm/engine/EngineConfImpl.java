@@ -2,6 +2,7 @@ package org.taskm.engine;
 
 import groovy.lang.GroovyClassLoader;
 import org.apache.log4j.Logger;
+import org.codehaus.groovy.control.MultipleCompilationErrorsException;
 import org.springframework.stereotype.Component;
 import org.taskm.core.task.Task;
 import org.taskm.core.task.TaskCoreException;
@@ -273,7 +274,7 @@ public class EngineConfImpl implements EngineConf {
         GroovyClassLoader groovyClassLoader = new GroovyClassLoader();
         try {
             return groovyClassLoader.parseClass(tasks).newInstance();
-        } catch (IOException | InstantiationException | IllegalAccessException e) {
+        } catch (IOException | InstantiationException | IllegalAccessException | MultipleCompilationErrorsException e) {
             throw new EngineException(String.format("Failed to compile groovy '%s' class. '%s'",className,e));
         }
 

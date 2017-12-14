@@ -65,4 +65,8 @@ public class SystemHistory {
     public void increaseFailures(){
         this.failures++;
     }
+
+    public String toString(){
+        return String.format("Executions : %s Failures : %s",this.getExecutions(),this.getFailures());
+    }
 }

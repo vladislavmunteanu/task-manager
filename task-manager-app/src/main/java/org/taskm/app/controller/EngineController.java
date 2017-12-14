@@ -43,13 +43,12 @@ public class EngineController {
     }
 
     @RequestMapping(value = "/groups/{group_name}/{task_name}", method = RequestMethod.GET)
-    public String getGroup(Model model, @PathVariable("group_name") String group_name, @PathVariable("task_name") String task_name) {
+    public String getTaskByName(Model model, @PathVariable("group_name") String group_name, @PathVariable("task_name") String task_name) {
 
 
         Task task = groups.get(engine.getEngineConf().getTaskGroupIndex(group_name)).getTask(task_name);
 
         model.addAttribute("task", task);
-
 
         Map<String, String> taskParameters = AppUtils.extractTaskParameters(task);
 
@@ -95,7 +94,7 @@ public class EngineController {
     }
 
     @RequestMapping("/groups")
-    public String getGroup(Model model) {
+    public String getGroups(Model model) {
 
         model.addAttribute("groups", groups);
         model.addAttribute("first_group",groups.get(0));
@@ -112,6 +111,7 @@ public class EngineController {
         model.addAttribute("systemHistory",this.engine.getSystemHistory());
         return "index";
     }
+
 }
 
 

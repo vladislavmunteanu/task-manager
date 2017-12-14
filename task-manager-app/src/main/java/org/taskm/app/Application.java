@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.taskm.app.notification.Notification;
 import org.taskm.engine.Engine;
 import org.taskm.engine.EngineConfImpl;
@@ -34,6 +35,32 @@ public class Application {
         } catch (EngineException | SchedulerException e) {
             e.printStackTrace();
         }
+
+//        memoryTrack();
+    }
+
+    //@Scheduled(fixedDelay = 5000)
+    public static void memoryTrack(){
+
+
+        int mb = 1024*1024;
+
+        //Getting the runtime reference from system
+        Runtime runtime = Runtime.getRuntime();
+
+        //Print used memory
+        System.out.print("U/M:"
+                + (runtime.totalMemory() - runtime.freeMemory()) / mb);
+
+        //Print free memory
+        System.out.print(" F/M:"
+                + runtime.freeMemory() / mb);
+
+        //Print total available memory
+        System.out.print(" T/M:" + runtime.totalMemory() / mb);
+
+        //Print Maximum available memory
+        System.out.println(" M/M:" + runtime.maxMemory() / mb);
     }
 
 }
