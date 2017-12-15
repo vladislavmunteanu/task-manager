@@ -45,7 +45,7 @@ public class TaskJob implements Job {
             throw new RuntimeException("Failed to run Scheduler", e);
         }
 
-        notificationClient.sendQuickNotification("notice", taskGroup.getName() + " started");
+        sendNotification("notice",taskGroup.getName() + " started",notificationClient);
         executeTaskGroup(taskGroup, taskRunner, notificationClient, systemHistory);
         systemHistory.increaseExecutions();
         systemHistory.setLastExecutedGroup(taskGroup.getName());
@@ -59,7 +59,7 @@ public class TaskJob implements Job {
     private void taskGroupUpdates(TaskGroup taskGroup, TaskRunner taskRunner, NotificationClient notificationClient, SystemHistory systemHistory) {
         taskGroup.incrementExecutions();
         taskGroup.setFailures(taskGroup.getFailures() + taskRunner.getFailedTasks());
-        notificationClient.sendQuickNotification("success", taskGroup.getName() + " executed");
+        sendNotification("success",taskGroup.getName() + " executed",notificationClient);
         systemHistory.setLastExecutionTime(new SimpleDateFormat("hh:mm:ss a").format(new Date(System.currentTimeMillis())));
         taskGroup.setStatus(TaskGroupStatus.Pending);
     }
@@ -127,5 +127,14 @@ public class TaskJob implements Job {
         Log.info(String.format("Finished Tasks : %s", taskGroup.getTaskList()));
     }
 
+
+    private void sendNotification(String type, String message, NotificationClient notificationClient){
+
+        if (notificationClient != null){
+            notificationClient.sendQuickNotification(type,message);
+        }else {
+            Log.warn("Notification Client is not available");
+        }
+    }
 }
 

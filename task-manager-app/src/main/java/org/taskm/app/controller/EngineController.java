@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.taskm.app.AppUtils;
 import org.taskm.core.task.Task;
 import org.taskm.core.task.TaskGroup;
@@ -57,8 +58,8 @@ public class EngineController {
         return "fragments/group-task-details";
     }
 
-    @RequestMapping("/tasks")
-    public String tasks(Model model) {
+    @RequestMapping(value = "/tasks",method = RequestMethod.GET)
+    public String getTasks(Model model) {
 
         model.addAttribute("tasksMap", tasksMap);
         model.addAttribute("first_map",tasksMap.get(tasksMap.keySet().toArray()[0].toString()));
@@ -72,7 +73,7 @@ public class EngineController {
         return "fragments/tasks";
     }
 
-    @RequestMapping("/tasks/{task_map}")
+    @RequestMapping(value ="/tasks/{task_map}",method = RequestMethod.GET)
     public String taskDetails(Model model, @PathVariable("task_map") String task_map) {
 
         model.addAttribute("taskMap", tasksMap.get(task_map));
@@ -84,7 +85,7 @@ public class EngineController {
         return "fragments/task-details";
     }
 
-    @RequestMapping("/groups/{group_name}")
+    @RequestMapping(value ="/groups/{group_name}",method = RequestMethod.GET)
     public String groupDetails(Model model, @PathVariable("group_name") String group_name) {
 
         model.addAttribute("group_name", groups.get(engine.getEngineConf().getTaskGroupIndex(group_name)).getName());
@@ -93,7 +94,7 @@ public class EngineController {
         return "fragments/group-details";
     }
 
-    @RequestMapping("/groups")
+    @RequestMapping(value ="/groups",method = RequestMethod.GET)
     public String getGroups(Model model) {
 
         model.addAttribute("groups", groups);
@@ -103,7 +104,7 @@ public class EngineController {
         return "fragments/groups";
     }
 
-    @RequestMapping("/")
+    @RequestMapping(value ="/",method = RequestMethod.GET)
     public String index(Model model) {
 
         model.addAttribute("groups_size",groups.size());
@@ -112,6 +113,23 @@ public class EngineController {
         return "index";
     }
 
+    @RequestMapping(value ="/failures",method = RequestMethod.GET)
+    @ResponseBody
+    public String getFailures(){
+        return Integer.toString(this.engine.getSystemHistory().getFailures());
+    }
+
+    @RequestMapping(value ="/executions",method = RequestMethod.GET)
+    @ResponseBody
+    public String getExecutions(){
+        return Integer.toString(this.engine.getSystemHistory().getExecutions());
+    }
+
+    @RequestMapping(value ="/last-executed-group",method = RequestMethod.GET)
+    @ResponseBody
+    public String getLastExecutedGroup(){
+        return this.engine.getSystemHistory().getLastExecutedGroup();
+    }
 }
 
 

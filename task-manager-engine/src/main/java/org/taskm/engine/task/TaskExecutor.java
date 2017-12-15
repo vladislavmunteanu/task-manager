@@ -183,7 +183,11 @@ class TaskExecutor implements Callable<Void> {
     }
 
     private static void provideException(Exception e,Task task,SystemHistory systemHistory,NotificationClient notificationClient,String nMessage){
-        notificationClient.sendQuickNotification("error",nMessage);
+
+        if (notificationClient != null) {
+            notificationClient.sendQuickNotification("error",nMessage);
+        }
+
         systemHistory.increaseFailures();
         task.setErrorMessage(e.getCause().getMessage());
         task.setStatus(TaskStatus.Failed);

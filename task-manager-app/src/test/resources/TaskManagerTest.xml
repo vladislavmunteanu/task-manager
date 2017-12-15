@@ -2,7 +2,7 @@
 
 <TaskManager>
 
-    <TaskGroup name="Group_1" parallel="true" scheduler="45 * * * * ?">
+    <TaskGroup name="Group_1" parallel="true" scheduler="0/5 * * * * ?">
         <Task>
             <Name>task_test_1</Name>
         </Task>
@@ -16,7 +16,7 @@
         </Task>
     </TaskGroup>
 
-    <TaskGroup name="Group_2" parallel="false" scheduler="32 * * * * ?">
+    <TaskGroup name="Group_2" parallel="false" scheduler="45 6 4 * * ?">
         <Task>
             <Name>task_test_4</Name>
             <Parameter type="Double">3456.234</Parameter>
