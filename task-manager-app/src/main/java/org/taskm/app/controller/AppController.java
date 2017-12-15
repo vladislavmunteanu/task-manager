@@ -3,6 +3,7 @@ package org.taskm.app.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.time.LocalDateTime;
 
@@ -12,20 +13,20 @@ import java.time.LocalDateTime;
 @Controller
 public class AppController {
 
-    @RequestMapping("/header")
+    @RequestMapping(value = "/header",method = RequestMethod.GET)
     public String header(Model model) {
         model.addAttribute("now", LocalDateTime.now());
         return "fragments/header";
     }
 
-    @RequestMapping("/time")
+    @RequestMapping(value = "/time",method = RequestMethod.GET)
     public String time(Model model) {
         model.addAttribute("now", LocalDateTime.now());
         return "fragments/time";
     }
 
 
-    @RequestMapping("/help")
+    @RequestMapping(value = "/help",method = RequestMethod.GET)
     public String help() {
         return "fragments/help";
     }

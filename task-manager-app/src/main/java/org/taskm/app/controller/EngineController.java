@@ -113,6 +113,8 @@ public class EngineController {
         return "index";
     }
 
+    //***** System History *****//
+
     @RequestMapping(value ="/failures",method = RequestMethod.GET)
     @ResponseBody
     public String getFailures(){
@@ -129,6 +131,12 @@ public class EngineController {
     @ResponseBody
     public String getLastExecutedGroup(){
         return this.engine.getSystemHistory().getLastExecutedGroup();
+    }
+
+    @RequestMapping(value ="/last-executed-task",method = RequestMethod.GET)
+    @ResponseBody
+    public String getLastExecutedTask(){
+        return this.engine.getSystemHistory().getLastExecutedTask();
     }
 }
 

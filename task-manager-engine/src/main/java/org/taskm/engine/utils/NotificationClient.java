@@ -4,6 +4,7 @@ import org.apache.log4j.Logger;
 import org.springframework.messaging.simp.stomp.StompHeaders;
 import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandlerAdapter;
+import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.web.socket.WebSocketHttpHeaders;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
