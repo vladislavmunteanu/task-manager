@@ -6,8 +6,7 @@ import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.taskm.core.task.TaskGroup;
-import org.taskm.engine.job.TaskJob;
-import org.taskm.engine.task.TaskRunner;
+import org.taskm.engine.job.GroupJob;
 import org.taskm.engine.utils.SystemHistory;
 
 import java.util.List;
@@ -51,7 +50,7 @@ public class EngineImpl implements Engine {
 
             if(!Objects.equals(taskGroup.getScheduler(), "manual")) {
                 JobKey jobKey = new JobKey(taskGroup.getName());
-                JobDetail job = JobBuilder.newJob(TaskJob.class).withIdentity(jobKey).build();
+                JobDetail job = JobBuilder.newJob(GroupJob.class).withIdentity(jobKey).build();
 
                 Trigger trigger = TriggerBuilder.newTrigger()
                         .withIdentity("cronTrigger_" + taskGroup.getName(), taskGroup.getName())
@@ -100,8 +99,8 @@ public class EngineImpl implements Engine {
 //    public void executeTaskGroup(String groupName){
 //        TaskRunner taskRunner = new TaskRunner();
 //        TaskGroup taskGroup = this.getEngineConf().getTaskGroupList().get(this.getEngineConf().getTaskGroupIndex(groupName));
-//       // TaskJob.executeTaskGroup(taskGroup,taskRunner);
-//      //  TaskJob.taskGroupUpdates(taskGroup,taskRunner);
+//       // GroupJob.executeTaskGroup(taskGroup,taskRunner);
+//      //  GroupJob.taskGroupUpdates(taskGroup,taskRunner);
 //    }
 
 }

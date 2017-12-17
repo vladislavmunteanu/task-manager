@@ -9,7 +9,6 @@ import org.taskm.core.task.TaskGroup;
 import org.taskm.engine.EngineConf;
 import org.taskm.engine.EngineConfImpl;
 import org.taskm.engine.EngineException;
-import org.taskm.engine.job.TaskJob;
 
 
 import java.text.ParseException;

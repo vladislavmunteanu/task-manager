@@ -26,22 +26,22 @@ function pushNotification(notification) {
 
     if (type === 'notice') {
         li.setAttribute('class', 'show-notification notice');
-        displayNotification(li,notification,notificationTime,notificationId,'alert-box-notice')
+        displayNotification(li, notification, notificationTime, notificationId, 'alert-box-notice')
     } else if (type === 'error') {
         li.setAttribute('class', 'show-notification error');
-        displayNotification(li,notification,notificationTime,notificationId,'alert-box-error')
+        displayNotification(li, notification, notificationTime, notificationId, 'alert-box-error')
     } else {
         li.setAttribute('class', 'show-notification success');
-        displayNotification(li,notification,notificationTime,notificationId,'alert-box-success')
+        displayNotification(li, notification, notificationTime, notificationId, 'alert-box-success')
     }
 
-    hideNotification(notificationId);
+    autoCloseNotification(notificationId);
 
 }
 
-function displayNotification(li,notification,notificationTime,notificationId,notificationImg) {
+function displayNotification(li, notification, notificationTime, notificationId, notificationImg) {
     var notificationTree = $('#notification-list');
-    li.innerHTML += buildNotification(notification.message, notificationTime, notificationId,notificationImg);
+    li.innerHTML += buildNotification(notification.message, notificationTime, notificationId, notificationImg);
 
     notificationTree.prepend(li).addClass('push-down');
     setTimeout(function () {
@@ -51,7 +51,7 @@ function displayNotification(li,notification,notificationTime,notificationId,not
     $('#no-notifications-footer').remove();
 }
 
-function hideNotification(id) {
+function autoCloseNotification(id) {
 
     var notification = $('#' + id);
 
@@ -72,8 +72,8 @@ function hideNotification(id) {
 
 
 function closeNotification(id) {
+    $('#' + id).hide(200);
 
-    $('#' + id).hide(300);
     setTimeout(function () {
         removeNotification(id);
         notificationFooterController();
@@ -83,32 +83,32 @@ function closeNotification(id) {
 
 function removeNotification(id) {
     var notification = document.getElementById(id);
-    if(notification !== null) {
+    if (notification !== null) {
         notification.parentNode.removeChild(notification);
     }
 }
 
-function buildNotification(message, notificationTime, notificationId,notificationClass) {
+function buildNotification(message, notificationTime, notificationId, notificationClass) {
 
-    return '    <div class="alert-box '+notificationClass+'">\n' +
-        '                                <span class="message">'+message+'</span>\n' +
-        '                                <span class="time">'+notificationTime+'</span>\n' +
+    return '    <div class="alert-box ' + notificationClass + '">\n' +
+        '                                <span class="message">' + message + '</span>\n' +
+        '                                <span class="time">' + notificationTime + '</span>\n' +
         '                            </div>\n' +
         '                            <div class="alert-box-button">\n' +
-        '                                <button type="button" class="notification-close close" onclick="closeNotification('+notificationId+')">&times;</button>\n' +
+        '                                <button type="button" class="notification-close close" onclick="closeNotification(' + notificationId + ')">&times;</button>\n' +
         '                            </div>';
 
 }
 
 
-function notificationFooterController(){
+function notificationFooterController() {
     var notificationTree = document.getElementById('notification-list');
     var li = document.createElement('li');
     var notificationTreeSize = notificationTree.getElementsByTagName('li').length;
 
-    if(notificationTreeSize === 0){
-        li.setAttribute('class','notification-footer');
-        li.setAttribute('id','no-notifications-footer');
+    if (notificationTreeSize === 0) {
+        li.setAttribute('class', 'notification-footer');
+        li.setAttribute('id', 'no-notifications-footer');
         li.innerHTML += noNotificationFooter;
         notificationTree.prepend(li);
     }

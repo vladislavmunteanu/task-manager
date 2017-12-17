@@ -138,6 +138,18 @@ public class EngineController {
     public String getLastExecutedTask(){
         return this.engine.getSystemHistory().getLastExecutedTask();
     }
+
+    @RequestMapping(value ="/last-execution-time",method = RequestMethod.GET)
+    @ResponseBody
+    public String getLastExecutionTime(){
+        return this.engine.getSystemHistory().getLastExecutionTime();
+    }
+
+    @RequestMapping(value ="/last-failure-time",method = RequestMethod.GET)
+    @ResponseBody
+    public String getLastFailureTime(){
+        return this.engine.getSystemHistory().getLastExecutionTime();
+    }
 }
 
 

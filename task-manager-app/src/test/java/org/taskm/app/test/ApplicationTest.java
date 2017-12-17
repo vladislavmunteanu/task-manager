@@ -1,6 +1,5 @@
 package org.taskm.app.test;
 
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +18,6 @@ import java.util.List;
 import java.util.Map;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(Application.class)
